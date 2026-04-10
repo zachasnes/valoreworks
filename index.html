@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
-<meta name="description" content="Valore Group builds custom AI automation for professional practices. No IT team needed. Tell us what's frustrating you — we'll tell you if it's fixable.">
-<title>Valore Group — AI Automation for Professional Practices</title>
+<meta name="description" content="Valore builds custom AI systems for professional practices. No IT team needed. Tell us what's frustrating you — we'll tell you if it's fixable.">
+<title>Valore — Custom AI Systems for Professional Practices</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -24,8 +24,10 @@ a{text-decoration:none}
 .wrap{width:100%;overflow-x:hidden}
 .ct{max-width:var(--max);margin:0 auto;width:100%}
 nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;width:100%;position:sticky;top:0;z-index:100}
-.logo{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--black)}
-.logo span{color:var(--accent)}
+.logo{display:flex;flex-direction:column;gap:1px;line-height:1}
+.logo-main{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--black)}
+.logo-main span{color:var(--accent)}
+.logo-sub{font-size:0.52rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--g400)}
 .nav-links{display:flex;gap:1.75rem;list-style:none}
 .nav-links a{font-size:0.78rem;font-weight:500;color:var(--g600);letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
 .nav-links a:hover{color:var(--accent)}
@@ -190,8 +192,10 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem
 .cnote{font-size:0.73rem;color:var(--g400);margin-top:0.75rem;line-height:1.65}
 .cnote a{color:var(--accent)}
 footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:2.25rem 2.5rem;text-align:center;width:100%}
-.flogo{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--white);display:block;margin-bottom:0.45rem}
+.flogo-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;margin-bottom:0.75rem}
+.flogo{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--white);display:block;line-height:1}
 .flogo span{color:var(--amid)}
+.flogo-sub{font-size:0.5rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.3)}
 footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
 @media(max-width:720px){
   .ti-in,.honest-in,.price-in,.audit-in,.contact-in{grid-template-columns:1fr;gap:2.5rem}
@@ -213,9 +217,12 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
 </head>
 <body>
 <div class="wrap">
-
+ 
 <nav>
-  <span class="logo">Valore<span>.</span></span>
+  <div class="logo">
+    <span class="logo-main">Valore<span>.</span></span>
+    <span class="logo-sub">Custom AI Systems</span>
+  </div>
   <ul class="nav-links">
     <li><a href="#how">How It Works</a></li>
     <li><a href="#work">Work</a></li>
@@ -223,7 +230,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <li><a href="#contact" class="nav-cta">Talk to Us</a></li>
   </ul>
 </nav>
-
+ 
 <div class="hero">
   <div class="hero-in">
     <h1>You know something<br>is taking too long.<br>We'll tell you if<br><em>it's fixable.</em></h1>
@@ -240,7 +247,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <div class="recog" id="problems">
   <div class="recog-in">
     <span class="lbl">Sound familiar?</span>
@@ -274,7 +281,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <div class="how" id="how">
   <div class="how-in">
     <span class="lbl">How It Works</span>
@@ -290,25 +297,25 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <div class="step">
         <span class="step-n">02</span>
         <h3>We run the numbers</h3>
-        <p>We calculate exactly what that problem costs you annually -- in hours, in dollars, in capacity. If automation doesn't pencil out, we tell you that before you spend anything.</p>
+        <p>We calculate exactly what that problem costs you annually -- in hours, in dollars, in capacity. If a custom system doesn't pencil out, we tell you that before you spend anything.</p>
         <span class="step-t">3-5 days</span>
       </div>
       <div class="step">
         <span class="step-n">03</span>
         <h3>We build it</h3>
-        <p>If the numbers work, we scope and build a custom solution -- deployed into the tools you already use. No new software to learn. No IT project to manage.</p>
+        <p>If the numbers work, we scope and build a custom system -- deployed into the tools you already use. No new software to learn. No IT project to manage.</p>
         <span class="step-t">2-4 weeks</span>
       </div>
       <div class="step">
         <span class="step-n">04</span>
         <h3>It runs. You don't touch it.</h3>
-        <p>We stay on for 30 days to make sure everything works as it should. After that, the thing just runs -- and your team gets their time back.</p>
+        <p>We stay on for 30 days to make sure everything works as it should. After that, the system just runs -- and your team gets their time back.</p>
         <span class="step-t">30-day handoff</span>
       </div>
     </div>
   </div>
 </div>
-
+ 
 <div class="proof-sec" id="work">
   <div class="proof-in">
     <span class="lbl">Proof of Work</span>
@@ -322,7 +329,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">Hours of manual copy-paste. Hot leads missed.</span></div>
           <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Leads flow in real time. Interested replies flagged instantly.</span></div>
         </div>
-        <p>Two platforms that didn't talk to each other, forcing reps to copy data by hand and start new email threads for every reply. We built a live connection between both systems with an AI layer that scores every inbound reply -- so the team only sees the conversations worth having.</p>
+        <p>Two platforms that didn't talk to each other, forcing reps to copy data by hand and start new email threads for every reply. We built a custom system connecting both platforms with an AI layer that scores every inbound reply -- so the team only sees the conversations worth having.</p>
         <p class="card-result">~$180K+ recovered pipeline annually</p>
       </div>
       <div class="card">
@@ -332,7 +339,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">48-hour process. Manual validation. Constant delays.</span></div>
           <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Same output. Seconds. Zero manual input.</span></div>
         </div>
-        <p>A sales org manually validating and uploading contacts one by one -- a 48-hour bottleneck that delayed every outreach cycle. We automated the entire pipeline from raw list to verified, CRM-ready records in seconds.</p>
+        <p>A sales org manually validating and uploading contacts one by one -- a 48-hour bottleneck that delayed every outreach cycle. We built a custom system that handles the full pipeline from raw list to verified, CRM-ready records in seconds.</p>
         <p class="card-result">Equivalent to 27 full-time employees. $2.16M in annual labor value.</p>
       </div>
       <div class="card">
@@ -342,7 +349,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">8+ hrs/week extracting fields, filling forms by hand.</span></div>
           <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Notes in. Completed forms out. One click.</span></div>
         </div>
-        <p>An attorney spending hours every week copying information from client notes into state-mandated form templates. We built a tool that reads the notes, extracts every required field, and populates the forms automatically.</p>
+        <p>An attorney spending hours every week copying information from client notes into state-mandated form templates. We built a custom system that reads the notes, extracts every required field, and populates the forms automatically.</p>
         <p class="card-result">~$52K in recovered billable time per year</p>
       </div>
       <div class="card">
@@ -352,13 +359,13 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">3-4 hrs per contract. Manual review. Inconsistent.</span></div>
           <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Risk scored. Clauses flagged. Redlines drafted. 5 minutes.</span></div>
         </div>
-        <p>Hours per contract reviewing agreement language with no consistent framework. We built an AI that reads every contract, scores it for risk, flags specific problem clauses, rewrites them, and exports a complete redlined document in one click.</p>
+        <p>Hours per contract reviewing agreement language with no consistent framework. We built a custom AI system that reads every contract, scores it for risk, flags specific problem clauses, rewrites them, and exports a complete redlined document in one click.</p>
         <p class="card-result">~$96K in attorney time recovered annually</p>
       </div>
     </div>
   </div>
 </div>
-
+ 
 <div class="ti-sec">
   <div class="ti-in">
     <div class="ti-left">
@@ -367,17 +374,17 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <div class="divl"></div>
       <p>Every professional practice has its own way of working. Your intake process isn't the same as the firm across the street. Your tools have been layered on top of each other over years. Your workflows have exceptions that no SaaS product accounts for.</p>
       <p>That's why software that promises to fix everything usually fixes nothing. It doesn't know your business well enough. We do -- because we spend time learning it before we write a single line of code.</p>
-      <p>And unlike no-code tools, everything we build runs on infrastructure you own, with your client data staying exactly where it belongs.</p>
+      <p>And unlike no-code tools, every system we build runs on infrastructure you own, with your client data staying exactly where it belongs.</p>
     </div>
     <div class="ti-grid">
       <div class="ti-item"><span class="ti-badge">Your data</span><h4>Stays in your environment</h4><p>Nothing flows through a shared third-party platform. Your client records don't touch someone else's servers.</p></div>
-      <div class="ti-item"><span class="ti-badge">Your workflow</span><h4>Built around how you actually work</h4><p>Not a template. Not a configuration. A custom build scoped to your exact process and the tools you already use.</p></div>
+      <div class="ti-item"><span class="ti-badge">Your workflow</span><h4>Built around how you actually work</h4><p>Not a template. Not a configuration. A custom system scoped to your exact process and the tools you already use.</p></div>
       <div class="ti-item"><span class="ti-badge">No IT team needed</span><h4>We handle everything technical</h4><p>You don't manage this. We build it, deploy it, and support it. You just use it.</p></div>
       <div class="ti-item"><span class="ti-badge">You own it</span><h4>No ongoing platform dependency</h4><p>No monthly fee to keep the lights on. No vendor to hold you hostage. The code is yours.</p></div>
     </div>
   </div>
 </div>
-
+ 
 <div class="tbar">
   <div class="tbar-in">
     <div class="ti2"><span class="tn">$2.5M+</span><span class="tl">Annual value delivered</span></div>
@@ -389,7 +396,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <div class="ti2"><span class="tn">3-4</span><span class="tl">New projects per quarter</span></div>
   </div>
 </div>
-
+ 
 <div class="honest-sec" id="standard">
   <div class="honest-in">
     <div class="honest-left">
@@ -401,8 +408,8 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <p style="font-size:0.8rem;color:var(--g400);font-style:italic;line-height:1.7">We'd rather lose a project than deliver something that doesn't pay for itself.</p>
       <p style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--g400);margin-top:1.5rem;margin-bottom:0.75rem">We'll say no if:</p>
       <ul class="no-list">
-        <li>Your data is too messy or inconsistent to automate reliably</li>
-        <li>The process changes so often a build won't stay useful</li>
+        <li>Your data is too messy or inconsistent to build on reliably</li>
+        <li>The process changes so often a custom system won't stay useful</li>
         <li>The volume doesn't produce enough savings to cover the cost</li>
         <li>The real problem is people or process -- not technology</li>
       </ul>
@@ -427,7 +434,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <div class="price-sec" id="pricing">
   <div class="price-in">
     <div class="price-left">
@@ -440,9 +447,9 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
     <div class="pcs">
       <div class="pc">
-        <h3>Single Automation Build</h3>
+        <h3>Single System Build</h3>
         <div class="pc-range">$4,500 - $9,000 <span>one-time</span></div>
-        <p>One process, automated end-to-end. Built, tested, and deployed into your existing tools. Includes 30 days of post-delivery support.</p>
+        <p>One process, solved end-to-end with a custom-built system. Deployed into your existing tools. Includes 30 days of post-delivery support.</p>
         <ul class="pc-inc">
           <li>Free ROI audit and scoping</li>
           <li>Custom build to your exact workflow</li>
@@ -455,11 +462,11 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
         <span class="pc-badge">Most common</span>
         <h3>Multi-System Integration</h3>
         <div class="pc-range">$9,000 - $18,000 <span>one-time</span></div>
-        <p>Two or more platforms connected, with intelligent routing or AI-based decision-making layered in. The builds that typically produce the largest returns.</p>
+        <p>Two or more platforms connected, with intelligent routing or AI-based decision-making built in. The engagements that typically produce the largest returns.</p>
         <ul class="pc-inc">
-          <li>Everything in Single Build</li>
+          <li>Everything in Single System Build</li>
           <li>Multi-platform connection and data sync</li>
-          <li>AI/ML layer where applicable</li>
+          <li>AI layer where applicable</li>
           <li>Extended 60-day support window</li>
           <li>Optional ongoing maintenance</li>
         </ul>
@@ -478,7 +485,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <div class="audit-sec" id="audit">
   <div class="audit-in">
     <div class="audit-left">
@@ -563,7 +570,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <div class="faq-sec" id="faq">
   <div class="faq-in">
     <h2>Questions we get before the first call.</h2>
@@ -571,7 +578,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <div class="faq-grid">
       <div class="faq-item">
         <h4>I don't know anything about AI or technology. Is that a problem?</h4>
-        <p>No. In fact, most of our clients say the same thing. You don't need to understand how any of this works -- that's our job. You describe what's frustrating you in plain English. We translate that into a solution, build it, and explain what it does in language that doesn't require a technical background.</p>
+        <p>No. In fact, most of our clients say the same thing. You don't need to understand how any of this works -- that's our job. You describe what's frustrating you in plain English. We translate that into a custom system, build it, and explain what it does in language that doesn't require a technical background.</p>
       </div>
       <div class="faq-item">
         <h4>We don't have an IT team. Can you still help?</h4>
@@ -579,15 +586,15 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       </div>
       <div class="faq-item">
         <h4>How is this different from software we've already tried?</h4>
-        <p>Off-the-shelf software is built for the average firm, not yours. It doesn't know your specific workflow, your exceptions, or how your team actually works. We build something custom -- scoped to exactly how you operate. That's why it fits, instead of requiring workarounds that defeat the purpose.</p>
+        <p>Off-the-shelf software is built for the average firm, not yours. It doesn't know your specific workflow, your exceptions, or how your team actually works. We build a custom system -- scoped to exactly how you operate. That's why it fits, instead of requiring workarounds that defeat the purpose.</p>
       </div>
       <div class="faq-item">
-        <h4>What if I don't know what to automate?</h4>
+        <h4>What if I don't know what I need?</h4>
         <p>That's exactly why the audit call exists. You don't need to come in with a solution -- just a frustration. We ask specific questions designed to surface where the real time is going. Most clients are surprised by what we find and how fixable it is.</p>
       </div>
       <div class="faq-item">
         <h4>What happens to my client data?</h4>
-        <p>It stays in your environment. We don't use shared automation platforms that store your data on someone else's servers. Everything runs on infrastructure you control, with full logging so you can always see exactly what the system did -- which matters when your clients are trusting you with sensitive information.</p>
+        <p>It stays in your environment. We don't use shared platforms that store your data on someone else's servers. Every system we build runs on infrastructure you control, with full logging so you can always see exactly what it did -- which matters when your clients are trusting you with sensitive information.</p>
       </div>
       <div class="faq-item">
         <h4>What if the ROI audit says it's not worth it?</h4>
@@ -596,7 +603,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <div class="contact-sec" id="contact">
   <div class="contact-in">
     <div class="contact-left">
@@ -638,13 +645,16 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     </div>
   </div>
 </div>
-
+ 
 <footer>
-  <span class="flogo">Valore<span>.</span></span>
-  <p>AI Automation for Professional Practices &middot; Austin, TX</p>
-  <p>&copy; 2026 Valore Group LLC. All rights reserved.</p>
+  <div class="flogo-wrap">
+    <span class="flogo">Valore<span>.</span></span>
+    <span class="flogo-sub">Custom AI Systems</span>
+  </div>
+  <p>Custom AI Systems for Professional Practices &middot; Austin, TX</p>
+  <p>&copy; 2026 Valore LLC. All rights reserved.</p>
 </footer>
-
+ 
 </div>
 <script>
 function runAudit(){
@@ -664,11 +674,11 @@ function runAudit(){
   var net=sav-imp;
   var pl={'data_entry':'moving data between tools','document_prep':'document prep and form filling','contract_review':'contract review','client_intake':'client intake and onboarding','reporting':'building weekly reports','renewal_tracking':'tracking renewals and deadlines','lead_routing':'sorting and qualifying leads'};
   document.getElementById('savingsNum').textContent='$'+sav.toLocaleString()+'/yr';
-  document.getElementById('savingsDesc').textContent='Your practice is spending roughly '+Math.round(ah*tm).toLocaleString()+' hours a year on '+(pl[pt]||'this process')+'. At $'+Math.round(br)+'/hr that\'s real money -- and most of it can be automated.';
+  document.getElementById('savingsDesc').textContent='Your practice is spending roughly '+Math.round(ah*tm).toLocaleString()+' hours a year on '+(pl[pt]||'this process')+'. At $'+Math.round(br)+'/hr that\'s real money -- and a custom system can handle most of it.';
   document.getElementById('breakdownList').innerHTML=
     '<li><span>Hours per year on this process</span><span>'+Math.round(ah*tm).toLocaleString()+'</span></li>'+
     '<li><span>Annual labor cost</span><span>$'+lab.toLocaleString()+'</span></li>'+
-    '<li><span>Est. automation coverage</span><span>~78%</span></li>'+
+    '<li><span>Est. system coverage</span><span>~78%</span></li>'+
     '<li><span>Est. build cost</span><span>$'+imp.toLocaleString()+'</span></li>'+
     '<li><span>Net savings, year one</span><span>$'+net.toLocaleString()+'</span></li>';
   var r=document.getElementById('auditResult');
