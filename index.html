@@ -1,6 +1,3 @@
-Valore group · HTML
-Copy
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -564,7 +561,21 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
             <span class="rsav" id="savingsNum">--</span>
             <p class="rdesc" id="savingsDesc">--</p>
             <ul class="rbr" id="breakdownList"></ul>
-            <p class="rcta">Want to dig into the details? <a href="#contact">Book a free 20-min call</a></p>
+            <div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08)">
+              <p style="font-size:0.76rem;color:rgba(250,248,244,0.55);margin-bottom:0.65rem;line-height:1.6">Want us to send you the full breakdown and follow up with next steps?</p>
+              <form id="auditEmailForm" action="https://formspree.io/f/mwvwdyqb" method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap">
+                <input type="hidden" name="_subject" value="New ROI Audit Lead"/>
+                <input type="hidden" name="annual_cost" id="auditHiddenCost"/>
+                <input type="hidden" name="practice_type" id="auditHiddenFirm"/>
+                <input type="hidden" name="team_size" id="auditHiddenTeam"/>
+                <input type="hidden" name="process" id="auditHiddenProcess"/>
+                <input type="hidden" name="hours_per_week" id="auditHiddenHours"/>
+                <input type="hidden" name="billable_rate" id="auditHiddenRate"/>
+                <input type="email" name="email" placeholder="your@email.com" required style="flex:1;min-width:180px;padding:0.6rem 0.8rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);font-family:var(--sans);font-size:0.82rem;color:var(--white);border-radius:2px;outline:none"/>
+                <button type="submit" style="background:var(--accent);color:var(--white);padding:0.6rem 1.1rem;font-family:var(--sans);font-size:0.82rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background 0.2s">Send My Report</button>
+              </form>
+              <p id="auditFormThanks" style="display:none;font-size:0.76rem;color:var(--amid);margin-top:0.5rem">Got it. We'll be in touch shortly.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -624,25 +635,27 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <div class="cform">
       <h3>Start Here</h3>
       <p class="fsub">We respond within 24 hours. Usually same day.</p>
-      <div class="fg"><label>Name</label><input type="text" placeholder="Your name"/></div>
-      <div class="fg"><label>Email</label><input type="email" placeholder="you@yourfirm.com"/></div>
-      <div class="fg">
-        <label>Practice Type</label>
-        <select>
-          <option value="">Select industry</option>
-          <option>Accounting / CPA</option>
-          <option>Law Firm</option>
-          <option>Insurance</option>
-          <option>Consulting</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="fg">
-        <label>What's frustrating you?</label>
-        <textarea class="ctarea" placeholder="Describe it however makes sense. You don't need technical language -- just tell us what's taking too long or costing too much."></textarea>
-      </div>
-      <button class="csub">Send It</button>
-      <p class="cnote">Your information stays private. We don't share it, sell it, or add you to a list. <a href="#">Privacy policy.</a></p>
+      <form action="https://formspree.io/f/xaqlgvjv" method="POST">
+        <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required/></div>
+        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@yourfirm.com" required/></div>
+        <div class="fg">
+          <label>Practice Type</label>
+          <select name="practice_type">
+            <option value="">Select industry</option>
+            <option>Accounting / CPA</option>
+            <option>Law Firm</option>
+            <option>Insurance</option>
+            <option>Consulting</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>What's frustrating you?</label>
+          <textarea class="ctarea" name="message" placeholder="Describe it however makes sense. You don't need technical language -- just tell us what's taking too long or costing too much." required></textarea>
+        </div>
+        <button type="submit" class="csub">Send It</button>
+        <p class="cnote">Your information stays private. We don't share it, sell it, or add you to a list. <a href="#">Privacy policy.</a></p>
+      </form>
     </div>
   </div>
 </div>
@@ -674,6 +687,9 @@ function runAudit(){
   var imp=sav>50000?12000:sav>25000?7500:4500;
   var net=sav-imp;
   var pl={'data_entry':'moving data between tools','document_prep':'document prep and form filling','contract_review':'contract review','client_intake':'client intake and onboarding','reporting':'building weekly reports','renewal_tracking':'tracking renewals and deadlines','lead_routing':'sorting and qualifying leads'};
+  var firmLabels={'cpa':'Accounting / CPA Firm','legal':'Law Firm / Legal Practice','insurance':'Insurance Brokerage','consulting':'Consulting Firm','staffing':'Staffing Agency','other':'Other Professional Practice'};
+  var teamLabels={'1':'1-5 people','2':'6-15 people','3':'16-50 people','4':'50+ people'};
+  var hwLabels={'3':'1-5 hrs/week','8':'6-10 hrs/week','15':'11-20 hrs/week','30':'20+ hrs/week'};
   document.getElementById('savingsNum').textContent='$'+sav.toLocaleString()+'/yr';
   document.getElementById('savingsDesc').textContent='Your practice is spending roughly '+Math.round(ah*tm).toLocaleString()+' hours a year on '+(pl[pt]||'this process')+'. At $'+Math.round(br)+'/hr that\'s real money -- and a custom system can handle most of it.';
   document.getElementById('breakdownList').innerHTML=
@@ -682,9 +698,21 @@ function runAudit(){
     '<li><span>Est. system coverage</span><span>~78%</span></li>'+
     '<li><span>Est. build cost</span><span>$'+imp.toLocaleString()+'</span></li>'+
     '<li><span>Net savings, year one</span><span>$'+net.toLocaleString()+'</span></li>';
+  document.getElementById('auditHiddenCost').value='$'+sav.toLocaleString()+'/yr';
+  document.getElementById('auditHiddenFirm').value=firmLabels[ft]||ft;
+  document.getElementById('auditHiddenTeam').value=teamLabels[String(ts)]||ts;
+  document.getElementById('auditHiddenProcess').value=pl[pt]||pt;
+  document.getElementById('auditHiddenHours').value=hwLabels[String(hw)]||hw+' hrs/week';
+  document.getElementById('auditHiddenRate').value='$'+Math.round(br)+'/hr';
   var r=document.getElementById('auditResult');
   r.classList.add('show');
   r.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('auditEmailForm').addEventListener('submit',function(){
+    setTimeout(function(){
+      document.getElementById('auditEmailForm').style.display='none';
+      document.getElementById('auditFormThanks').style.display='block';
+    },500);
+  });
 }
 </script>
 </body>
