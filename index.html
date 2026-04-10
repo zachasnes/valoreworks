@@ -1,6 +1,3 @@
-Valore group · HTML
-Copy
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,12 +238,54 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <p class="hero-note">You don't need to know what you need. That's our job. Tell us what's frustrating you -- we'll figure out the rest.</p>
     <div class="hero-btns">
       <a href="#contact" class="btn-p">Tell Us What's Frustrating You</a>
-      <a href="#work" class="btn-s">See What We've Fixed</a>
+      <a href="#audit" class="btn-s">Get Your Free ROI Estimate</a>
     </div>
     <div class="hero-proof">
       <div class="hp-item"><span class="n">$2.5M+</span><span class="l">Annual value delivered</span></div>
       <div class="hp-item"><span class="n">27x</span><span class="l">Equivalent FTE capacity added</span></div>
       <div class="hp-item"><span class="n">48hrs</span><span class="l">Compressed to seconds</span></div>
+    </div>
+    <div style="margin-top:3rem;background:var(--off);border:1px solid var(--g200);padding:1.5rem 2rem;border-radius:2px;max-width:680px">
+      <p style="font-size:0.7rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem">Free ROI Estimate</p>
+      <p style="font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--black);margin-bottom:1.25rem;line-height:1.3">See what your biggest manual process is costing you annually.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.65rem;align-items:end;flex-wrap:wrap">
+        <div>
+          <label style="display:block;font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem">Biggest Time Drain</label>
+          <select id="heroProcess" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.82rem;color:var(--black);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none">
+            <option value="">Select a process</option>
+            <option value="data_entry">Moving data between tools</option>
+            <option value="document_prep">Document prep / form filling</option>
+            <option value="contract_review">Contract review</option>
+            <option value="client_intake">Client intake</option>
+            <option value="reporting">Weekly reports</option>
+            <option value="renewal_tracking">Renewal tracking</option>
+            <option value="lead_routing">Lead qualification</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem">Hours/Week</label>
+          <select id="heroHours" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.82rem;color:var(--black);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none">
+            <option value="">Select range</option>
+            <option value="3">1–5 hrs/week</option>
+            <option value="8">6–10 hrs/week</option>
+            <option value="15">11–20 hrs/week</option>
+            <option value="30">20+ hrs/week</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem">Billable Rate ($/hr)</label>
+          <input type="number" id="heroRate" placeholder="e.g. 150" min="25" max="1000" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.82rem;color:var(--black);border-radius:2px;outline:none"/>
+        </div>
+        <button onclick="runHeroAudit()" style="background:var(--black);color:var(--white);padding:0.6rem 1.25rem;font-family:var(--sans);font-size:0.82rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background 0.2s;height:38px" onmouseover="this.style.background='#9a7435'" onmouseout="this.style.background='#111110'">Calculate</button>
+      </div>
+      <div id="heroResult" style="display:none;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--g200)">
+        <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem">
+          <span style="font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--black)" id="heroSavings">--</span>
+          <span style="font-size:0.82rem;color:var(--g600)" id="heroSavingsLabel">estimated annual cost</span>
+        </div>
+        <p style="font-size:0.8rem;color:var(--g600);line-height:1.65;margin-bottom:1rem" id="heroSavingsDesc"></p>
+        <a href="#audit" style="font-size:0.8rem;font-weight:500;color:var(--accent);border-bottom:1px solid var(--alight);padding-bottom:1px">Get the full breakdown with year-one ROI &#8594;</a>
+      </div>
     </div>
   </div>
 </div>
@@ -680,7 +719,20 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
  
 </div>
 <script>
-function runAudit(){
+function runHeroAudit(){
+  var pt=document.getElementById('heroProcess').value;
+  var hw=parseFloat(document.getElementById('heroHours').value)||0;
+  var br=parseFloat(document.getElementById('heroRate').value)||0;
+  if(!pt||!hw||!br){alert('Please fill in all three fields.');return;}
+  var pm={'data_entry':1.0,'document_prep':1.1,'contract_review':1.4,'client_intake':1.0,'reporting':0.9,'renewal_tracking':0.85,'lead_routing':1.2}[pt]||1.0;
+  var ah=hw*50;
+  var sav=Math.round(ah*br*pm*0.78/100)*100;
+  var pl={'data_entry':'moving data between tools','document_prep':'document prep and form filling','contract_review':'contract review','client_intake':'client intake','reporting':'building weekly reports','renewal_tracking':'renewal tracking','lead_routing':'lead qualification'};
+  document.getElementById('heroSavings').textContent='$'+sav.toLocaleString()+'/yr';
+  document.getElementById('heroSavingsDesc').textContent='Your practice spends roughly '+Math.round(ah).toLocaleString()+' hours/year on '+(pl[pt]||'this process')+'. At $'+Math.round(br)+'/hr, that\'s real money sitting on the floor. Get the full breakdown below.';
+  document.getElementById('heroResult').style.display='block';
+}
+ 
   var ft=document.getElementById('firmType').value;
   var ts=document.getElementById('teamSize').value;
   var br=parseFloat(document.getElementById('billableRate').value)||125;
