@@ -105,6 +105,12 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem
 .ba-col:last-child .ba-val{color:var(--white)}
 .card p{font-size:0.82rem;color:var(--g600);line-height:1.75;font-weight:300}
 .card-result{margin-top:0.75rem;font-size:0.8rem;color:var(--accent);font-weight:500}
+.tquote-sec{padding:4rem 2.5rem;background:var(--off);border-top:1px solid var(--g200);border-bottom:1px solid var(--g200);width:100%}
+.tquote-in{max-width:720px;margin:0 auto;text-align:center}
+.tq-mark{font-family:var(--serif);font-size:4rem;line-height:0.5;color:var(--alight);display:block;margin-bottom:1.25rem}
+.tq-body{font-family:var(--serif);font-size:clamp(1.1rem,2vw,1.45rem);font-weight:400;font-style:italic;color:var(--black);line-height:1.6;margin-bottom:1.25rem}
+.tq-attr{font-size:0.72rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent)}
+@media(max-width:720px){.tquote-sec{padding:3rem 1.25rem}}
 .ti-sec{padding:5rem 2.5rem;background:var(--black);width:100%}
 .ti-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
 .ti-left .lbl{color:var(--amid)}
@@ -435,6 +441,14 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
         <p class="card-result">~$96K in attorney time recovered annually</p>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="tquote-sec">
+  <div class="tquote-in">
+    <span class="tq-mark">&ldquo;</span>
+    <blockquote class="tq-body">You did a full audit of my day and found every gap where AI could take over the manual work. The systems you built have already made me 62% more efficient &mdash; I&rsquo;m taking on more clients because of it.</blockquote>
+    <p class="tq-attr">Attorney, Private Practice</p>
   </div>
 </div>
 
