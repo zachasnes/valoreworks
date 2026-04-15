@@ -181,6 +181,14 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem
 .rbr li span:last-child{color:var(--amid);font-weight:500}
 .rcta{margin-top:0.9rem;font-size:0.74rem;color:rgba(250,248,244,0.35)}
 .rcta a{color:var(--amid);font-weight:500}
+.about-sec{padding:5rem 2.5rem;background:var(--white);width:100%}
+.about-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:start}
+.about-left .lbl{color:var(--accent)}
+.about-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
+.about-name{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--black);margin-bottom:0.2rem}
+.about-title{font-size:0.72rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem;display:block}
+.about-right p{color:var(--g600);font-weight:300;line-height:1.85;font-size:0.92rem;margin-bottom:0.9rem}
+@media(max-width:720px){.about-in{grid-template-columns:1fr;gap:2rem}.about-sec{padding:3rem 1.25rem}}
 .faq-sec{padding:5rem 2.5rem;background:var(--off);width:100%}
 .faq-in{max-width:var(--max);margin:0 auto}
 .faq-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
@@ -263,6 +271,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <li><a href="#how">How It Works</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#standard">Our Standard</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="#audit">Free Audit</a></li>
     <li><a href="#contact" class="nav-cta">Talk to Us</a></li>
   </ul>
@@ -274,6 +283,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   <a href="#how" onclick="toggleMenu()">How It Works</a>
   <a href="#work" onclick="toggleMenu()">Work</a>
   <a href="#standard" onclick="toggleMenu()">Our Standard</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
   <a href="#audit" onclick="toggleMenu()">Free Audit</a>
   <a href="#contact" onclick="toggleMenu()">Talk to Us</a>
 </div>
@@ -627,6 +637,22 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="about-sec" id="about">
+  <div class="about-in">
+    <div class="about-left">
+      <span class="lbl">Who We Are</span>
+      <h2>The person<br>behind the work.</h2>
+      <div class="divl"></div>
+    </div>
+    <div class="about-right">
+      <p class="about-name">Zach Asnes</p>
+      <span class="about-title">Founder, Valore</span>
+      <p>Zach Asnes is a technical consultant at Google, where he works with enterprise clients on cloud and AI adoption. He started Valore after watching small professional service firms struggle with the same problems the enterprise world solves overnight — manual workflows, disconnected tools, no internal team to fix any of it.</p>
+      <p>He holds an MBA from UT McCombs.</p>
     </div>
   </div>
 </div>
