@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="description" content="Valore builds custom AI systems for professional practices. No IT team needed. Tell us what's frustrating you — we'll tell you if it's fixable.">
+<title>Valore — Custom AI Systems for Professional Practices</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111110;--white:#faf8f4;--off:#f2efe8;
+  --accent:#9a7435;--amid:#c9a55a;--alight:#e8d9be;
+  --g100:#ece9e1;--g200:#d4d0c6;--g400:#9c9890;--g600:#5a5754;--g800:#2e2d2b;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --max:1000px;
+}
+html,body{width:100%;overflow-x:clip}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.65}
+a{text-decoration:none}
+.wrap{width:100%}
+.ct{max-width:var(--max);margin:0 auto;width:100%}
+nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;width:100%;position:sticky;top:0;z-index:100}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
+.hamburger span{display:block;width:22px;height:2px;background:var(--black);transition:all 0.2s}
+.mobile-menu{display:none;position:fixed;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--g200);padding:1rem 1.25rem;z-index:99;flex-direction:column;gap:0}
+.mobile-menu a{display:block;padding:0.85rem 0;font-size:0.85rem;font-weight:500;color:var(--g600);border-bottom:1px solid var(--g100);letter-spacing:0.05em;text-transform:uppercase}
+.mobile-menu a:last-child{border-bottom:none;background:var(--black);color:var(--white)!important;text-align:center;padding:0.85rem;margin-top:0.5rem;border-radius:2px}
+.mobile-menu.open{display:flex}
+@media(max-width:720px){.hamburger{display:flex}}
+.logo{display:flex;flex-direction:column;gap:1px;line-height:1}
+.logo-main{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--black)}
+.logo-main span{color:var(--accent)}
+.logo-sub{font-size:0.52rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--g400)}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{font-size:0.78rem;font-weight:500;color:var(--g600);letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--black)!important;color:var(--white)!important;padding:0.4rem 1rem;border-radius:2px}
+.nav-cta:hover{background:var(--accent)!important;color:var(--white)!important}
+.btn-p{background:var(--black);color:var(--white);padding:0.9rem 1.9rem;font-family:var(--sans);font-size:0.88rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;display:inline-block;transition:background 0.2s;letter-spacing:0.02em}
+.btn-p:hover{background:var(--accent)}
+.btn-s{background:transparent;color:var(--black);padding:0.9rem 1.9rem;font-family:var(--sans);font-size:0.88rem;font-weight:500;border:1.5px solid var(--g200);cursor:pointer;border-radius:2px;display:inline-block;transition:all 0.2s}
+.btn-s:hover{border-color:var(--accent);color:var(--accent)}
+.lbl{font-size:0.68rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;display:block}
+.divl{width:36px;height:2px;background:var(--accent);margin:1.25rem 0}
+.hero{padding:3.5rem 2.5rem 5rem;width:100%}
+.hero-in{max-width:var(--max);margin:0 auto}
+.hero-in h1{font-family:var(--serif);font-size:clamp(2.4rem,4.5vw,4.6rem);font-weight:700;line-height:1.08;max-width:800px;margin-bottom:1.5rem;color:var(--black)}
+.hero-in h1 em{font-style:italic;color:var(--accent)}
+.hero-p{font-size:1.1rem;color:var(--g600);max-width:580px;margin-bottom:0.75rem;font-weight:300;line-height:1.85}
+.hero-note{font-size:0.88rem;color:var(--g400);max-width:520px;margin-bottom:2.5rem;font-style:italic;line-height:1.75}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:4.5rem}
+.hero-proof{border-top:1px solid var(--g200);padding-top:2rem;display:flex;gap:3rem;flex-wrap:wrap}
+.hp-item .n{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--black);display:block;line-height:1}
+.hp-item .l{font-size:0.72rem;color:var(--g400);text-transform:uppercase;letter-spacing:0.09em;margin-top:0.35rem;display:block}
+.recog{background:var(--black);padding:5rem 2.5rem;width:100%}
+.recog-in{max-width:var(--max);margin:0 auto}
+.recog-in .lbl{color:var(--amid)}
+.recog-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;line-height:1.15;color:var(--white);margin-bottom:0.5rem;max-width:680px}
+.recog-in h2 em{color:var(--amid);font-style:italic}
+.recog-sub{color:rgba(250,248,244,0.55);font-weight:300;font-size:0.95rem;max-width:560px;line-height:1.85;margin-bottom:3rem}
+.moments{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(255,255,255,0.06)}
+.moment{background:var(--black);padding:1.75rem;border:1px solid rgba(255,255,255,0.06)}
+.moment-q{font-family:var(--serif);font-size:1.1rem;font-weight:400;font-style:italic;color:rgba(250,248,244,0.85);line-height:1.5;margin-bottom:0.75rem}
+.moment-a{font-size:0.8rem;color:rgba(250,248,244,0.38);line-height:1.65;font-weight:300}
+.how{padding:5rem 2.5rem;background:var(--off);width:100%}
+.how-in{max-width:var(--max);margin:0 auto}
+.how-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
+.how-sub{color:var(--g600);font-weight:300;font-size:0.95rem;max-width:520px;line-height:1.85;margin-bottom:2.5rem}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--g200)}
+.step{padding:1.75rem;background:var(--white);border-right:1px solid var(--g200)}
+.step:last-child{border-right:none}
+.step-n{font-family:var(--serif);font-size:2.8rem;font-weight:700;color:var(--alight);line-height:1;margin-bottom:0.85rem;display:block}
+.step h3{font-family:var(--serif);font-size:0.95rem;font-weight:700;margin-bottom:0.5rem;color:var(--black)}
+.step p{font-size:0.82rem;color:var(--g600);line-height:1.75;font-weight:300}
+.step-t{display:inline-block;margin-top:0.8rem;font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--alight);padding-bottom:2px}
+.proof-sec{padding:5rem 2.5rem;background:var(--white);width:100%}
+.proof-in{max-width:var(--max);margin:0 auto}
+.proof-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
+.proof-sub{color:var(--g600);font-weight:300;font-size:0.95rem;max-width:520px;line-height:1.85;margin-bottom:2.5rem}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.card{background:var(--off);border:1px solid var(--g200);padding:1.75rem;border-radius:2px}
+.card-tag{font-size:0.67rem;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--accent);margin-bottom:0.85rem;display:block}
+.card h3{font-family:var(--serif);font-size:1rem;font-weight:700;margin-bottom:0.65rem;line-height:1.35;color:var(--black)}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:1rem;border:1px solid var(--g200);border-radius:2px;overflow:hidden}
+.ba-col{padding:0.85rem}
+.ba-col:first-child{background:var(--white);border-right:1px solid var(--g200)}
+.ba-col:last-child{background:var(--black)}
+.ba-label{font-size:0.63rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.4rem;display:block}
+.ba-col:first-child .ba-label{color:var(--g400)}
+.ba-col:last-child .ba-label{color:var(--amid)}
+.ba-val{font-family:var(--serif);font-size:1rem;font-weight:700;line-height:1.2;display:block}
+.ba-col:first-child .ba-val{color:var(--g800)}
+.ba-col:last-child .ba-val{color:var(--white)}
+.card p{font-size:0.82rem;color:var(--g600);line-height:1.75;font-weight:300}
+.card-result{margin-top:0.75rem;font-size:0.8rem;color:var(--accent);font-weight:500}
+.ti-sec{padding:5rem 2.5rem;background:var(--black);width:100%}
+.ti-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.ti-left .lbl{color:var(--amid)}
+.ti-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--white);margin-bottom:0.75rem}
+.ti-left p{color:rgba(250,248,244,0.62);font-weight:300;line-height:1.85;font-size:0.92rem;margin-bottom:0.9rem}
+.ti-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07)}
+.ti-item{background:var(--black);padding:1.35rem;border:1px solid rgba(255,255,255,0.06)}
+.ti-badge{display:inline-block;font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--amid);border:1px solid rgba(201,165,90,0.25);padding:0.18rem 0.5rem;border-radius:2px;margin-bottom:0.65rem}
+.ti-item h4{font-family:var(--serif);font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.4rem}
+.ti-item p{font-size:0.79rem;color:rgba(250,248,244,0.45);line-height:1.65;font-weight:300}
+.tbar{padding:3rem 2.5rem;background:var(--black);border-top:1px solid rgba(255,255,255,0.06);width:100%}
+.tbar-in{max-width:var(--max);margin:0 auto;display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.ti2 .tn{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--amid);display:block;line-height:1}
+.ti2 .tl{font-size:0.7rem;color:rgba(250,248,244,0.35);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.35rem;display:block}
+.tdv{width:1px;height:44px;background:rgba(255,255,255,0.07)}
+.honest-sec{padding:5rem 2.5rem;background:var(--white);width:100%}
+.honest-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.honest-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black)}
+.honest-left h2 em{font-style:italic;color:var(--accent)}
+.honest-left p{color:var(--g600);font-weight:300;line-height:1.85;font-size:0.9rem;margin-bottom:0.9rem}
+.no-list{list-style:none;margin-top:0.5rem}
+.no-list li{padding:0.6rem 0;border-bottom:1px solid var(--g100);font-size:0.86rem;color:var(--g800);display:flex;gap:0.8rem;line-height:1.6}
+.no-list li::before{content:'x';color:var(--g400);flex-shrink:0;font-weight:500}
+.yes-box{background:var(--black);padding:1.75rem}
+.yes-head{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--amid);margin-bottom:1.1rem;display:block}
+.yes-list{list-style:none}
+.yes-list li{padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:0.86rem;color:rgba(250,248,244,0.72);display:flex;gap:0.8rem;line-height:1.6}
+.yes-list li::before{content:'--';color:var(--amid);flex-shrink:0}
+.cap-box{margin-top:1.1rem;background:var(--off);border:1px solid var(--g200);padding:1.35rem;border-radius:2px}
+.cap-lbl{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);margin-bottom:0.6rem;display:block}
+.cap-box h4{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--black);margin-bottom:0.35rem}
+.cap-box p{font-size:0.8rem;color:var(--g600);line-height:1.7;font-weight:300}
+.price-sec{padding:5rem 2.5rem;background:var(--off);width:100%}
+.price-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1.3fr;gap:4rem;align-items:start}
+.price-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.75rem}
+.price-left p{color:var(--g600);font-weight:300;line-height:1.85;font-size:0.9rem;margin-bottom:0.85rem}
+.pcs{display:flex;flex-direction:column;gap:1rem}
+.pc{background:var(--white);border:1px solid var(--g200);padding:1.5rem;border-radius:2px}
+.pc.feat{border:2px solid var(--accent)}
+.pc-badge{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;background:var(--alight);color:var(--accent);padding:0.22rem 0.6rem;border-radius:2px;display:inline-block;margin-bottom:0.75rem}
+.pc h3{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--black);margin-bottom:0.2rem}
+.pc-range{font-size:1.5rem;font-family:var(--serif);font-weight:700;color:var(--black);margin:0.4rem 0}
+.pc-range span{font-size:0.76rem;font-weight:400;color:var(--g400);font-family:var(--sans)}
+.pc p{font-size:0.8rem;color:var(--g600);line-height:1.7;font-weight:300;margin-bottom:0.85rem}
+.pc-inc{list-style:none;font-size:0.78rem}
+.pc-inc li{padding:0.3rem 0;color:var(--g600);display:flex;gap:0.6rem;border-bottom:1px solid var(--g100)}
+.pc-inc li::before{content:'--';color:var(--amid);flex-shrink:0}
+.audit-sec{padding:5rem 2.5rem;background:var(--white);width:100%}
+.audit-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:start}
+.audit-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black)}
+.audit-left h2 em{font-style:italic;color:var(--accent)}
+.audit-left p{color:var(--g600);font-weight:300;line-height:1.85;margin-bottom:0.9rem;font-size:0.9rem}
+.a-steps{margin-top:1.25rem;list-style:none}
+.a-steps li{display:flex;gap:0.9rem;padding:0.75rem 0;border-bottom:1px solid var(--g200);font-size:0.84rem;color:var(--g600)}
+.a-sn{font-family:var(--serif);font-weight:700;color:var(--accent);flex-shrink:0;width:16px}
+.aform{background:var(--off);border:1px solid var(--g200);padding:1.75rem;border-radius:2px}
+.aform h3{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin-bottom:0.2rem;color:var(--black)}
+.aform .fsub{font-size:0.78rem;color:var(--g400);margin-bottom:1.35rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-size:0.71rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem}
+.fg select,.fg input{width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.84rem;color:var(--black);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none}
+.fg select:focus,.fg input:focus{border-color:var(--accent)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:0.65rem}
+.asub{width:100%;background:var(--black);color:var(--white);padding:0.85rem;font-family:var(--sans);font-size:0.86rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;margin-top:0.4rem;transition:background 0.2s}
+.asub:hover{background:var(--accent)}
+.ares{display:none;margin-top:1.35rem}
+.ares.show{display:block}
+.rbox{background:var(--black);padding:1.35rem;border-radius:2px}
+.rl2{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.13em;color:var(--amid);margin-bottom:0.45rem;display:block}
+.rsav{font-family:var(--serif);font-size:2.4rem;font-weight:700;line-height:1;color:var(--white);margin-bottom:0.25rem;display:block}
+.rdesc{font-size:0.78rem;color:rgba(250,248,244,0.55);line-height:1.65;margin-bottom:1rem}
+.rbr{list-style:none;font-size:0.76rem}
+.rbr li{padding:0.4rem 0;border-bottom:1px solid rgba(255,255,255,0.07);color:rgba(250,248,244,0.6);display:flex;justify-content:space-between}
+.rbr li span:last-child{color:var(--amid);font-weight:500}
+.rcta{margin-top:0.9rem;font-size:0.74rem;color:rgba(250,248,244,0.35)}
+.rcta a{color:var(--amid);font-weight:500}
+.faq-sec{padding:5rem 2.5rem;background:var(--off);width:100%}
+.faq-in{max-width:var(--max);margin:0 auto}
+.faq-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
+.faq-sub{color:var(--g600);font-weight:300;font-size:0.95rem;max-width:520px;line-height:1.85;margin-bottom:2.5rem}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.faq-item{background:var(--white);border:1px solid var(--g200);padding:1.5rem;border-radius:2px}
+.faq-item h4{font-family:var(--serif);font-size:0.95rem;font-weight:700;color:var(--black);margin-bottom:0.65rem;line-height:1.35}
+.faq-item p{font-size:0.82rem;color:var(--g600);line-height:1.75;font-weight:300}
+.contact-sec{padding:5rem 2.5rem;background:var(--black);width:100%}
+.contact-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-left .lbl{color:var(--amid)}
+.contact-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--white);margin-bottom:0.75rem}
+.contact-left p{color:rgba(250,248,244,0.58);font-weight:300;line-height:1.85;font-size:0.92rem;margin-bottom:0.9rem}
+.cpts{list-style:none;margin-top:1.5rem}
+.cpts li{padding:0.55rem 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:0.86rem;color:rgba(250,248,244,0.65);display:flex;gap:0.8rem;line-height:1.6}
+.cpts li::before{content:'--';color:var(--amid);flex-shrink:0}
+.cform{background:var(--white);padding:1.75rem;border-radius:2px}
+.cform h3{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin-bottom:0.2rem;color:var(--black)}
+.cform .fsub{font-size:0.78rem;color:var(--g400);margin-bottom:1.35rem}
+.ctarea{width:100%;padding:0.65rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.84rem;color:var(--black);border-radius:2px;outline:none;resize:vertical;min-height:90px}
+.ctarea:focus{border-color:var(--accent)}
+.csub{width:100%;background:var(--black);color:var(--white);padding:0.88rem;font-family:var(--sans);font-size:0.86rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;margin-top:0.4rem;transition:background 0.2s}
+.csub:hover{background:var(--accent)}
+.cnote{font-size:0.73rem;color:var(--g400);margin-top:0.75rem;line-height:1.65}
+.cnote a{color:var(--accent)}
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:2.25rem 2.5rem;text-align:center;width:100%}
+.flogo-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;margin-bottom:0.75rem}
+.flogo{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--white);display:block;line-height:1}
+.flogo span{color:var(--amid)}
+.flogo-sub{font-size:0.5rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.3)}
+footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
+@media(max-width:720px){
+  .ti-in,.honest-in,.price-in,.audit-in,.contact-in{grid-template-columns:1fr;gap:2.5rem}
+  .steps{grid-template-columns:1fr 1fr}
+  .cards,.moments,.faq-grid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .tbar-in{gap:1.75rem;justify-content:center}
+  .tdv{display:none}
+  .before-after{grid-template-columns:1fr}
+  .ba-col:first-child{border-right:none;border-bottom:1px solid var(--g200)}
+  .hero{padding:2.5rem 1.25rem 3rem}
+  .recog,.how,.proof-sec,.ti-sec,.tbar,.honest-sec,.price-sec,.audit-sec,.faq-sec,.contact-sec{padding:3rem 1.25rem}
+  footer{padding:2rem 1.25rem}
+  nav{padding:0 1.25rem}
+  .hero-btns{flex-direction:column;gap:0.75rem}
+  .btn-p,.btn-s{width:100%;text-align:center;padding:0.85rem 1rem}
+  .hero-proof{gap:1.5rem}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .hero-proof{gap:1.25rem}
+  .hero-in h1{font-size:2rem}
+  .hero-p{font-size:0.95rem}
+  .recog-in h2,.how-in h2,.proof-in h2,.honest-left h2,.price-left h2,.audit-left h2,.contact-left h2{font-size:1.6rem}
+  .tbar-in{flex-direction:column;align-items:center;gap:1.25rem}
+  .pc-range{font-size:1.25rem}
+  .hero-calc-grid{grid-template-columns:1fr!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+ 
+<nav>
+  <div class="logo">
+    <span class="logo-main">Valore<span>.</span></span>
+    <span class="logo-sub">Custom AI Systems</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#audit">Free Audit</a></li>
+    <li><a href="#contact" class="nav-cta">Talk to Us</a></li>
+  </ul>
+  <button class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#how" onclick="toggleMenu()">How It Works</a>
+  <a href="#work" onclick="toggleMenu()">Work</a>
+  <a href="#audit" onclick="toggleMenu()">Free Audit</a>
+  <a href="#contact" onclick="toggleMenu()">Talk to Us</a>
+</div>
+ 
+<div class="hero">
+  <div class="hero-in">
+    <h1>You know something<br>is taking too long.<br>We'll tell you if<br><em>it's fixable.</em></h1>
+    <p class="hero-p">Most of our clients came to us saying the same thing: "I don't know how AI could help my business. I just know my team is spending hours on something that feels like it shouldn't take that long."</p>
+    <p class="hero-note">You don't need to know what you need. That's our job. Tell us what's frustrating you -- we'll figure out the rest.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-p">Tell Us What's Frustrating You</a>
+      <a href="#audit" class="btn-s">Get Your Free ROI Estimate</a>
+    </div>
+    <div class="hero-proof">
+      <div class="hp-item"><span class="n">$2.5M+</span><span class="l">Annual value delivered</span></div>
+      <div class="hp-item"><span class="n">27x</span><span class="l">Equivalent FTE capacity added</span></div>
+      <div class="hp-item"><span class="n">48hrs</span><span class="l">Compressed to seconds</span></div>
+    </div>
+    <div style="margin-top:3rem;background:var(--off);border:1px solid var(--g200);padding:1.5rem 2rem;border-radius:2px;max-width:680px">
+      <p style="font-size:0.7rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:0.5rem">Free ROI Estimate</p>
+      <p style="font-family:var(--serif);font-size:1.15rem;font-weight:700;color:var(--black);margin-bottom:1.25rem;line-height:1.3">See what your biggest manual process is costing you annually.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:0.65rem;align-items:end;flex-wrap:wrap" class="hero-calc-grid">
+        <div>
+          <label style="display:block;font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem">Biggest Time Drain</label>
+          <select id="heroProcess" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.82rem;color:var(--black);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none">
+            <option value="">Select a process</option>
+            <option value="data_entry">Moving data between tools</option>
+            <option value="document_prep">Document prep / form filling</option>
+            <option value="contract_review">Contract review</option>
+            <option value="client_intake">Client intake</option>
+            <option value="reporting">Weekly reports</option>
+            <option value="renewal_tracking">Renewal tracking</option>
+            <option value="lead_routing">Lead qualification</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem">Hours/Week</label>
+          <select id="heroHours" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.82rem;color:var(--black);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none">
+            <option value="">Select range</option>
+            <option value="3">1–5 hrs/week</option>
+            <option value="8">6–10 hrs/week</option>
+            <option value="15">11–20 hrs/week</option>
+            <option value="30">20+ hrs/week</option>
+          </select>
+        </div>
+        <div>
+          <label style="display:block;font-size:0.68rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem">Billable Rate ($/hr)</label>
+          <input type="number" id="heroRate" placeholder="e.g. 150" min="25" max="1000" style="width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.82rem;color:var(--black);border-radius:2px;outline:none"/>
+        </div>
+        <button onclick="runHeroAudit()" style="background:var(--black);color:var(--white);padding:0.6rem 1.25rem;font-family:var(--sans);font-size:0.82rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background 0.2s;height:38px" onmouseover="this.style.background='#9a7435'" onmouseout="this.style.background='#111110'">Calculate</button>
+      </div>
+      <div id="heroResult" style="display:none;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--g200)">
+        <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-bottom:0.5rem">
+          <span style="font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--black)" id="heroSavings">--</span>
+          <span style="font-size:0.82rem;color:var(--g600)" id="heroSavingsLabel">estimated annual cost</span>
+        </div>
+        <p style="font-size:0.8rem;color:var(--g600);line-height:1.65;margin-bottom:1rem" id="heroSavingsDesc"></p>
+        <a href="#audit" style="font-size:0.8rem;font-weight:500;color:var(--accent);border-bottom:1px solid var(--alight);padding-bottom:1px">Get the full breakdown with year-one ROI &#8594;</a>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="recog" id="problems">
+  <div class="recog-in">
+    <span class="lbl">Sound familiar?</span>
+    <h2>These are the moments<br>our clients describe<br><em>before they call us.</em></h2>
+    <p class="recog-sub">You don't need to know the technical solution. You just need to recognize the feeling. If any of these sound like your week, we should talk.</p>
+    <div class="moments">
+      <div class="moment">
+        <p class="moment-q">"I do the same thing every single morning before I can even start my actual work."</p>
+        <p class="moment-a">Copying data between tools, chasing down information, updating records by hand. It's the first hour of every day -- and it's been that way for years.</p>
+      </div>
+      <div class="moment">
+        <p class="moment-q">"We bought software that was supposed to fix this. It didn't."</p>
+        <p class="moment-a">Off-the-shelf tools promise to solve everything. They're built for the average firm, not yours. So the same manual workarounds live on, just inside a more expensive system.</p>
+      </div>
+      <div class="moment">
+        <p class="moment-q">"My best people are doing work that should be beneath them."</p>
+        <p class="moment-a">You hired experts for their judgment. But half their day goes to admin, data entry, and tasks that have nothing to do with why you brought them on.</p>
+      </div>
+      <div class="moment">
+        <p class="moment-q">"A client asked a simple question and it took three people two hours to answer it."</p>
+        <p class="moment-a">The information exists. It's just in three different places, none of which talk to each other, and someone has to manually piece it together every time.</p>
+      </div>
+      <div class="moment">
+        <p class="moment-q">"I don't have an IT team and I don't know where to start with any of this."</p>
+        <p class="moment-a">You're not a tech company. You don't have developers, a CTO, or time to manage a software project. You just need someone to handle it and tell you when it's done.</p>
+      </div>
+      <div class="moment">
+        <p class="moment-q">"We keep growing but the manual work grows with us."</p>
+        <p class="moment-a">More clients means more of the same repetitive process. You can't hire fast enough to keep up. And the team you have is already stretched thin.</p>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="how" id="how">
+  <div class="how-in">
+    <span class="lbl">How It Works</span>
+    <h2>You describe the problem<br>in plain English.<br>We handle everything else.</h2>
+    <p class="how-sub">No technical knowledge required. No IT team needed. No long implementation project to manage. You tell us what's frustrating you -- we figure out if and how to fix it.</p>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">01</span>
+        <h3>You tell us what's broken</h3>
+        <p>A 20-minute call. No jargon, no pitch deck. Just describe the thing that's eating your team's time. You don't need to know what the solution looks like.</p>
+        <span class="step-t">20 minutes</span>
+      </div>
+      <div class="step">
+        <span class="step-n">02</span>
+        <h3>We run the numbers</h3>
+        <p>We calculate exactly what that problem costs you annually -- in hours, in dollars, in capacity. If a custom system doesn't pencil out, we tell you that before you spend anything.</p>
+        <span class="step-t">3-5 days</span>
+      </div>
+      <div class="step">
+        <span class="step-n">03</span>
+        <h3>We build it</h3>
+        <p>If the numbers work, we scope and build a custom system -- deployed into the tools you already use. No new software to learn. No IT project to manage.</p>
+        <span class="step-t">2-4 weeks</span>
+      </div>
+      <div class="step">
+        <span class="step-n">04</span>
+        <h3>It runs. You don't touch it.</h3>
+        <p>We stay on for 30 days to make sure everything works as it should. After that, the system just runs -- and your team gets their time back.</p>
+        <span class="step-t">30-day handoff</span>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="proof-sec" id="work">
+  <div class="proof-in">
+    <span class="lbl">Proof of Work</span>
+    <h2>What "fixed" actually looks like.</h2>
+    <p class="proof-sub">Real problems, real practices, real results. Each one started with someone describing a frustration -- not a technical requirement.</p>
+    <div class="cards">
+      <div class="card">
+        <span class="card-tag">Sales Agency</span>
+        <h3>"We're copying everything manually and still missing replies from interested leads."</h3>
+        <div class="before-after">
+          <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">Hours of manual copy-paste. Hot leads missed.</span></div>
+          <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Leads flow in real time. Interested replies flagged instantly.</span></div>
+        </div>
+        <p>Two platforms that didn't talk to each other, forcing reps to copy data by hand and start new email threads for every reply. We built a custom system connecting both platforms with an AI layer that scores every inbound reply -- so the team only sees the conversations worth having.</p>
+        <p class="card-result">~$180K+ recovered pipeline annually</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Enterprise Technology Client</span>
+        <h3>"Uploading our contact lists takes two full days and a whole team."</h3>
+        <div class="before-after">
+          <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">48-hour process. Manual validation. Constant delays.</span></div>
+          <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Same output. Seconds. Zero manual input.</span></div>
+        </div>
+        <p>A sales org manually validating and uploading contacts one by one -- a 48-hour bottleneck that delayed every outreach cycle. We built a custom system that handles the full pipeline from raw list to verified, CRM-ready records in seconds.</p>
+        <p class="card-result">Equivalent to 27 full-time employees. $2.16M in annual labor value.</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Probate Attorney</span>
+        <h3>"I spend hours every week on paperwork that feels like it should fill itself out."</h3>
+        <div class="before-after">
+          <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">8+ hrs/week extracting fields, filling forms by hand.</span></div>
+          <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Notes in. Completed forms out. One click.</span></div>
+        </div>
+        <p>An attorney spending hours every week copying information from client notes into state-mandated form templates. We built a custom system that reads the notes, extracts every required field, and populates the forms automatically.</p>
+        <p class="card-result">~$52K in recovered billable time per year</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Boutique M&A Advisory</span>
+        <h3>"Every deal needs a full DCF model. We were spending half a day building the same thing from scratch every time."</h3>
+        <div class="before-after">
+          <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">3-4 hrs per model. Inconsistent assumptions. Analyst time wasted on setup.</span></div>
+          <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Guided inputs. Full model out in minutes. Consistent across every deal.</span></div>
+        </div>
+        <p>A small advisory team rebuilding the same DCF framework deal after deal -- different analysts, different assumptions, no consistency. We built a custom AI system that takes guided inputs, enforces standardized assumptions, and outputs a complete model with WACC calculation, Hamada equation, and multi-year FCF build in one click.</p>
+        <p class="card-result">~$40K in recovered analyst time annually</p>
+      </div>
+      <div class="card">
+        <span class="card-tag">Legal Operations</span>
+        <h3>"Contract review takes hours and we're not even sure we're catching everything."</h3>
+        <div class="before-after">
+          <div class="ba-col"><span class="ba-label">Before</span><span class="ba-val">3-4 hrs per contract. Manual review. Inconsistent.</span></div>
+          <div class="ba-col"><span class="ba-label">After</span><span class="ba-val">Risk scored. Clauses flagged. Redlines drafted. 5 minutes.</span></div>
+        </div>
+        <p>Hours per contract reviewing agreement language with no consistent framework. We built a custom AI system that reads every contract, scores it for risk, flags specific problem clauses, rewrites them, and exports a complete redlined document in one click.</p>
+        <p class="card-result">~$96K in attorney time recovered annually</p>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="ti-sec">
+  <div class="ti-in">
+    <div class="ti-left">
+      <span class="lbl">Why not just use existing software?</span>
+      <h2>Because off-the-shelf<br>was built for everyone.<br>Not for you.</h2>
+      <div class="divl"></div>
+      <p>Every professional practice has its own way of working. Your intake process isn't the same as the firm across the street. Your tools have been layered on top of each other over years. Your workflows have exceptions that no SaaS product accounts for. We spend time learning all of it before we write a single line of code.</p>
+      <p>And unlike no-code tools, every system we build runs on infrastructure you own, with your client data staying exactly where it belongs.</p>
+    </div>
+    <div class="ti-grid">
+      <div class="ti-item"><span class="ti-badge">Your data</span><h4>Stays in your environment</h4><p>Nothing flows through a shared third-party platform. Your client records don't touch someone else's servers.</p></div>
+      <div class="ti-item"><span class="ti-badge">Your workflow</span><h4>Built around how you actually work</h4><p>Not a template. Not a configuration. A custom system scoped to your exact process and the tools you already use.</p></div>
+      <div class="ti-item"><span class="ti-badge">No IT team needed</span><h4>We handle everything technical</h4><p>You don't manage this. We build it, deploy it, and support it. You just use it.</p></div>
+      <div class="ti-item"><span class="ti-badge">You own it</span><h4>No ongoing platform dependency</h4><p>No monthly fee to keep the lights on. No vendor to hold you hostage. The code is yours.</p></div>
+    </div>
+  </div>
+</div>
+ 
+<div class="tbar">
+  <div class="tbar-in">
+    <div class="ti2"><span class="tn">$2.5M+</span><span class="tl">Annual value delivered</span></div>
+    <div class="tdv"></div>
+    <div class="ti2"><span class="tn">48hrs to sec</span><span class="tl">Fastest process compression</span></div>
+    <div class="tdv"></div>
+    <div class="ti2"><span class="tn">$0</span><span class="tl">Charged if audit shows no ROI</span></div>
+    <div class="tdv"></div>
+    <div class="ti2"><span class="tn">3-4</span><span class="tl">New projects per quarter</span></div>
+  </div>
+</div>
+ 
+<div class="honest-sec" id="standard">
+  <div class="honest-in">
+    <div class="honest-left">
+      <span class="lbl">Our Standard</span>
+      <h2>We turn down projects.<br><em>Here's when.</em></h2>
+      <div class="divl"></div>
+      <p>We don't take every project that comes through. We've said no to firms that looked like good business because the numbers didn't support a build. Data too inconsistent, volume too low, process changing too often.</p>
+      <p>If your audit comes back negative, we'll tell you directly and explain why. A free audit that saves you from a $10,000 mistake is the most useful thing we can offer -- even if it means we don't get the work.</p>
+      <p style="font-size:0.8rem;color:var(--g400);font-style:italic;line-height:1.7">We'd rather lose a project than deliver something that doesn't pay for itself.</p>
+      <p style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--g400);margin-top:1.5rem;margin-bottom:0.75rem">We'll say no if:</p>
+      <ul class="no-list">
+        <li>Your data is too messy or inconsistent to build on reliably</li>
+        <li>The process changes so often a custom system won't stay useful</li>
+        <li>The volume doesn't produce enough savings to cover the cost</li>
+        <li>The real problem is people or process -- not technology</li>
+      </ul>
+    </div>
+    <div>
+      <div class="yes-box">
+        <span class="yes-head">When we do take a project, here's what you get</span>
+        <ul class="yes-list">
+          <li>Flat-fee build -- no retainer until we deliver</li>
+          <li>Pre-build ROI model so you know the return before we start</li>
+          <li>No third-party platforms touching your client data</li>
+          <li>30 days of included support after go-live</li>
+          <li>Code you own -- no vendor lock-in, ever</li>
+          <li>Plain-English updates throughout -- no technical jargon</li>
+        </ul>
+      </div>
+      <div class="cap-box">
+        <span class="cap-lbl">Availability</span>
+        <h4>We take 3-4 new projects per quarter.</h4>
+        <p>Current availability: Q3 2026. Scoping calls book 2-3 weeks out -- reach out now if you're planning ahead.</p>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="price-sec" id="pricing">
+  <div class="price-in">
+    <div class="price-left">
+      <span class="lbl">Investment</span>
+      <h2>What it costs.<br>What you get back.</h2>
+      <div class="divl"></div>
+      <p>We show you the numbers before you commit to anything. Every engagement starts with a free audit that produces a clear ROI model. You'll know the projected return before we scope a single line of work.</p>
+      <p>The ranges below are honest averages from completed builds. Exact pricing depends on scope -- which we determine together, not unilaterally.</p>
+    </div>
+    <div class="pcs">
+      <div class="pc">
+        <h3>Single System Build</h3>
+        <div class="pc-range">$4,500 - $9,000 <span>one-time</span></div>
+        <p>One process, solved end-to-end with a custom-built system. Deployed into your existing tools. Includes 30 days of post-delivery support.</p>
+        <ul class="pc-inc">
+          <li>Free ROI audit and scoping</li>
+          <li>Custom build to your exact workflow</li>
+          <li>Deploys into tools you already use</li>
+          <li>30-day included support</li>
+          <li>Code ownership -- no ongoing platform fees</li>
+          <li>Cloud infrastructure ~$5–$50/mo, paid direct to provider</li>
+        </ul>
+      </div>
+      <div class="pc feat">
+        <span class="pc-badge">Most common</span>
+        <h3>Multi-System Integration</h3>
+        <div class="pc-range">$9,000 - $18,000 <span>one-time</span></div>
+        <p>Two or more platforms connected, with intelligent routing or AI-based decision-making built in. The engagements that typically produce the largest returns.</p>
+        <ul class="pc-inc">
+          <li>Everything in Single System Build</li>
+          <li>Multi-platform connection and data sync</li>
+          <li>AI layer where applicable</li>
+          <li>Extended 60-day support window</li>
+          <li>Optional ongoing maintenance</li>
+          <li>Cloud infrastructure ~$5–$50/mo, paid direct to provider</li>
+        </ul>
+      </div>
+      <div class="pc">
+        <h3>Monthly Maintenance</h3>
+        <div class="pc-range">$500 - $2,000 <span>/month</span></div>
+        <p>Optional. Covers monitoring, updates, and adjustments as your processes evolve. Not required -- but available if you want us to keep it running without thinking about it.</p>
+        <ul class="pc-inc">
+          <li>System monitoring and alerts</li>
+          <li>API and dependency updates</li>
+          <li>Minor workflow adjustments</li>
+          <li>Monthly check-in</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="audit-sec" id="audit">
+  <div class="audit-in">
+    <div class="audit-left">
+      <span class="lbl">Free ROI Audit</span>
+      <h2>Find out what that<br>frustration is <em>actually</em><br>costing you.</h2>
+      <div class="divl"></div>
+      <p>Most practices have no idea what their manual processes cost until someone runs the math. Two minutes, five questions, and you'll have a real number -- in dollars, per year.</p>
+      <p>No email required. See your number instantly, then decide if it's worth a conversation.</p>
+      <ul class="a-steps">
+        <li><span class="a-sn">1</span><span>Answer 5 questions about your practice and the process</span></li>
+        <li><span class="a-sn">2</span><span>See your estimated annual cost instantly -- no email required</span></li>
+        <li><span class="a-sn">3</span><span>Optionally leave your email and we'll follow up with next steps</span></li>
+        <li><span class="a-sn">4</span><span>If the numbers work, we talk. If not, the report is yours.</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="aform">
+        <h3>Your Free ROI Audit</h3>
+        <p class="fsub">2 minutes. See your number instantly.</p>
+        <div class="fg">
+          <label>Practice Type</label>
+          <select id="firmType">
+            <option value="">Select your industry</option>
+            <option value="cpa">Accounting / CPA Firm</option>
+            <option value="legal">Law Firm / Legal Practice</option>
+            <option value="insurance">Insurance Brokerage</option>
+            <option value="consulting">Consulting Firm</option>
+            <option value="staffing">Staffing Agency</option>
+            <option value="other">Other Professional Practice</option>
+          </select>
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Team Size</label>
+            <select id="teamSize">
+              <option value="">Headcount</option>
+              <option value="1">1-5 people</option>
+              <option value="2">6-15 people</option>
+              <option value="3">16-50 people</option>
+              <option value="4">50+ people</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Billable Rate ($/hr)</label>
+            <input type="number" id="billableRate" placeholder="e.g. 150" min="25" max="1000"/>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Biggest Time Drain</label>
+          <select id="processType">
+            <option value="">What's eating your team's time?</option>
+            <option value="data_entry">Moving data between tools manually</option>
+            <option value="document_prep">Document prep and form filling</option>
+            <option value="contract_review">Reviewing contracts or agreements</option>
+            <option value="client_intake">Client intake and onboarding</option>
+            <option value="reporting">Building the same reports every week</option>
+            <option value="renewal_tracking">Tracking renewals and deadlines</option>
+            <option value="lead_routing">Sorting and qualifying leads</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Hours per week on this</label>
+          <select id="hoursPerWeek">
+            <option value="">Select range</option>
+            <option value="3">1-5 hours/week</option>
+            <option value="8">6-10 hours/week</option>
+            <option value="15">11-20 hours/week</option>
+            <option value="30">20+ hours/week</option>
+          </select>
+        </div>
+        <button class="asub" onclick="runAudit()">Show Me the Number</button>
+        <div class="ares" id="auditResult">
+          <div class="rbox">
+            <span class="rl2">What this is costing you annually</span>
+            <span class="rsav" id="savingsNum">--</span>
+            <p class="rdesc" id="savingsDesc">--</p>
+            <ul class="rbr" id="breakdownList"></ul>
+            <div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08)">
+              <p style="font-size:0.76rem;color:rgba(250,248,244,0.55);margin-bottom:0.65rem;line-height:1.6">Want us to follow up with next steps? Leave your email and we'll reach out.</p>
+              <form id="auditEmailForm" action="https://formspree.io/f/mwvwdyqb" method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap">
+                <input type="hidden" name="_subject" value="New ROI Audit Lead"/>
+                <input type="hidden" name="annual_cost" id="auditHiddenCost"/>
+                <input type="hidden" name="practice_type" id="auditHiddenFirm"/>
+                <input type="hidden" name="team_size" id="auditHiddenTeam"/>
+                <input type="hidden" name="process" id="auditHiddenProcess"/>
+                <input type="hidden" name="hours_per_week" id="auditHiddenHours"/>
+                <input type="hidden" name="billable_rate" id="auditHiddenRate"/>
+                <input type="email" name="email" placeholder="your@email.com" required style="flex:1;min-width:180px;padding:0.6rem 0.8rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);font-family:var(--sans);font-size:0.82rem;color:var(--white);border-radius:2px;outline:none"/>
+                <button type="submit" style="background:var(--accent);color:var(--white);padding:0.6rem 1.1rem;font-family:var(--sans);font-size:0.82rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;white-space:nowrap;transition:background 0.2s">Send My Report</button>
+              </form>
+              <p id="auditFormThanks" style="display:none;font-size:0.76rem;color:var(--amid);margin-top:0.5rem">Got it. We'll be in touch shortly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="faq-sec" id="faq">
+  <div class="faq-in">
+    <h2>Questions we get before the first call.</h2>
+    <p class="faq-sub">Plain answers. No jargon.</p>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Are there ongoing costs after the build?</h4>
+        <p>The only ongoing cost is cloud infrastructure -- typically $5–$50/month depending on usage, paid directly to the provider (AWS, Google Cloud, or similar). There is no Valore platform fee, no subscription, and no markup from us. You pay once to build it. After that, the only cost is the electricity to run it.</p>
+      </div>
+      <div class="faq-item">
+        <h4>I don't know anything about AI or technology. Is that a problem?</h4>
+        <p>No. In fact, most of our clients say the same thing. You don't need to understand how any of this works -- that's our job. You describe what's frustrating you in plain English. We translate that into a custom system, build it, and explain what it does in language that doesn't require a technical background.</p>
+      </div>
+      <div class="faq-item">
+        <h4>We don't have an IT team. Can you still help?</h4>
+        <p>Yes. We don't need your IT team because we are your IT team for this project. We handle everything from scoping to deployment to support. The only thing we need from you is an understanding of your process and access to the tools we're connecting. After delivery, it runs on its own.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How is this different from software we've already tried?</h4>
+        <p>Off-the-shelf software is built for the average firm, not yours. It doesn't know your specific workflow, your exceptions, or how your team actually works. We build a custom system -- scoped to exactly how you operate. That's why it fits, instead of requiring workarounds that defeat the purpose.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if I don't know what I need?</h4>
+        <p>That's exactly why the audit call exists. You don't need to come in with a solution -- just a frustration. We ask specific questions designed to surface where the real time is going. Most clients are surprised by what we find and how fixable it is.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What happens to my client data?</h4>
+        <p>It stays in your environment. We don't use shared platforms that store your data on someone else's servers. Every system we build runs on infrastructure you control, with full logging so you can always see exactly what it did -- which matters when your clients are trusting you with sensitive information.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if the ROI audit says it's not worth it?</h4>
+        <p>Then we tell you that directly, explain why, and you walk away with a clear picture of where your time is going at zero cost. We've turned down projects because the numbers didn't support a build. We'd rather do that than take your money on something that won't pay off.</p>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<div class="contact-sec" id="contact">
+  <div class="contact-in">
+    <div class="contact-left">
+      <span class="lbl">Get in Touch</span>
+      <h2>Tell us what's<br>frustrating you.</h2>
+      <div class="divl" style="background:var(--amid)"></div>
+      <p>You don't need to know what the solution looks like. You don't need technical language. Just describe the thing that's taking too long, costing too much, or driving your team crazy.</p>
+      <p>We'll take it from there.</p>
+      <ul class="cpts">
+        <li>20-minute call -- no pitch, no deck, no pressure</li>
+        <li>We tell you if it's fixable and what it's worth fixing</li>
+        <li>Flat-fee scope before any commitment</li>
+        <li>Honest answer even if that answer is not yet</li>
+        <li>3-4 projects per quarter -- Q3 2026 now open</li>
+      </ul>
+    </div>
+    <div class="cform">
+      <h3>Start Here</h3>
+      <p class="fsub">We respond within 24 hours. Usually same day.</p>
+      <form action="https://formspree.io/f/xaqlgvjv" method="POST">
+        <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required/></div>
+        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@yourfirm.com" required/></div>
+        <div class="fg">
+          <label>Practice Type</label>
+          <select name="practice_type">
+            <option value="">Select industry</option>
+            <option>Accounting / CPA</option>
+            <option>Law Firm</option>
+            <option>Insurance</option>
+            <option>Consulting</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>What's frustrating you?</label>
+          <textarea class="ctarea" name="message" placeholder="Describe it however makes sense. You don't need technical language -- just tell us what's taking too long or costing too much." required></textarea>
+        </div>
+        <button type="submit" class="csub">Send It</button>
+        <p class="cnote">Your information stays private. We don't share it, sell it, or add you to a list. <a href="#">Privacy policy.</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+ 
+<footer>
+  <div class="flogo-wrap">
+    <span class="flogo">Valore<span>.</span></span>
+    <span class="flogo-sub">Custom AI Systems</span>
+  </div>
+  <p>Custom AI Systems for Professional Practices &middot; Austin, TX</p>
+  <p>&copy; 2026 Valore. All rights reserved.</p>
+</footer>
+ 
+</div>
+<script>
+function toggleMenu(){
+  var m=document.getElementById('mobileMenu');
+  m.classList.toggle('open');
+}
+function runHeroAudit(){
+  var pt=document.getElementById('heroProcess').value;
+  var hw=parseFloat(document.getElementById('heroHours').value)||0;
+  var br=parseFloat(document.getElementById('heroRate').value)||0;
+  if(!pt||!hw||!br){alert('Please fill in all three fields.');return;}
+  var pm={'data_entry':1.0,'document_prep':1.1,'contract_review':1.4,'client_intake':1.0,'reporting':0.9,'renewal_tracking':0.85,'lead_routing':1.2}[pt]||1.0;
+  var ah=hw*50;
+  var sav=Math.round(ah*br*pm*0.78/100)*100;
+  var pl={'data_entry':'moving data between tools','document_prep':'document prep and form filling','contract_review':'contract review','client_intake':'client intake','reporting':'building weekly reports','renewal_tracking':'renewal tracking','lead_routing':'lead qualification'};
+  document.getElementById('heroSavings').textContent='$'+sav.toLocaleString()+'/yr';
+  document.getElementById('heroSavingsDesc').textContent='Your practice spends roughly '+Math.round(ah).toLocaleString()+' hours/year on '+(pl[pt]||'this process')+'. At $'+Math.round(br)+'/hr, that\'s real money sitting on the floor. Get the full breakdown below.';
+  document.getElementById('heroResult').style.display='block';
+}
+ 
+function runAudit(){
+  var ft=document.getElementById('firmType').value;
+  var ts=document.getElementById('teamSize').value;
+  var br=parseFloat(document.getElementById('billableRate').value)||125;
+  var pt=document.getElementById('processType').value;
+  var hw=parseFloat(document.getElementById('hoursPerWeek').value)||8;
+  if(!ft||!ts||!pt||!hw){alert('Please fill in all fields to see your number.');return;}
+  var tm={'1':1.2,'2':1.8,'3':2.8,'4':4.5}[ts]||1.5;
+  var pm={'data_entry':1.0,'document_prep':1.1,'contract_review':1.4,'client_intake':1.0,'reporting':0.9,'renewal_tracking':0.85,'lead_routing':1.2}[pt]||1.0;
+  var ah=hw*50;
+  var raw=ah*br*tm*pm;
+  var sav=Math.round(raw*0.78/100)*100;
+  var lab=Math.round(ah*br*tm/100)*100;
+  var imp=sav>50000?12000:sav>25000?7500:4500;
+  var net=sav-imp;
+  var pl={'data_entry':'moving data between tools','document_prep':'document prep and form filling','contract_review':'contract review','client_intake':'client intake and onboarding','reporting':'building weekly reports','renewal_tracking':'tracking renewals and deadlines','lead_routing':'sorting and qualifying leads'};
+  var firmLabels={'cpa':'Accounting / CPA Firm','legal':'Law Firm / Legal Practice','insurance':'Insurance Brokerage','consulting':'Consulting Firm','staffing':'Staffing Agency','other':'Other Professional Practice'};
+  var teamLabels={'1':'1-5 people','2':'6-15 people','3':'16-50 people','4':'50+ people'};
+  var hwLabels={'3':'1-5 hrs/week','8':'6-10 hrs/week','15':'11-20 hrs/week','30':'20+ hrs/week'};
+  document.getElementById('savingsNum').textContent='$'+sav.toLocaleString()+'/yr';
+  document.getElementById('savingsDesc').textContent='Your practice is spending roughly '+Math.round(ah*tm).toLocaleString()+' hours a year on '+(pl[pt]||'this process')+'. At $'+Math.round(br)+'/hr that\'s real money -- and a custom system can handle most of it.';
+  document.getElementById('breakdownList').innerHTML=
+    '<li><span>Hours per year on this process</span><span>'+Math.round(ah*tm).toLocaleString()+'</span></li>'+
+    '<li><span>Annual labor cost</span><span>$'+lab.toLocaleString()+'</span></li>'+
+    '<li><span>Est. system coverage</span><span>~78%</span></li>'+
+    '<li><span>Est. build cost</span><span>$'+imp.toLocaleString()+'</span></li>'+
+    '<li><span>Net savings, year one</span><span>$'+net.toLocaleString()+'</span></li>';
+  document.getElementById('auditHiddenCost').value='$'+sav.toLocaleString()+'/yr';
+  document.getElementById('auditHiddenFirm').value=firmLabels[ft]||ft;
+  document.getElementById('auditHiddenTeam').value=teamLabels[String(ts)]||ts;
+  document.getElementById('auditHiddenProcess').value=pl[pt]||pt;
+  document.getElementById('auditHiddenHours').value=hwLabels[String(hw)]||hw+' hrs/week';
+  document.getElementById('auditHiddenRate').value='$'+Math.round(br)+'/hr';
+  var r=document.getElementById('auditResult');
+  r.classList.add('show');
+  r.scrollIntoView({behavior:'smooth',block:'nearest'});
+  document.getElementById('auditEmailForm').addEventListener('submit',function(){
+    setTimeout(function(){
+      document.getElementById('auditEmailForm').style.display='none';
+      document.getElementById('auditFormThanks').style.display='block';
+    },500);
+  });
+}
+</script>
+</body>
+</html>
