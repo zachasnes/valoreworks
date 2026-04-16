@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Zach Asnes — Custom AI Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+  :root{
+    --black:#111110;
+    --white:#faf8f4;
+    --off:#f2efe8;
+    --accent:#9a7435;
+    --amid:#c9a55a;
+    --alight:#e8d9be;
+    --g100:#ece9e1;
+    --g200:#d4d0c6;
+    --g400:#9c9890;
+    --g600:#5a5754;
+    --serif:'Playfair Display',Georgia,serif;
+    --sans:'DM Sans',system-ui,sans-serif;
+  }
+
+  html,body{
+    width:100%;
+    background:#e8e5de;
+    font-family:var(--sans);
+    color:var(--black);
+  }
+
+  .page{
+    width:8.5in;
+    min-height:11in;
+    margin:0.4in auto;
+    background:var(--white);
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* ── HEADER ── */
+  .header{
+    background:var(--black);
+    padding:0.38in 0.45in 0.32in;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:1rem;
+  }
+
+  .header-left h1{
+    font-family:var(--serif);
+    font-size:2rem;
+    font-weight:700;
+    color:var(--white);
+    letter-spacing:-0.01em;
+    line-height:1.1;
+  }
+
+  .header-left .tagline{
+    font-size:0.72rem;
+    font-weight:400;
+    color:var(--amid);
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    margin-top:0.3rem;
+  }
+
+  .header-right{
+    text-align:right;
+    flex-shrink:0;
+  }
+
+  .header-right .contact-line{
+    font-size:0.72rem;
+    color:rgba(250,248,244,0.5);
+    letter-spacing:0.04em;
+    line-height:1.8;
+  }
+
+  .header-right .contact-line a,
+  .header-right .contact-line span{
+    color:var(--amid);
+    text-decoration:none;
+    font-weight:500;
+  }
+
+  .gold-bar{
+    height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--amid));
+    flex-shrink:0;
+  }
+
+  /* ── BODY ── */
+  .body{
+    flex:1;
+    padding:0.32in 0.45in 0.3in;
+    display:flex;
+    flex-direction:column;
+    gap:0.28in;
+  }
+
+  /* ── SECTION LABEL ── */
+  .sec-label{
+    font-size:0.62rem;
+    font-weight:500;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:0.12in;
+  }
+
+  /* ── TOP ROW ── */
+  .top-row{
+    display:grid;
+    grid-template-columns:1fr 1px 1fr;
+    gap:0 0.32in;
+  }
+
+  .divider-v{
+    background:var(--g200);
+    width:1px;
+    align-self:stretch;
+  }
+
+  .problem-body{
+    font-family:var(--serif);
+    font-size:1.08rem;
+    font-weight:400;
+    line-height:1.55;
+    color:var(--black);
+  }
+
+  .problem-body em{
+    font-style:italic;
+    color:var(--accent);
+  }
+
+  .cred-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:0.12in;
+  }
+
+  .cred-list li{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .cred-list li .cred-title{
+    font-size:0.78rem;
+    font-weight:500;
+    color:var(--black);
+  }
+
+  .cred-list li .cred-sub{
+    font-size:0.7rem;
+    color:var(--g600);
+    line-height:1.4;
+  }
+
+  /* ── DIVIDER ── */
+  .divider-h{
+    height:1px;
+    background:var(--g100);
+  }
+
+  /* ── TESTIMONIAL ── */
+  .testimonial{
+    background:var(--off);
+    border-left:3px solid var(--accent);
+    padding:0.18in 0.22in;
+    border-radius:1px;
+  }
+
+  .testimonial blockquote{
+    font-family:var(--serif);
+    font-size:0.82rem;
+    font-style:italic;
+    color:var(--black);
+    line-height:1.6;
+  }
+
+  .testimonial cite{
+    display:block;
+    margin-top:0.1in;
+    font-size:0.66rem;
+    font-style:normal;
+    font-weight:500;
+    color:var(--g600);
+    letter-spacing:0.04em;
+  }
+
+  /* ── RESULTS GRID ── */
+  .results-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0.14in;
+  }
+
+  .result-card{
+    background:var(--off);
+    border:1px solid var(--g100);
+    border-top:2.5px solid var(--g200);
+    padding:0.16in 0.16in 0.14in;
+    display:flex;
+    flex-direction:column;
+    gap:0.07in;
+    border-radius:1px;
+  }
+
+  .result-card .rc-name{
+    font-size:0.72rem;
+    font-weight:500;
+    color:var(--black);
+    line-height:1.3;
+  }
+
+  .result-card .rc-problem{
+    font-size:0.65rem;
+    color:var(--g600);
+    line-height:1.4;
+  }
+
+  .result-card .rc-result{
+    font-size:0.68rem;
+    font-weight:500;
+    color:var(--accent);
+    line-height:1.4;
+    margin-top:0.04in;
+    padding-top:0.06in;
+    border-top:1px solid var(--g200);
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0.14in;
+  }
+
+  .step{
+    display:flex;
+    align-items:flex-start;
+    gap:0.1in;
+  }
+
+  .step-num{
+    font-family:var(--serif);
+    font-size:1.4rem;
+    font-weight:700;
+    color:var(--alight);
+    line-height:1;
+    flex-shrink:0;
+    margin-top:0.01in;
+  }
+
+  .step-text .st-title{
+    font-size:0.76rem;
+    font-weight:500;
+    color:var(--black);
+    line-height:1.3;
+  }
+
+  .step-text .st-desc{
+    font-size:0.68rem;
+    color:var(--g600);
+    line-height:1.4;
+    margin-top:0.03in;
+  }
+
+  /* ── CTA FOOTER ── */
+  .cta-footer{
+    background:var(--black);
+    margin:0 -0.45in -0.3in;
+    padding:0.22in 0.45in;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+  }
+
+  .cta-left .cta-headline{
+    font-family:var(--serif);
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--white);
+    line-height:1.3;
+  }
+
+  .cta-left .cta-sub{
+    font-size:0.68rem;
+    color:rgba(250,248,244,0.45);
+    margin-top:0.05in;
+    line-height:1.4;
+  }
+
+  .cta-right{
+    display:flex;
+    align-items:center;
+    gap:0.22in;
+    flex-shrink:0;
+  }
+
+  .cta-link-block{
+    text-align:right;
+  }
+
+  .cta-link-block .cta-url{
+    display:inline-block;
+    font-size:0.74rem;
+    font-weight:500;
+    color:var(--amid);
+    letter-spacing:0.02em;
+    line-height:1.5;
+  }
+
+  .cta-link-block .cta-label{
+    font-size:0.62rem;
+    color:rgba(250,248,244,0.35);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    display:block;
+    margin-bottom:0.04in;
+  }
+
+  .qr-wrap{
+    background:white;
+    padding:5px;
+    border-radius:2px;
+    width:68px;
+    height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+
+  .qr-wrap img{
+    width:58px;
+    height:58px;
+    display:block;
+  }
+
+  /* ── PRINT ── */
+  @media print{
+    html,body{background:white}
+    .page{margin:0;width:100%;min-height:100vh;box-shadow:none}
+    @page{size:letter;margin:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Zach Asnes</h1>
+      <p class="tagline">Business Automation &nbsp;·&nbsp; Valore Works</p>
+    </div>
+    <div class="header-right">
+      <div class="contact-line"><span>zach@valoreworks.com</span></div>
+      <div class="contact-line"><span>valoreworks.com</span></div>
+    </div>
+  </div>
+  <div class="gold-bar"></div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- TOP ROW: Problem + Credentials -->
+    <div class="top-row">
+      <div class="problem-col">
+        <p class="sec-label">What I do</p>
+        <p class="problem-body">
+          Every business has hours of work that <em>shouldn't be manual.</em><br><br>
+          I sit down with you, learn your workflow, and build a custom AI system that eliminates the repetitive parts — so you and your team can focus on the work that actually earns.
+        </p>
+      </div>
+      <div class="divider-v"></div>
+      <div class="cred-col">
+        <p class="sec-label">Background</p>
+        <ul class="cred-list">
+          <li>
+            <span class="cred-title">Solutions Consultant — Google Cloud</span>
+            <span class="cred-sub">AI and automation at enterprise scale</span>
+          </li>
+          <li>
+            <span class="cred-title">MBA Candidate — University of Texas, McCombs School of Business</span>
+          </li>
+          <li>
+            <span class="cred-title">Founder — DemandForge</span>
+            <span class="cred-sub">Automated growth systems for small business</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider-h"></div>
+
+    <!-- RESULTS GRID -->
+    <div>
+      <p class="sec-label">What I've built</p>
+      <div class="results-grid">
+
+        <div class="result-card">
+          <div class="rc-name">"I type the same thing for every single client."</div>
+          <div class="rc-problem">An attorney spent 45–60 min per client manually filling out forms from handwritten notes.</div>
+          <div class="rc-result">→ Now takes under 60 seconds. Same output, zero manual entry.</div>
+        </div>
+
+        <div class="result-card">
+          <div class="rc-name">"I know I'm not billing everything I should."</div>
+          <div class="rc-problem">Billable work was falling through the cracks daily — adding up to $75,000+ in lost revenue per year.</div>
+          <div class="rc-result">→ 5–8 hrs of recovered billable time per attorney, per month.</div>
+        </div>
+
+        <div class="result-card">
+          <div class="rc-name">"My apps don't talk to each other."</div>
+          <div class="rc-problem">Someone on the team spent hours every week manually moving information between tools to keep everything in sync.</div>
+          <div class="rc-result">→ 81+ hrs of manual work eliminated per week.</div>
+        </div>
+
+        <div class="result-card">
+          <div class="rc-name">"This report takes me half a day every time."</div>
+          <div class="rc-problem">A full analysis that should be routine was being rebuilt from scratch every single time — taking a full day of work.</div>
+          <div class="rc-result">→ Same output now delivered in 90 seconds.</div>
+        </div>
+
+        <div class="result-card">
+          <div class="rc-name">"Onboarding a new client is a whole ordeal."</div>
+          <div class="rc-problem">A new paying client was ready to start — but manual setup meant days of internal work before anything could happen.</div>
+          <div class="rc-result">→ Client onboarded and live the same day. No deal lost.</div>
+        </div>
+
+        <div class="result-card">
+          <div class="rc-name">"I spend the first hour of every day on the same tasks."</div>
+          <div class="rc-problem">Every morning started with the same routine — pulling info, updating records, and preparing before any real work could begin.</div>
+          <div class="rc-result">→ Morning routine fully automated. Day starts with real work.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider-h"></div>
+
+    <!-- TESTIMONIAL -->
+    <div class="testimonial">
+      <blockquote>"Before Valore, we had a full-time employee doing nothing but copying lead data by hand — names, contact info, all of it. On a busy day that's 100+ leads. It was slow, it was error-prone, and by the time a client got the lead it was already hours old. Now it all moves automatically the second it comes in — straight into our CRM and our client's CRM simultaneously. Our clients can act on a lead in real time. That alone changed how we sell."</blockquote>
+      <cite>— Sales Agency, Austin TX</cite>
+    </div>
+
+    <div class="divider-h"></div>
+
+    <!-- HOW IT WORKS -->
+    <div>
+      <p class="sec-label">How it works</p>
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-text">
+            <div class="st-title">Understand</div>
+            <div class="st-desc">30 minutes learning your day-to-day workflow. No technical knowledge needed on your end.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-text">
+            <div class="st-title">Build</div>
+            <div class="st-desc">A custom system built around your existing tools and process. Nothing generic.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-text">
+            <div class="st-title">Deploy</div>
+            <div class="st-desc">You use it from day one. No IT team, no training program, no disruption.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA FOOTER -->
+    <div class="cta-footer">
+      <div class="cta-left">
+        <div class="cta-headline">Let's find the hours you're losing every week.</div>
+        <div class="cta-sub">Free 30-minute call. No pitch, no commitment. Just an honest look at your workflow.</div>
+      </div>
+      <div class="cta-right">
+        <div class="cta-link-block">
+          <span class="cta-label">Book a call</span>
+          <span class="cta-url">calendly.com/valoreworks/intro-call</span>
+        </div>
+        <div class="qr-wrap">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=116x116&data=https://calendly.com/valoreworks/intro-call&bgcolor=ffffff&color=111110&margin=0" alt="QR code" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Time Leak Calculator — Valore Works</title>
+<meta name="description" content="Find out exactly what manual work is costing your business. Industry-specific, task-level breakdown. Free from Valore Works.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111110;--white:#faf8f4;--off:#f2efe8;
+  --accent:#9a7435;--amid:#c9a55a;--alight:#e8d9be;
+  --g100:#ece9e1;--g200:#d4d0c6;--g400:#9c9890;--g600:#5a5754;--g800:#2e2d2b;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --max:800px;
+}
+html,body{width:100%;overflow-x:clip}
+body{font-family:var(--sans);background:var(--off);color:var(--black);font-size:15px;line-height:1.65}
+a{text-decoration:none}
+
+/* NAV */
+nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:58px;width:100%;position:sticky;top:0;z-index:100}
+.logo{display:flex;flex-direction:column;gap:1px;line-height:1}
+.logo-main{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--black)}
+.logo-main span{color:var(--accent)}
+.logo-sub{font-size:0.56rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--g400)}
+.nav-cta{background:var(--black);color:var(--white);padding:0.4rem 1rem;border-radius:2px;font-size:0.78rem;font-weight:500;letter-spacing:0.03em;transition:background 0.2s}
+.nav-cta:hover{background:var(--accent)}
+
+/* LAYOUT */
+.page-wrap{padding:0 1.5rem}
+.ct{max-width:var(--max);margin:0 auto;width:100%}
+.lbl{font-size:0.66rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;display:block}
+.section-head{margin-bottom:1.5rem}
+.section-head h2{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--black);line-height:1.2;margin-bottom:0.35rem}
+.section-head p{font-size:0.85rem;color:var(--g600);font-weight:300;line-height:1.75}
+
+/* HERO */
+.hero{padding:3rem 0 1.75rem}
+.hero h1{font-family:var(--serif);font-size:clamp(1.9rem,4.5vw,2.9rem);font-weight:700;line-height:1.1;color:var(--black);margin-bottom:0.85rem}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:0.97rem;color:var(--g600);max-width:560px;line-height:1.85;font-weight:300;margin-bottom:1.5rem}
+.proof-strip{display:flex;gap:2rem;flex-wrap:wrap;padding:1rem 0;border-top:1px solid var(--g200)}
+.proof-item .pn{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--black);display:block;line-height:1}
+.proof-item .pl{font-size:0.67rem;color:var(--g400);text-transform:uppercase;letter-spacing:0.09em;margin-top:0.25rem;display:block}
+
+/* INDUSTRY */
+.industry-section{padding:1.5rem 0 2rem}
+.industry-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem}
+.ind-btn{
+  padding:0.85rem 1rem;background:var(--white);border:1.5px solid var(--g200);
+  border-radius:2px;font-family:var(--sans);cursor:pointer;
+  text-align:left;transition:all 0.15s;
+}
+.ind-btn:hover{border-color:var(--g400)}
+.ind-btn.active{background:var(--black);border-color:var(--black)}
+.ind-main{display:block;font-size:0.83rem;font-weight:500;color:var(--g800);line-height:1.2;margin-bottom:0.2rem;transition:color 0.15s}
+.ind-sub{display:block;font-size:0.67rem;color:var(--g400);font-weight:300;line-height:1.4;transition:color 0.15s}
+.ind-btn:hover .ind-main{color:var(--black)}
+.ind-btn.active .ind-main{color:var(--white)}
+.ind-btn.active .ind-sub{color:rgba(250,248,244,0.45)}
+
+/* TASKS */
+.tasks-section{padding:0.5rem 0 2rem;display:none}
+.tasks-section.visible{display:block;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.task-group-label{font-size:0.62rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--g400);margin-bottom:0.65rem;display:block}
+.task-list{display:flex;flex-direction:column;gap:0.45rem}
+.tasks-divider{height:1px;background:var(--g200);margin:1.5rem 0}
+
+/* task card */
+.task-card{background:var(--white);border:1.5px solid var(--g200);border-radius:2px;overflow:hidden;transition:border-color 0.15s,box-shadow 0.15s}
+.task-card.checked{border-color:var(--amid);box-shadow:0 1px 6px rgba(154,116,53,0.12)}
+.task-top{display:flex;align-items:flex-start;gap:0.85rem;padding:0.85rem 1rem;cursor:pointer;user-select:none}
+.task-cb{flex-shrink:0;margin-top:2px;width:18px;height:18px;border:1.5px solid var(--g200);border-radius:2px;display:flex;align-items:center;justify-content:center;background:var(--off);transition:all 0.15s}
+.task-card.checked .task-cb{background:var(--black);border-color:var(--black)}
+.task-cb svg{display:none;width:10px;height:10px}
+.task-card.checked .task-cb svg{display:block}
+.task-info{flex:1}
+.task-name{font-size:0.84rem;font-weight:500;color:var(--black);line-height:1.3;margin-bottom:0.2rem}
+.task-desc{font-size:0.72rem;color:var(--g400);line-height:1.55;font-weight:300}
+
+/* config row */
+.task-config{display:none;border-top:1px solid var(--g100);background:var(--off);padding:0.75rem 1rem 0.85rem;flex-wrap:wrap;gap:0.8rem;align-items:center}
+.task-card.checked .task-config{display:flex}
+.cfg-item{display:flex;flex-direction:column;gap:0.2rem}
+.cfg-item label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--g400)}
+.cfg-row{display:flex;align-items:center;gap:0.3rem}
+.cfg-input{width:60px;padding:0.3rem 0.45rem;font-family:var(--sans);font-size:0.85rem;font-weight:500;color:var(--black);background:var(--white);border:1px solid var(--g200);border-radius:2px;outline:none;-moz-appearance:textfield;transition:border-color 0.15s}
+.cfg-input::-webkit-outer-spin-button,.cfg-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.cfg-input:focus{border-color:var(--accent)}
+.cfg-unit{font-size:0.71rem;color:var(--g400)}
+.cfg-sep{width:1px;height:30px;background:var(--g200)}
+.cfg-select{padding:0.3rem 0.5rem;font-family:var(--sans);font-size:0.79rem;color:var(--black);background:var(--white);border:1px solid var(--g200);border-radius:2px;outline:none;cursor:pointer;transition:border-color 0.15s}
+.cfg-select:focus{border-color:var(--accent)}
+.cfg-edit-hint{font-size:0.58rem;color:var(--amid);font-style:italic;letter-spacing:0;text-transform:none;margin-left:0.2rem}
+.cfg-rate{width:66px}
+
+/* live preview */
+.selection-preview{
+  margin-top:1.25rem;padding:0.75rem 1rem;border-radius:2px;
+  font-size:0.8rem;line-height:1.5;transition:all 0.2s;
+}
+.selection-preview.empty{background:var(--g100);color:var(--g400)}
+.selection-preview.active{background:var(--black);color:rgba(250,248,244,0.7)}
+.selection-preview.active strong{color:var(--amid)}
+
+/* CALC BUTTON */
+.calc-btn-wrap{padding:1.25rem 0 0.5rem}
+.calc-btn{
+  width:100%;padding:1rem 1.5rem;background:var(--accent);color:var(--white);
+  font-family:var(--sans);font-size:0.92rem;font-weight:500;border:none;
+  border-radius:2px;cursor:pointer;letter-spacing:0.03em;transition:background 0.2s;
+}
+.calc-btn:hover{background:var(--black)}
+.calc-note{text-align:center;font-size:0.71rem;color:var(--g400);margin-top:0.6rem;line-height:1.6}
+
+/* RESULTS */
+.results-section{padding:0.5rem 0 3.5rem;display:none}
+.results-section.visible{display:block;animation:fadeUp 0.4s ease}
+
+/* hero */
+.result-hero{background:var(--black);border-radius:2px;padding:2rem 1.75rem;margin-bottom:1rem}
+.rh-lbl{font-size:0.62rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:rgba(250,248,244,0.38);margin-bottom:0.6rem;display:block}
+.rh-num{font-family:var(--serif);font-size:clamp(2.6rem,8vw,4.2rem);font-weight:700;color:var(--amid);line-height:1;display:block;margin-bottom:0.3rem}
+.rh-recovery{font-size:0.82rem;color:rgba(250,248,244,0.42);margin-bottom:1.5rem;display:block}
+.rh-stats{display:flex;gap:2rem;flex-wrap:wrap;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.07)}
+.rh-stat .v{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--white);display:block;line-height:1}
+.rh-stat .l{font-size:0.61rem;text-transform:uppercase;letter-spacing:0.1em;color:rgba(250,248,244,0.32);margin-top:0.3rem;display:block}
+
+/* top opportunity */
+.top-opp{
+  background:var(--off);border:1px solid var(--g200);border-left:3px solid var(--amid);
+  padding:1rem 1.15rem;border-radius:1px;margin-bottom:1rem;
+}
+.top-opp .to-label{font-size:0.62rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--amid);margin-bottom:0.35rem;display:block}
+.top-opp .to-name{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--black);margin-bottom:0.3rem;line-height:1.3}
+.top-opp .to-detail{font-size:0.8rem;color:var(--g600);line-height:1.7;font-weight:300}
+.top-opp .to-detail strong{color:var(--black);font-weight:500}
+
+/* table */
+.tbl-wrap{background:var(--white);border:1px solid var(--g200);border-radius:2px;margin-bottom:1rem;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rtbl{width:100%;border-collapse:collapse;font-size:0.79rem}
+.rtbl thead tr{border-bottom:1.5px solid var(--g200)}
+.rtbl th{padding:0.65rem 0.85rem;text-align:left;font-size:0.59rem;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--g400);white-space:nowrap}
+.rtbl th.r{text-align:right}
+.rtbl td{padding:0.65rem 0.85rem;border-bottom:1px solid var(--g100);color:var(--black);white-space:nowrap}
+.rtbl td.r{text-align:right}
+.rtbl td.tname{white-space:normal;font-weight:500;min-width:150px}
+.rtbl td.rcov{text-align:right;color:var(--accent);font-weight:500}
+.rtbl td.rpct{text-align:right;color:var(--g400);font-size:0.72rem}
+.rtbl tbody tr:last-child td{border-bottom:none}
+.rtbl tbody tr:hover{background:var(--off)}
+.rtbl tfoot tr{border-top:2px solid var(--g200);background:var(--off)}
+.rtbl tfoot td{padding:0.75rem 0.85rem;font-weight:500}
+
+/* callout + notes */
+.callout{background:var(--off);border:1px solid var(--g200);border-left:3px solid var(--accent);padding:1rem 1.15rem;border-radius:1px;margin-bottom:1rem}
+.callout .c-head{font-size:0.62rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;display:block}
+.callout p{font-size:0.81rem;color:var(--g600);line-height:1.78;font-weight:300}
+.callout strong{color:var(--black);font-weight:500}
+.hidden-note{border:1px solid var(--g200);background:var(--white);padding:1rem 1.15rem;border-radius:2px;margin-bottom:1rem}
+.hidden-note p{font-size:0.8rem;color:var(--g600);line-height:1.78;font-weight:300}
+.hidden-note strong{color:var(--black);font-weight:500}
+
+/* CTA */
+.cta-block{background:var(--black);padding:2rem 1.75rem;border-radius:2px;text-align:center}
+.cta-block h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--white);margin-bottom:0.5rem;line-height:1.3}
+.cta-block p{font-size:0.83rem;color:rgba(250,248,244,0.48);margin-bottom:1.35rem;line-height:1.75;font-weight:300;max-width:440px;margin-left:auto;margin-right:auto}
+.cta-link{display:inline-block;background:var(--amid);color:var(--black);padding:0.9rem 2.25rem;border-radius:2px;font-size:0.88rem;font-weight:500;letter-spacing:0.02em;transition:all 0.2s}
+.cta-link:hover{background:var(--accent);color:var(--white)}
+.cta-terms{display:block;font-size:0.67rem;color:rgba(250,248,244,0.28);margin-top:0.75rem;letter-spacing:0.05em}
+
+/* FOOTER */
+footer{max-width:var(--max);margin:0 auto;padding:2rem 1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.footer-brand{font-family:var(--serif);font-size:0.9rem;color:var(--g400)}
+.footer-brand span{color:var(--accent)}
+.footer-link{font-size:0.72rem;color:var(--g400);letter-spacing:0.05em}
+.footer-link:hover{color:var(--accent)}
+
+@media(max-width:620px){
+  nav{padding:0 1rem}
+  .industry-grid{grid-template-columns:1fr 1fr}
+  .rh-stats{gap:1.25rem}
+  .proof-strip{gap:1.25rem}
+  footer{flex-direction:column;align-items:flex-start;gap:0.4rem}
+}
+@media(max-width:400px){
+  .industry-grid{grid-template-columns:1fr}
+  .page-wrap{padding:0 1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <span class="logo-main">V<span>a</span>lore</span>
+    <span class="logo-sub">Business Automation</span>
+  </a>
+  <a href="https://calendly.com/valoreworks/intro-call" class="nav-cta" target="_blank" rel="noopener">Book a Call</a>
+</nav>
+
+<div class="page-wrap">
+<div class="ct">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="lbl">Time Leak Calculator</span>
+  <h1>How much is your team spending<br>on work <em>a machine could do?</em></h1>
+  <p class="hero-sub">Pick your industry. Check every process your team still handles manually. We'll show you exactly what it's costing you — process by process, dollar by dollar.</p>
+  <div class="proof-strip">
+    <div class="proof-item">
+      <span class="pn">$50K–$200K</span>
+      <span class="pl">Typical annual loss found per audit</span>
+    </div>
+    <div class="proof-item">
+      <span class="pn">~2 min</span>
+      <span class="pl">To complete this calculator</span>
+    </div>
+    <div class="proof-item">
+      <span class="pn">Real numbers</span>
+      <span class="pl">Based on your actual processes</span>
+    </div>
+  </div>
+</div>
+
+<!-- STEP 1: INDUSTRY -->
+<div class="industry-section">
+  <div class="section-head">
+    <span class="lbl">Step 1 of 2</span>
+    <h2>What kind of business are you?</h2>
+    <p>This determines which processes we show you — and which ones we pre-select as the most common time leaks for your type of firm.</p>
+  </div>
+  <div class="industry-grid">
+    <button class="ind-btn" data-ind="law" onclick="selectIndustry('law')">
+      <span class="ind-main">Law Firm</span>
+      <span class="ind-sub">Intake · time entry · docket management</span>
+    </button>
+    <button class="ind-btn" data-ind="cpa" onclick="selectIndustry('cpa')">
+      <span class="ind-main">Accounting / CPA</span>
+      <span class="ind-sub">Returns · reconciliation · deadlines</span>
+    </button>
+    <button class="ind-btn" data-ind="agency" onclick="selectIndustry('agency')">
+      <span class="ind-main">Marketing or Sales Agency</span>
+      <span class="ind-sub">Reporting · leads · proposals</span>
+    </button>
+    <button class="ind-btn" data-ind="realestate" onclick="selectIndustry('realestate')">
+      <span class="ind-main">Real Estate</span>
+      <span class="ind-sub">Listings · documents · follow-up</span>
+    </button>
+    <button class="ind-btn" data-ind="consulting" onclick="selectIndustry('consulting')">
+      <span class="ind-main">Consulting Firm</span>
+      <span class="ind-sub">Billing · proposals · status updates</span>
+    </button>
+    <button class="ind-btn" data-ind="other" onclick="selectIndustry('other')">
+      <span class="ind-main">Other Professional Services</span>
+      <span class="ind-sub">Any service business with recurring manual work</span>
+    </button>
+  </div>
+</div>
+
+<!-- STEP 2: TASKS -->
+<div class="tasks-section" id="tasks-section">
+  <div class="section-head">
+    <span class="lbl">Step 2 of 2</span>
+    <h2>Which of these does your team still do manually?</h2>
+    <p>We've pre-selected the most common ones for your industry. Be honest — the more accurate your selections, the more useful your number.</p>
+  </div>
+  <div id="task-list"></div>
+  <div id="selection-preview" class="selection-preview empty">Select the processes that apply to your team</div>
+  <div class="calc-btn-wrap">
+    <button class="calc-btn" onclick="calculate()">Show Me What It's Costing &rarr;</button>
+    <p class="calc-note">Uncheck anything your team has already automated.<br>The defaults are industry benchmarks — adjust them to match your reality.</p>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div class="results-section" id="results-section">
+  <div class="section-head">
+    <span class="lbl">Your Results</span>
+    <h2>Here's what manual work is costing you.</h2>
+  </div>
+
+  <div class="result-hero" id="result-hero"></div>
+  <div id="top-opp"></div>
+
+  <div class="tbl-wrap">
+    <table class="rtbl">
+      <thead>
+        <tr>
+          <th>Process</th>
+          <th class="r">Min / occ</th>
+          <th class="r">× / wk</th>
+          <th class="r">Hrs / yr</th>
+          <th>Done by</th>
+          <th class="r">Annual cost</th>
+          <th class="r">Recoverable</th>
+          <th class="r">Recovery %</th>
+        </tr>
+      </thead>
+      <tbody id="result-tbody"></tbody>
+      <tfoot id="result-tfoot"></tfoot>
+    </table>
+  </div>
+
+  <div class="callout" id="result-callout"></div>
+
+  <div class="hidden-note">
+    <p><strong>This is a baseline, not a ceiling.</strong> These numbers only count time that's directly measurable. Most businesses Valore audits also uncover losses from errors that require rework, decisions that stall because the right data isn't in front of the right person, and work that simply never gets done because the manual version takes too long. Those don't show up in any calculator.</p>
+  </div>
+
+  <div class="cta-block">
+    <h3>Let's verify these numbers together.</h3>
+    <p>Book a free 30-minute Time Leak Audit. I'll go through every process flagged here, look at your actual tools and workflow, and tell you specifically what's automatable and what it would take. No pitch. No commitment.</p>
+    <a href="https://calendly.com/valoreworks/intro-call" class="cta-link" target="_blank" rel="noopener">Book My Free Audit &rarr;</a>
+    <span class="cta-terms">30 minutes &nbsp;·&nbsp; No pitch &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; Limited spots per month</span>
+  </div>
+</div>
+
+</div><!-- ct -->
+</div><!-- page-wrap -->
+
+<footer>
+  <span class="footer-brand">V<span>a</span>lore Works</span>
+  <a href="index.html" class="footer-link">valoreworks.com</a>
+</footer>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+
+// Fully-loaded presets = base hourly × ~1.25 overhead (benefits, taxes, space, tools)
+// e.g. $17/hr base admin → $22/hr fully loaded. Adjust per task with the rate input.
+const ROLE_PRESETS = [
+  { label: 'Admin / Receptionist',          rate: 22  },
+  { label: 'Bookkeeper / Coordinator',       rate: 32  },
+  { label: 'Office Manager / Sr. Admin',     rate: 48  },
+  { label: 'Associate / Professional',       rate: 75  },
+  { label: 'Partner / Owner',               rate: 150 },
+];
+
+// Recovery rates are per-process realistic automation yields,
+// adjusted for typical adoption friction (not theoretical maximums).
+// Sources: AI/RPA vendor benchmarks, practitioner surveys, Valore client data.
+const TASKS = [
+  {
+    id: 'intake',
+    name: 'Client intake & onboarding',
+    desc: 'Every new client triggers the same cycle — collect information, fill forms, enter it into your system, send welcome materials. Manually. Every time.',
+    defaultMin: 45, defaultFreq: 4, defaultRate: 32,
+    recovery: 0.45,
+    show:     ['law','cpa','agency','realestate','consulting','other'],
+    precheck: ['law','cpa','agency','realestate','consulting','other'],
+  },
+  {
+    id: 'scheduling',
+    name: 'Scheduling & calendar coordination',
+    desc: 'Finding a time that works takes six emails. Sending the invite, the reminder, the reschedule — all manual. Multiply that by every meeting on your calendar.',
+    defaultMin: 12, defaultFreq: 15, defaultRate: 22,
+    recovery: 0.82,
+    show:     ['law','cpa','agency','realestate','consulting','other'],
+    precheck: ['law','cpa','agency','realestate','consulting','other'],
+  },
+  {
+    id: 'data-entry',
+    name: 'Data entry between systems',
+    desc: 'Your CRM, your billing software, your spreadsheet — none of them talk to each other. Someone on your team moves information between them by hand, every single day.',
+    defaultMin: 15, defaultFreq: 14, defaultRate: 22,
+    recovery: 0.75,
+    show:     ['law','cpa','agency','realestate','consulting','other'],
+    precheck: ['law','cpa','agency','realestate','consulting','other'],
+  },
+  {
+    id: 'status-updates',
+    name: 'Client status updates',
+    desc: 'Clients want to know where things stand. Writing those updates — pulling the information, composing the email, sending it — is time your team spends not doing actual work.',
+    defaultMin: 18, defaultFreq: 10, defaultRate: 32,
+    recovery: 0.35,
+    show:     ['law','cpa','agency','realestate','consulting','other'],
+    precheck: ['law','agency','consulting','realestate'],
+  },
+  {
+    id: 'documents',
+    name: 'Document & contract preparation',
+    desc: 'Pull the template, swap out the client name, fill in the details, format it, send it for review. Thirty-five minutes of work that\'s 90% identical every time.',
+    defaultMin: 35, defaultFreq: 5, defaultRate: 32,
+    recovery: 0.72,
+    show:     ['law','cpa','realestate','consulting','other'],
+    precheck: ['law','cpa','realestate','consulting','other'],
+  },
+  {
+    id: 'billing',
+    name: 'Invoice creation & billing entry',
+    desc: 'Review the time sheet. Build the invoice. Code the charges. Get approval. Send it. Track whether it\'s been paid. All manual, all recurring, every billing cycle.',
+    defaultMin: 20, defaultFreq: 8, defaultRate: 32,
+    recovery: 0.65,
+    show:     ['law','cpa','consulting','other'],
+    precheck: ['law','cpa','consulting','other'],
+  },
+  {
+    id: 'reporting',
+    name: 'Reporting & analysis',
+    desc: 'The same report, rebuilt from raw data every week or month. Pulling numbers from three different tools, formatting them, writing the narrative — hours of work for something that should take seconds.',
+    defaultMin: 90, defaultFreq: 2, defaultRate: 48,
+    recovery: 0.75,
+    show:     ['law','cpa','agency','realestate','consulting','other'],
+    precheck: ['cpa','agency','consulting'],
+  },
+  {
+    id: 'filing',
+    name: 'File organization & document archiving',
+    desc: 'Documents need to be named, moved to the right folder, and logged in the right place. Someone on your team does this by hand — constantly, and invisibly.',
+    defaultMin: 20, defaultFreq: 8, defaultRate: 22,
+    recovery: 0.75,
+    show:     ['law','cpa','realestate','other'],
+    precheck: ['law','cpa','realestate'],
+  },
+  // Law-specific
+  {
+    id: 'docket',
+    name: 'Docket & deadline tracking',
+    desc: 'Court dates, filing deadlines, statutes of limitations — entered manually, tracked in a calendar, reminded by whoever remembers to check. One missed deadline is a malpractice claim.',
+    defaultMin: 5, defaultFreq: 30, defaultRate: 22,
+    recovery: 0.87,
+    show:     ['law'],
+    precheck: ['law'],
+  },
+  {
+    id: 'time-coding',
+    name: 'Time entry & billing code assignment',
+    desc: 'Every billable hour needs a time entry, a billing code, and a written narrative. Attorneys spend hours every week on admin work that earns the firm nothing.',
+    defaultMin: 5, defaultFreq: 50, defaultRate: 75,
+    recovery: 0.45,
+    show:     ['law','consulting'],
+    precheck: ['law'],
+  },
+  // CPA-specific
+  {
+    id: 'tax-review',
+    name: 'Tax return review & checklist',
+    desc: 'Every return gets checked against a checklist before it goes out. Flagging errors, requesting corrections, tracking status — done manually, return by return, all season long.',
+    defaultMin: 45, defaultFreq: 8, defaultRate: 75,
+    recovery: 0.62,
+    show:     ['cpa'],
+    precheck: ['cpa'],
+  },
+  {
+    id: 'reconciliation',
+    name: 'Bank & account reconciliation',
+    desc: 'Matching transactions, coding mismatches, flagging exceptions — done by hand, every week, for every client account. Systematic and time-consuming.',
+    defaultMin: 30, defaultFreq: 5, defaultRate: 32,
+    recovery: 0.70,
+    show:     ['cpa','realestate','consulting','other'],
+    precheck: ['cpa','realestate'],
+  },
+  {
+    id: 'compliance-calendar',
+    name: 'Compliance & deadline calendar',
+    desc: 'Filing deadlines, renewal dates, regulatory due dates — tracked in a spreadsheet, reminded by whoever has bandwidth to check. High stakes, low system.',
+    defaultMin: 10, defaultFreq: 15, defaultRate: 22,
+    recovery: 0.85,
+    show:     ['cpa','law'],
+    precheck: ['cpa','law'],
+  },
+  // Agency-specific
+  {
+    id: 'campaign-reporting',
+    name: 'Campaign performance reporting',
+    desc: 'Every client expects a report. Pulling data from every platform, formatting it, writing the narrative, getting it out the door — that\'s days of work per month, per client.',
+    defaultMin: 45, defaultFreq: 5, defaultRate: 32,
+    recovery: 0.75,
+    show:     ['agency'],
+    precheck: ['agency'],
+  },
+  {
+    id: 'lead-entry',
+    name: 'Lead & prospect data entry',
+    desc: 'Every new lead needs to be logged, the CRM needs to be updated, the list needs to be cleaned. Manually, one by one, for every prospect that comes in.',
+    defaultMin: 15, defaultFreq: 12, defaultRate: 22,
+    recovery: 0.82,
+    show:     ['agency','realestate','consulting','other'],
+    precheck: ['agency','realestate'],
+  },
+  {
+    id: 'proposals',
+    name: 'Proposal & scope document creation',
+    desc: 'Every new opportunity means a custom proposal. Even with templates, it\'s 90 minutes of pulling, customizing, formatting, and reviewing — for every single prospect.',
+    defaultMin: 90, defaultFreq: 3, defaultRate: 48,
+    recovery: 0.58,
+    show:     ['agency','consulting','realestate'],
+    precheck: ['agency','consulting'],
+  },
+];
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let selectedIndustry = null;
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function fmtDollar(n) {
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+function fmtHrs(h) {
+  return h < 10 ? h.toFixed(1) : Math.round(h).toLocaleString('en-US');
+}
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls)  e.className   = cls;
+  if (text) e.textContent = text;
+  return e;
+}
+
+// ─── ANIMATED COUNTER ────────────────────────────────────────────────────────
+function animateCounter(element, target, duration) {
+  const start = Date.now();
+  (function tick() {
+    const elapsed  = Date.now() - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased    = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+    element.textContent = '$' + Math.round(eased * target).toLocaleString('en-US');
+    if (progress < 1) requestAnimationFrame(tick);
+  })();
+}
+
+// ─── LIVE PREVIEW ─────────────────────────────────────────────────────────────
+function updatePreview() {
+  let count = 0, totalHrsWk = 0;
+  TASKS.forEach(task => {
+    const card = document.getElementById('card-' + task.id);
+    if (!card || !card.classList.contains('checked')) return;
+    count++;
+    const min  = parseFloat(document.getElementById('min-'  + task.id)?.value) || task.defaultMin;
+    const freq = parseFloat(document.getElementById('freq-' + task.id)?.value) || task.defaultFreq;
+    totalHrsWk += (min * freq) / 60;
+  });
+  const p = document.getElementById('selection-preview');
+  if (!p) return;
+  if (count === 0) {
+    p.textContent = 'Select the processes that apply to your team';
+    p.className = 'selection-preview empty';
+  } else {
+    p.innerHTML = `<strong>${count}</strong> process${count > 1 ? 'es' : ''} selected &nbsp;&middot;&nbsp; ~<strong>${totalHrsWk.toFixed(1)} hrs/week</strong> in manual work`;
+    p.className = 'selection-preview active';
+  }
+}
+
+// ─── INDUSTRY SELECT ──────────────────────────────────────────────────────────
+function selectIndustry(id) {
+  selectedIndustry = id;
+  document.querySelectorAll('.ind-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.ind === id);
+  });
+  renderTasks(id);
+  const section = document.getElementById('tasks-section');
+  section.classList.add('visible');
+  document.getElementById('results-section').style.display = 'none';
+  document.getElementById('results-section').classList.remove('visible');
+  setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+}
+
+// ─── RENDER TASKS ─────────────────────────────────────────────────────────────
+function renderTasks(industryId) {
+  const visible   = TASKS.filter(t => t.show.includes(industryId));
+  const primary   = visible.filter(t =>  t.precheck.includes(industryId));
+  const secondary = visible.filter(t => !t.precheck.includes(industryId));
+
+  const list = document.getElementById('task-list');
+  list.innerHTML = '';
+
+  if (primary.length) {
+    list.appendChild(el('span', 'task-group-label', 'Common for your industry — uncheck anything your team has already automated'));
+    const grp = el('div', 'task-list');
+    primary.forEach(t => grp.appendChild(buildCard(t, true)));
+    list.appendChild(grp);
+  }
+  if (secondary.length) {
+    list.appendChild(el('div', 'tasks-divider'));
+    list.appendChild(el('span', 'task-group-label', 'Additional processes — add any that apply to your team'));
+    const grp2 = el('div', 'task-list');
+    secondary.forEach(t => grp2.appendChild(buildCard(t, false)));
+    list.appendChild(grp2);
+  }
+
+  updatePreview();
+}
+
+function buildCard(task, checked) {
+  const card = document.createElement('div');
+  card.className = 'task-card' + (checked ? ' checked' : '');
+  card.id = 'card-' + task.id;
+
+  const presetOpts = ROLE_PRESETS.map(r =>
+    `<option value="${r.rate}">${r.label} (~$${r.rate}/hr)</option>`
+  ).join('');
+
+  // Find closest preset to defaultRate for initial dropdown selection
+  const closestPreset = ROLE_PRESETS.reduce((prev, curr) =>
+    Math.abs(curr.rate - task.defaultRate) < Math.abs(prev.rate - task.defaultRate) ? curr : prev
+  );
+
+  card.innerHTML = `
+    <div class="task-top" onclick="toggleCard('${task.id}')">
+      <div class="task-cb">
+        <svg viewBox="0 0 10 8" fill="none" stroke="#faf8f4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1,4 3.5,6.5 9,1"/>
+        </svg>
+      </div>
+      <div class="task-info">
+        <div class="task-name">${task.name}</div>
+        <div class="task-desc">${task.desc}</div>
+      </div>
+    </div>
+    <div class="task-config">
+      <div class="cfg-item">
+        <label>Minutes per occurrence</label>
+        <div class="cfg-row">
+          <input class="cfg-input" type="number" id="min-${task.id}" value="${task.defaultMin}" min="1" max="480" oninput="updatePreview()">
+          <span class="cfg-unit">min</span>
+        </div>
+      </div>
+      <div class="cfg-sep"></div>
+      <div class="cfg-item">
+        <label>Times per week</label>
+        <div class="cfg-row">
+          <input class="cfg-input" type="number" id="freq-${task.id}" value="${task.defaultFreq}" min="0.5" max="200" step="0.5" oninput="updatePreview()">
+          <span class="cfg-unit">&times;&thinsp;/wk</span>
+        </div>
+      </div>
+      <div class="cfg-sep"></div>
+      <div class="cfg-item">
+        <label>Who does it</label>
+        <select class="cfg-select" id="role-${task.id}" onchange="syncRate('${task.id}')">
+          ${ROLE_PRESETS.map(r =>
+            `<option value="${r.rate}"${r.rate === closestPreset.rate ? ' selected' : ''}>${r.label}</option>`
+          ).join('')}
+        </select>
+      </div>
+      <div class="cfg-sep"></div>
+      <div class="cfg-item">
+        <label>$/hr fully loaded <span class="cfg-edit-hint">(edit to match yours)</span></label>
+        <div class="cfg-row">
+          <span class="cfg-unit">$</span>
+          <input class="cfg-input cfg-rate" type="number" id="rate-${task.id}" value="${task.defaultRate}" min="10" max="999" step="1">
+          <span class="cfg-unit">/hr</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  return card;
+}
+
+function toggleCard(id) {
+  document.getElementById('card-' + id).classList.toggle('checked');
+  updatePreview();
+}
+
+// When the dropdown changes, update the rate input to the preset value.
+// User can then further edit the rate input without touching the dropdown.
+function syncRate(id) {
+  const sel  = document.getElementById('role-' + id);
+  const rate = document.getElementById('rate-' + id);
+  if (sel && rate) rate.value = sel.value;
+}
+
+// ─── CALCULATE ────────────────────────────────────────────────────────────────
+// Formula per process:
+//   hrsPerWeek  = (minutesPerOccurrence × occurrencesPerWeek) / 60
+//   hrsPerYear  = hrsPerWeek × 52
+//   annualCost  = hrsPerYear × fullyLoadedHourlyRate
+//   recoverable = annualCost × taskRecoveryRate
+//
+// Recovery rates are per-task automation yields adjusted for real-world adoption.
+// FTE equivalent = totalAnnualHours / 2,080 (standard work-year hours).
+
+function calculate() {
+  const rows = [];
+
+  TASKS.forEach(task => {
+    const card = document.getElementById('card-' + task.id);
+    if (!card || !card.classList.contains('checked')) return;
+
+    const minutes  = parseFloat(document.getElementById('min-'  + task.id)?.value) || task.defaultMin;
+    const freq     = parseFloat(document.getElementById('freq-' + task.id)?.value) || task.defaultFreq;
+    // Rate is read from the editable $/hr input — user may have overridden the preset
+    const rate     = parseFloat(document.getElementById('rate-' + task.id)?.value) || task.defaultRate;
+    const roleName = document.getElementById('role-' + task.id)?.options[
+                       document.getElementById('role-' + task.id)?.selectedIndex
+                     ]?.text || '—';
+
+    const hrsPerWeek  = (minutes * freq) / 60;
+    const hrsPerYear  = hrsPerWeek * 52;
+    const annualCost  = hrsPerYear * rate;
+    const recoverable = annualCost * task.recovery;
+
+    rows.push({ task, minutes, freq, rate, roleName, hrsPerWeek, hrsPerYear, annualCost, recoverable });
+  });
+
+  if (!rows.length) {
+    alert('Select at least one process above to calculate.');
+    return;
+  }
+
+  rows.sort((a, b) => b.annualCost - a.annualCost);
+  renderResults(rows);
+}
+
+// ─── RENDER RESULTS ───────────────────────────────────────────────────────────
+function renderResults(rows) {
+  const totalCost     = rows.reduce((s, r) => s + r.annualCost,  0);
+  const totalRecovery = rows.reduce((s, r) => s + r.recoverable, 0);
+  const totalHrsWk    = rows.reduce((s, r) => s + r.hrsPerWeek,  0);
+  const totalHrsYr    = rows.reduce((s, r) => s + r.hrsPerYear,  0);
+  const fteEquiv      = totalHrsYr / 2080;
+  const weeklyLoss    = totalCost / 52;
+  const top           = rows[0];
+  const pct           = Math.round((totalRecovery / totalCost) * 100);
+
+  // ── Hero number (animated) ──
+  document.getElementById('result-hero').innerHTML = `
+    <span class="rh-lbl">Estimated annual cost of manual work</span>
+    <span class="rh-num" id="counter-num">$0</span>
+    <span class="rh-recovery">${fmtDollar(totalRecovery)} estimated as recoverable with targeted automation</span>
+    <div class="rh-stats">
+      <div class="rh-stat">
+        <span class="v">${fmtDollar(weeklyLoss)}/wk</span>
+        <span class="l">Leaving every week</span>
+      </div>
+      <div class="rh-stat">
+        <span class="v">${fmtHrs(totalHrsWk)} hrs</span>
+        <span class="l">Lost per week</span>
+      </div>
+      <div class="rh-stat">
+        <span class="v">${fteEquiv.toFixed(1)}</span>
+        <span class="l">Full-time equivalent</span>
+      </div>
+      <div class="rh-stat">
+        <span class="v">${fmtDollar(totalRecovery)}</span>
+        <span class="l">Recoverable annually</span>
+      </div>
+    </div>
+  `;
+  animateCounter(document.getElementById('counter-num'), totalCost, 1400);
+
+  // ── Top opportunity callout ──
+  document.getElementById('top-opp').innerHTML = `
+    <div class="top-opp">
+      <span class="to-label">Your biggest single opportunity</span>
+      <div class="to-name">${top.task.name}</div>
+      <p class="to-detail">
+        <strong>${fmtDollar(top.recoverable)}/year recoverable</strong> &nbsp;&middot;&nbsp;
+        ${Math.round(top.task.recovery * 100)}% of this process is automatable with the right setup
+        &nbsp;&middot;&nbsp; ${fmtHrs(top.hrsPerYear)} hrs/year currently done manually
+        at <strong>${fmtDollar(top.annualCost)}/year</strong> in staff cost.
+      </p>
+    </div>
+  `;
+
+  // ── Itemized table ──
+  // Columns: Process | Min/occ | ×/wk | Hrs/yr | Done by | Annual cost | Recoverable | Recovery %
+  // Sorted by annual cost descending (biggest leak first)
+  document.getElementById('result-tbody').innerHTML = rows.map(r => `
+    <tr>
+      <td class="tname">${r.task.name}</td>
+      <td class="r">${r.minutes}</td>
+      <td class="r">${r.freq}</td>
+      <td class="r">${fmtHrs(r.hrsPerYear)}</td>
+      <td>$${r.rate}/hr</td>
+      <td class="r">${fmtDollar(r.annualCost)}</td>
+      <td class="rcov">${fmtDollar(r.recoverable)}</td>
+      <td class="rpct">${Math.round(r.task.recovery * 100)}%</td>
+    </tr>
+  `).join('');
+
+  document.getElementById('result-tfoot').innerHTML = `
+    <tr>
+      <td class="tname"><strong>Total (${rows.length} processes)</strong></td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r"><strong>${fmtHrs(totalHrsYr)}</strong></td>
+      <td></td>
+      <td class="r"><strong>${fmtDollar(totalCost)}</strong></td>
+      <td class="rcov"><strong>${fmtDollar(totalRecovery)}</strong></td>
+      <td class="rpct"><strong>${pct}%</strong></td>
+    </tr>
+  `;
+
+  // ── Recovery explanation ──
+  document.getElementById('result-callout').innerHTML = `
+    <span class="c-head">How recovery is calculated</span>
+    <p>
+      Each process has a different automation yield based on how much human judgment it requires.
+      Scheduling and calendar coordination recovers at <strong>82%</strong> — nearly fully automatable.
+      Status updates recover at <strong>35%</strong> — tone and context still require a person.
+      The <strong>${pct}% overall recovery rate</strong> across your ${rows.length} processes
+      already accounts for realistic adoption: training curves, edge cases, and the 20–30% of
+      situations that will always need a human in the loop.
+      <strong>${fmtDollar(totalRecovery)}/year</strong> is what's left after that discount.
+    </p>
+  `;
+
+  // ── Show results ──
+  const section = document.getElementById('results-section');
+  section.style.display = 'block';
+  section.classList.add('visible');
+  setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+}
+</script>
+
+</body>
+</html>
