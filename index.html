@@ -651,6 +651,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
             <div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08)">
               <p style="font-size:0.76rem;color:rgba(250,248,244,0.55);margin-bottom:0.65rem;line-height:1.6">Want us to follow up with next steps? Leave your email and we'll reach out.</p>
               <form id="auditEmailForm" action="https://formspree.io/f/mwvwdyqb" method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap">
+                <input type="text" name="_gotcha" style="display:none;visibility:hidden;position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
                 <input type="hidden" name="_subject" value="New ROI Audit Lead"/>
                 <input type="hidden" name="annual_cost" id="auditHiddenCost"/>
                 <input type="hidden" name="practice_type" id="auditHiddenFirm"/>
@@ -744,7 +745,12 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <p style="text-align:center;font-size:0.78rem;color:var(--g400);margin-bottom:1.5rem;margin-top:-1rem;">Or fill out the form and we'll reach out within 24 hours.</p>
       <h3>Start Here</h3>
       <p class="fsub">We respond within 24 hours. Usually same day.</p>
-      <form action="https://formspree.io/f/xaqlgvjv" method="POST">
+      <form action="https://formspree.io/f/xaqlgvjv" method="POST" id="contact-form" onsubmit="return checkForm()">
+        <!-- Honeypot: bots fill this, humans never see it. Formspree drops the submission if filled. -->
+        <input type="text" name="_gotcha" style="display:none;visibility:hidden;position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+        <!-- Timing token: populated on page load, checked on submit -->
+        <input type="hidden" name="_load_time" id="form-load-time">
+        <input type="hidden" name="_subject" value="New inquiry — valoreworks.com">
         <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your name" required/></div>
         <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@yourfirm.com" required/></div>
         <div class="fg">
@@ -857,6 +863,28 @@ function runAudit(){
       document.getElementById('auditFormThanks').style.display='block';
     },500);
   });
+}
+
+// ── SPAM PROTECTION ──────────────────────────────────────────────
+// Record page load time so we can reject submissions that arrive too fast
+document.addEventListener('DOMContentLoaded', function() {
+  var loadField = document.getElementById('form-load-time');
+  if (loadField) loadField.value = Date.now();
+});
+
+function checkForm() {
+  var loadField = document.getElementById('form-load-time');
+  if (!loadField) return true;
+
+  var elapsed = Date.now() - parseInt(loadField.value || 0);
+
+  // Under 3 seconds = almost certainly a bot
+  if (elapsed < 3000) {
+    console.warn('Form submitted too fast — likely bot.');
+    return false;
+  }
+
+  return true;
 }
 </script>
 </body>
