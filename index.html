@@ -56,14 +56,23 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem
 .divl{width:36px;height:2px;background:var(--accent);margin:1.25rem 0}
 .hero{padding:3.5rem 2.5rem 5rem;width:100%}
 .hero-in{max-width:var(--max);margin:0 auto}
+.hero-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-bottom:1.25rem}
+.hero-tags span{font-size:0.67rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:var(--alight);padding:0.25rem 0.65rem;border-radius:2px}
 .hero-in h1{font-family:var(--serif);font-size:clamp(2.4rem,4.5vw,4.6rem);font-weight:700;line-height:1.08;max-width:800px;margin-bottom:1.5rem;color:var(--black)}
 .hero-in h1 em{font-style:italic;color:var(--accent)}
 .hero-p{font-size:1.1rem;color:var(--g600);max-width:580px;margin-bottom:0.75rem;font-weight:300;line-height:1.85}
 .hero-note{font-size:0.88rem;color:var(--g400);max-width:520px;margin-bottom:2.5rem;font-style:italic;line-height:1.75}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:4.5rem}
-.hero-proof{border-top:1px solid var(--g200);padding-top:2rem;display:flex;gap:3rem;flex-wrap:wrap}
+.hero-proof{display:flex;gap:3rem;flex-wrap:wrap;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--g200)}
 .hp-item .n{font-family:var(--serif);font-size:2.2rem;font-weight:700;color:var(--black);display:block;line-height:1}
 .hp-item .l{font-size:0.72rem;color:var(--g400);text-transform:uppercase;letter-spacing:0.09em;margin-top:0.35rem;display:block}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.hero-creds{display:flex;flex-wrap:wrap;gap:0.5rem;align-items:center}
+.hero-cred{font-size:0.72rem;color:var(--g400);display:flex;align-items:center;gap:0.35rem}
+.hero-cred::before{content:'';width:5px;height:5px;background:var(--alight);border-radius:50%;display:block;flex-shrink:0}
+.hero-cred strong{color:var(--g600);font-weight:500}
+.hero-mini-quote{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--g100);max-width:520px}
+.hmq-text{font-family:var(--serif);font-size:0.95rem;font-style:italic;color:var(--g600);line-height:1.6;margin-bottom:0.35rem}
+.hmq-attr{font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent)}
 .recog{background:var(--black);padding:5rem 2.5rem;width:100%}
 .recog-in{max-width:var(--max);margin:0 auto}
 .recog-in .lbl{color:var(--amid)}
@@ -158,6 +167,18 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem
 .pc-inc{list-style:none;font-size:0.78rem}
 .pc-inc li{padding:0.3rem 0;color:var(--g600);display:flex;gap:0.6rem;border-bottom:1px solid var(--g100)}
 .pc-inc li::before{content:'--';color:var(--amid);flex-shrink:0}
+.midcta{padding:4rem 2.5rem;background:var(--black);width:100%}
+.midcta-in{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:3rem;flex-wrap:wrap}
+.midcta-left{}
+.midcta-left .lbl{color:var(--amid)}
+.midcta-left h2{font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.1rem);font-weight:700;color:var(--white);line-height:1.15;margin-bottom:0.6rem}
+.midcta-left h2 em{font-style:italic;color:var(--amid)}
+.midcta-left p{font-size:0.88rem;color:rgba(250,248,244,0.5);font-weight:300;line-height:1.8;max-width:480px}
+.midcta-right{flex-shrink:0;text-align:center}
+.midcta-btn{display:inline-block;background:var(--accent);color:var(--white);padding:1rem 2rem;font-family:var(--sans);font-size:0.9rem;font-weight:500;border-radius:2px;transition:background 0.2s;letter-spacing:0.02em;white-space:nowrap}
+.midcta-btn:hover{background:var(--amid)}
+.midcta-note{display:block;font-size:0.7rem;color:rgba(250,248,244,0.3);margin-top:0.6rem;letter-spacing:0.05em}
+@media(max-width:720px){.midcta{padding:3rem 1.25rem}.midcta-in{flex-direction:column;gap:2rem}.midcta-right{width:100%}.midcta-btn{width:100%;text-align:center;display:block}}
 .audit-sec{padding:5rem 2.5rem;background:var(--white);width:100%}
 .audit-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:start}
 .audit-left h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black)}
@@ -282,7 +303,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <li><a href="#work">Work</a></li>
     <li><a href="#standard">Our Standard</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#audit">Free Audit</a></li>
+    <li><a href="assessment.html">Free Assessment</a></li>
     <li><a href="https://calendly.com/valoreworks/intro-call" target="_blank" class="nav-cta">Book a Call</a></li>
   </ul>
   <button class="hamburger" onclick="toggleMenu()" id="hamburger">
@@ -295,23 +316,34 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   <a href="#standard" onclick="toggleMenu()">Our Standard</a>
   <a href="#pricing" onclick="toggleMenu()">Pricing</a>
   <a href="#about" onclick="toggleMenu()">About</a>
-  <a href="#audit" onclick="toggleMenu()">Free Audit</a>
+  <a href="assessment.html" onclick="toggleMenu()">Free Assessment</a>
   <a href="https://calendly.com/valoreworks/intro-call" target="_blank" onclick="toggleMenu()">Book a Call</a>
 </div>
 
 <div class="hero">
   <div class="hero-in">
-    <h1>You know something<br>is taking too long.<br>We'll tell you if<br><em>it's fixable.</em></h1>
-    <p class="hero-p">Most clients come to us saying the same thing: "I don't know how AI could help — I just know my team is spending hours on something that feels like it shouldn't take that long."</p>
-    <p class="hero-note">You don't need to know what the solution looks like. That's our job.</p>
-    <div class="hero-btns">
-      <a href="https://calendly.com/valoreworks/intro-call" target="_blank" class="btn-p">Book a Free 30-Min Call</a>
-      <a href="#audit" class="btn-s">Get Your Free ROI Estimate</a>
+    <div class="hero-tags">
+      <span>Law Firms</span><span>CPAs</span><span>Advisory Firms</span><span>Professional Practices</span>
     </div>
+    <h1>Your team is doing work<br>that should run itself.<br>We build the fix.</h1>
+    <p class="hero-p">Most professional service firms are losing $40,000–$200,000 a year to manual workflows their team shouldn't be touching. We find it, put a dollar figure on it, and build a custom system to eliminate it — or tell you honestly if it's not worth building.</p>
     <div class="hero-proof">
       <div class="hp-item"><span class="n">$2.5M+</span><span class="l">Annual value delivered</span></div>
       <div class="hp-item"><span class="n">27x</span><span class="l">Equivalent FTE capacity added</span></div>
       <div class="hp-item"><span class="n">48hrs</span><span class="l">Compressed to minutes</span></div>
+    </div>
+    <div class="hero-btns">
+      <a href="assessment.html" class="btn-p">Get Your Free Profit Assessment</a>
+      <a href="https://calendly.com/valoreworks/intro-call" target="_blank" class="btn-s">Schedule a 20-Min Call</a>
+    </div>
+    <div class="hero-creds">
+      <span class="hero-cred"><strong>Google Cloud Solutions Consultant</strong></span>
+      <span class="hero-cred"><strong>UT McCombs MBA</strong></span>
+      <span class="hero-cred"><strong>Enterprise AI · Built for small firms</strong></span>
+    </div>
+    <div class="hero-mini-quote">
+      <p class="hmq-text">"You found every gap where AI could take over. I'm 62% more efficient and taking on more clients because of it."</p>
+      <span class="hmq-attr">Attorney, Private Practice</span>
     </div>
   </div>
 </div>
@@ -319,8 +351,8 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
 <div class="recog" id="problems">
   <div class="recog-in">
     <span class="lbl">Sound familiar?</span>
-    <h2>These are the moments<br>our clients describe<br><em>before they call us.</em></h2>
-    <p class="recog-sub">You don't need to know the technical solution. You just need to recognize the feeling. If any of these sound like your week, we should talk.</p>
+    <h2>If any of these<br>is your week,<br><em>we can fix it.</em></h2>
+    <p class="recog-sub">You don't need to know what the technical solution looks like. Just recognize the problem. If one of these sounds like your firm, we know what to do about it.</p>
     <div class="moments">
       <div class="moment">
         <p class="moment-q">"I do the same thing every single morning before I can even start my actual work."</p>
@@ -347,6 +379,10 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
         <p class="moment-a">More clients means more of the same repetitive process. You can't hire fast enough to keep up. And the team you have is already stretched thin.</p>
       </div>
     </div>
+    <div style="margin-top:2.5rem;text-align:center">
+      <a href="assessment.html" class="btn-p" style="display:inline-block">Find out what it's costing you &rarr;</a>
+      <p style="font-size:0.75rem;color:rgba(250,248,244,0.4);margin-top:0.65rem;letter-spacing:0.04em">Free. No call required. 48-hour turnaround.</p>
+    </div>
   </div>
 </div>
 
@@ -358,9 +394,9 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <div class="steps">
       <div class="step">
         <span class="step-n">01</span>
-        <h3>You tell us what's broken</h3>
-        <p>A 20-minute call. No jargon, no deck. Just describe the thing that's eating your team's time. You don't need to know what the solution looks like.</p>
-        <span class="step-t">20 minutes</span>
+        <h3>You describe the problem</h3>
+        <p>Fill out a 5-minute form or jump on a 20-minute call — no jargon, no deck. Just describe what's eating your team's time. You don't need to know what the solution looks like.</p>
+        <span class="step-t">5 min form or 20-min call</span>
       </div>
       <div class="step">
         <span class="step-n">02</span>
@@ -451,6 +487,13 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
         <p class="card-result">43% revenue increase within 3 months of go-live</p>
       </div>
     </div>
+    <div style="margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--g200);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem">
+      <div>
+        <p style="font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--black);margin-bottom:0.25rem">See what your workflow is costing you.</p>
+        <p style="font-size:0.82rem;color:var(--g400);font-weight:300">Free written assessment. No call required. 48-hour turnaround.</p>
+      </div>
+      <a href="assessment.html" class="btn-p" style="white-space:nowrap">Get Your Free Assessment &rarr;</a>
+    </div>
   </div>
 </div>
 
@@ -480,6 +523,10 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   </div>
 </div>
 
+<div style="background:var(--off);border-top:1px solid var(--g200);border-bottom:1px solid var(--g200);padding:2rem 2.5rem;text-align:center">
+  <p style="font-size:0.82rem;color:var(--g600);font-weight:300;margin-bottom:0.75rem">Ready to find out if your workflow is worth automating?</p>
+  <a href="assessment.html" class="btn-p" style="display:inline-block">Get Your Free Profit Assessment &rarr;</a>
+</div>
 
 <div class="honest-sec" id="standard">
   <div class="honest-in">
@@ -526,12 +573,12 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <h2>What it costs.<br>What you get back.</h2>
       <div class="divl"></div>
       <p>We show you the numbers before you commit to anything. Every engagement starts with a free audit that produces a clear ROI model. You'll know the projected return before we scope a single line of work.</p>
-      <p>The ranges below are honest averages from completed builds. Exact pricing depends on scope -- which we determine together, not unilaterally.</p>
+      <p>The ranges below are starting points from completed builds. Larger or multi-phase projects are scoped and priced custom -- we don't apply a template to work that doesn't fit one.</p>
     </div>
     <div class="pcs">
       <div class="pc">
         <h3>Single System Build</h3>
-        <div class="pc-range">$4,500 - $9,000 <span>one-time</span></div>
+        <div class="pc-range">Starting at $4,500 <span>one-time</span></div>
         <p>One process, solved end-to-end with a custom-built system. Deployed into your existing tools. Includes 30 days of post-delivery support.</p>
         <ul class="pc-inc">
           <li>Free ROI audit and scoping</li>
@@ -545,7 +592,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <div class="pc feat">
         <span class="pc-badge">Most common</span>
         <h3>Multi-System Integration</h3>
-        <div class="pc-range">$9,000 - $18,000 <span>one-time</span></div>
+        <div class="pc-range">Starting at $9,000 <span>one-time</span></div>
         <p>Two or more platforms connected, with intelligent routing or AI-based decision-making built in. The engagements that typically produce the largest returns.</p>
         <ul class="pc-inc">
           <li>Everything in Single System Build</li>
@@ -567,6 +614,20 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           <li>Monthly check-in</li>
         </ul>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="midcta">
+  <div class="midcta-in">
+    <div class="midcta-left">
+      <span class="lbl">Before You Commit Anything</span>
+      <h2>Find out if it <em>pencils out</em> first.</h2>
+      <p>5-minute form. We'll send you a written breakdown of what your workflow is costing you annually, what we'd build to fix it, and the projected ROI — before you spend a dollar. If the numbers don't support a build, we'll tell you that too.</p>
+    </div>
+    <div class="midcta-right">
+      <a href="assessment.html" class="midcta-btn">Get Your Free Profit Assessment &rarr;</a>
+      <span class="midcta-note">No call required &nbsp;&middot;&nbsp; 48-hour turnaround</span>
     </div>
   </div>
 </div>
@@ -665,6 +726,10 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
               </form>
               <p id="auditFormThanks" style="display:none;font-size:0.76rem;color:var(--amid);margin-top:0.5rem">Got it. We'll be in touch shortly.</p>
             </div>
+            <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08)">
+              <p style="font-size:0.74rem;color:rgba(250,248,244,0.38);margin-bottom:0.5rem;line-height:1.6">Want a full written assessment — with ROI model, build plan, and honest verdict?</p>
+              <a href="assessment.html" style="display:inline-block;font-size:0.8rem;font-weight:500;color:var(--amid);border-bottom:1px solid rgba(201,165,90,0.3);padding-bottom:2px;transition:color 0.2s">Get your free profit assessment &rarr;</a>
+            </div>
           </div>
         </div>
       </div>
@@ -742,8 +807,6 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       </ul>
     </div>
     <div class="cform">
-      <a href="https://calendly.com/valoreworks/intro-call" target="_blank" class="btn-p" style="display:block;text-align:center;margin-bottom:1.5rem;">Book a Free 30-Min Call</a>
-      <p style="text-align:center;font-size:0.78rem;color:var(--g400);margin-bottom:1.5rem;margin-top:-1rem;">Or fill out the form and we'll reach out within 24 hours.</p>
       <h3>Start Here</h3>
       <p class="fsub">We respond within 24 hours. Usually same day.</p>
       <form action="https://formspree.io/f/xaqlgvjv" method="POST" id="contact-form" onsubmit="return checkForm()">
@@ -770,40 +833,10 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
           <textarea class="ctarea" name="message" placeholder="Describe it however makes sense. You don't need technical language -- just tell us what's taking too long or costing too much." required></textarea>
         </div>
         <button type="submit" class="csub">Send It</button>
-        <p class="cnote">Your information stays private. We don't share it, sell it, or add you to a list. <a href="#privacy">Privacy policy.</a></p>
+        <p class="cnote">We respond within 24 hours. Your information stays private — not shared, not sold. <a href="privacy.html">Privacy policy.</a></p>
+        <p style="text-align:center;margin-top:1rem;font-size:0.78rem;color:var(--g400)">Prefer to talk now? <a href="https://calendly.com/valoreworks/intro-call" target="_blank" style="color:var(--accent);font-weight:500">Book a 20-min call &rarr;</a></p>
       </form>
     </div>
-  </div>
-</div>
-
-<div class="privacy-sec" id="privacy">
-  <div class="privacy-in">
-    <span class="lbl">Privacy Policy</span>
-    <h2>How we handle your information.</h2>
-    <div class="divl"></div>
-    <div class="privacy-body">
-      <div class="privacy-block">
-        <h4>What we collect</h4>
-        <p>When you submit a form on this site — the contact form or the ROI audit — we collect the information you enter: your name, email address, practice type, and the description of your process. We also collect the inputs you provide to the ROI calculator if you choose to submit them.</p>
-      </div>
-      <div class="privacy-block">
-        <h4>How we use it</h4>
-        <p>Solely to respond to your inquiry. We use your information to follow up on the specific question or request you submitted. We do not add you to a mailing list, send marketing emails, or contact you about anything other than what you reached out about.</p>
-      </div>
-      <div class="privacy-block">
-        <h4>Who we share it with</h4>
-        <p>No one. We do not sell, rent, or share your information with third parties for their use. Form submissions are processed through Formspree, a secure form backend, for delivery to our inbox. Formspree's privacy policy governs their handling of that transmission.</p>
-      </div>
-      <div class="privacy-block">
-        <h4>Your client data</h4>
-        <p>If we engage in a project together, any client data involved in the systems we build stays in your environment — on infrastructure you control. We do not store, copy, or retain your clients' information on Valore-owned servers.</p>
-      </div>
-      <div class="privacy-block">
-        <h4>Questions</h4>
-        <p>If you have questions about this policy or want to request deletion of your information, use the contact form above.</p>
-      </div>
-    </div>
-    <p class="privacy-updated">Last updated April 2026.</p>
   </div>
 </div>
 
@@ -813,6 +846,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <span class="flogo-sub">Custom AI Systems</span>
   </div>
   <p>Custom AI Systems for Professional Practices &middot; Austin, TX</p>
+  <p style="margin-top:0.35rem"><a href="privacy.html" style="color:rgba(201,165,90,0.5);font-size:0.72rem">Privacy Policy</a></p>
   <p>&copy; 2026 Valore. All rights reserved.</p>
 </footer>
 

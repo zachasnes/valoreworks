@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta name="description" content="Get a free, personalized breakdown of what your workflow is costing you annually — no call required. Valore delivers a custom ROI assessment in 48 hours.">
+<title>Free Workflow Profit Assessment — Valore</title>
+<meta property="og:title" content="Free Workflow Profit Assessment — Valore">
+<meta property="og:description" content="5-minute form. 48-hour turnaround. A personalized dollar figure showing what your biggest time drain is actually costing you.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111110;--white:#faf8f4;--off:#f2efe8;
+  --accent:#9a7435;--amid:#c9a55a;--alight:#e8d9be;
+  --g100:#ece9e1;--g200:#d4d0c6;--g400:#9c9890;--g600:#5a5754;--g800:#2e2d2b;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --max:1000px;
+}
+html,body{width:100%;overflow-x:clip}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--white);color:var(--black);font-size:15px;line-height:1.65}
+a{text-decoration:none}
+.wrap{width:100%}
+
+/* Nav */
+nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;width:100%;position:sticky;top:0;z-index:100}
+.logo{display:flex;flex-direction:column;gap:1px;line-height:1}
+.logo-main{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--black)}
+.logo-main span{color:var(--accent)}
+.logo-sub{font-size:0.58rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--g400)}
+.nav-back{font-size:0.76rem;font-weight:500;color:var(--g400);letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s}
+.nav-back:hover{color:var(--accent)}
+.nav-back::before{content:'← '}
+
+/* Shared */
+.lbl{font-size:0.68rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;display:block}
+.divl{width:36px;height:2px;background:var(--accent);margin:1.25rem 0}
+.btn-p{background:var(--black);color:var(--white);padding:0.9rem 1.9rem;font-family:var(--sans);font-size:0.88rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;display:inline-block;transition:background 0.2s;letter-spacing:0.02em}
+.btn-p:hover{background:var(--accent)}
+
+/* Hero */
+.hero{padding:4rem 2.5rem 3rem;width:100%;background:var(--white)}
+.hero-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.hero-left{}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--alight);color:var(--accent);font-size:0.67rem;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;padding:0.3rem 0.75rem;border-radius:2px;margin-bottom:1.25rem}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;display:block}
+.hero-left h1{font-family:var(--serif);font-size:clamp(2rem,3.5vw,3.2rem);font-weight:700;line-height:1.1;color:var(--black);margin-bottom:1.25rem}
+.hero-left h1 em{font-style:italic;color:var(--accent)}
+.hero-p{font-size:1rem;color:var(--g600);max-width:480px;margin-bottom:1.75rem;font-weight:300;line-height:1.85}
+.deliverables{list-style:none;margin-bottom:2rem}
+.deliverables li{padding:0.55rem 0;border-bottom:1px solid var(--g100);font-size:0.86rem;color:var(--g800);display:flex;gap:0.8rem;line-height:1.6}
+.deliverables li::before{content:'--';color:var(--amid);flex-shrink:0;font-weight:500}
+.hero-guarantee{background:var(--off);border:1px solid var(--g200);border-left:3px solid var(--accent);padding:1rem 1.25rem;border-radius:2px;margin-top:0.5rem}
+.hg-label{font-size:0.63rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:0.35rem;display:block}
+.hg-text{font-size:0.84rem;color:var(--g800);line-height:1.65;font-weight:300}
+.hg-text strong{font-weight:500;color:var(--black)}
+
+/* Form card */
+.form-card{background:var(--off);border:1px solid var(--g200);padding:2rem;border-radius:2px;position:sticky;top:80px}
+.form-card h2{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--black);margin-bottom:0.2rem}
+.form-sub{font-size:0.78rem;color:var(--g400);margin-bottom:1.5rem;line-height:1.65}
+.progress{display:flex;gap:0.4rem;margin-bottom:1.5rem;align-items:center}
+.prog-step{height:3px;flex:1;background:var(--g200);border-radius:2px;transition:background 0.3s}
+.prog-step.active{background:var(--accent)}
+.prog-label{font-size:0.68rem;color:var(--g400);letter-spacing:0.1em;text-transform:uppercase;margin-left:0.25rem;white-space:nowrap}
+.fg{margin-bottom:0.9rem}
+.fg label{display:block;font-size:0.71rem;font-weight:500;text-transform:uppercase;letter-spacing:0.09em;color:var(--g600);margin-bottom:0.35rem}
+.fg select,.fg input{width:100%;padding:0.6rem 0.8rem;border:1px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.84rem;color:var(--black);border-radius:2px;outline:none;-webkit-appearance:none;appearance:none}
+.fg select:focus,.fg input:focus{border-color:var(--accent)}
+.fg select option[value=""]{color:var(--g400)}
+.form-step{display:none}
+.form-step.active{display:block}
+.fnext,.fsub-btn{width:100%;background:var(--black);color:var(--white);padding:0.9rem;font-family:var(--sans);font-size:0.88rem;font-weight:500;border:none;cursor:pointer;border-radius:2px;margin-top:0.5rem;transition:background 0.2s;letter-spacing:0.02em}
+.fnext:hover,.fsub-btn:hover{background:var(--accent)}
+.fback{background:none;border:none;font-family:var(--sans);font-size:0.78rem;color:var(--g400);cursor:pointer;padding:0.5rem 0;display:block;margin-top:0.5rem;text-align:center;transition:color 0.2s}
+.fback:hover{color:var(--accent)}
+.ferr{font-size:0.76rem;color:#b94444;margin-top:0.35rem;display:none}
+.fnote{font-size:0.72rem;color:var(--g400);margin-top:0.75rem;line-height:1.6;text-align:center}
+.form-success{display:none;text-align:center;padding:1rem 0}
+.form-success.show{display:block}
+.fs-icon{font-size:2rem;margin-bottom:0.75rem;display:block}
+.form-success h3{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--black);margin-bottom:0.5rem}
+.form-success p{font-size:0.86rem;color:var(--g600);line-height:1.75;font-weight:300;margin-bottom:1rem}
+.form-success .fsub-link{display:inline-block;font-size:0.82rem;font-weight:500;color:var(--accent);border-bottom:1px solid var(--alight);padding-bottom:2px}
+
+/* Social proof bar */
+.proof-bar{background:var(--black);padding:2rem 2.5rem;width:100%}
+.proof-bar-in{max-width:var(--max);margin:0 auto;display:flex;gap:3rem;flex-wrap:wrap;align-items:center;justify-content:center}
+.pb-item{text-align:center}
+.pb-n{font-family:var(--serif);font-size:1.9rem;font-weight:700;color:var(--amid);display:block;line-height:1}
+.pb-l{font-size:0.68rem;color:rgba(250,248,244,0.4);text-transform:uppercase;letter-spacing:0.1em;margin-top:0.35rem;display:block}
+.pb-div{width:1px;height:40px;background:rgba(255,255,255,0.07)}
+
+/* What you get */
+.wyg-sec{padding:5rem 2.5rem;background:var(--white);width:100%}
+.wyg-in{max-width:var(--max);margin:0 auto}
+.wyg-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
+.wyg-sub{color:var(--g600);font-weight:300;font-size:0.95rem;max-width:520px;line-height:1.85;margin-bottom:2.5rem}
+.wyg-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem}
+.wyg-item{background:var(--off);border:1px solid var(--g200);padding:1.75rem;border-radius:2px}
+.wyg-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:var(--alight);line-height:1;margin-bottom:0.75rem;display:block}
+.wyg-item h3{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--black);margin-bottom:0.45rem}
+.wyg-item p{font-size:0.82rem;color:var(--g600);line-height:1.75;font-weight:300}
+
+/* Guarantee section */
+.guar-sec{padding:4rem 2.5rem;background:var(--black);width:100%}
+.guar-in{max-width:700px;margin:0 auto;text-align:center}
+.guar-in .lbl{color:var(--amid);text-align:center}
+.guar-in h2{font-family:var(--serif);font-size:clamp(1.6rem,2.5vw,2.2rem);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:1rem}
+.guar-in h2 em{font-style:italic;color:var(--amid)}
+.guar-in p{font-size:0.92rem;color:rgba(250,248,244,0.55);font-weight:300;line-height:1.85;max-width:540px;margin:0 auto 1.75rem}
+.guar-cta{display:inline-block;background:var(--accent);color:var(--white);padding:0.9rem 2rem;font-family:var(--sans);font-size:0.88rem;font-weight:500;border-radius:2px;transition:background 0.2s;letter-spacing:0.02em}
+.guar-cta:hover{background:var(--amid)}
+
+/* FAQ */
+.faq-sec{padding:5rem 2.5rem;background:var(--off);width:100%}
+.faq-in{max-width:var(--max);margin:0 auto}
+.faq-in h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:700;line-height:1.15;color:var(--black);margin-bottom:0.5rem}
+.faq-sub{color:var(--g600);font-weight:300;font-size:0.95rem;max-width:520px;line-height:1.85;margin-bottom:2.5rem}
+.faq-list{display:flex;flex-direction:column;gap:1px;background:var(--g200)}
+.faq-item{background:var(--white);padding:1.5rem}
+.faq-item h4{font-family:var(--serif);font-size:0.95rem;font-weight:700;color:var(--black);margin-bottom:0.6rem;line-height:1.35}
+.faq-item p{font-size:0.82rem;color:var(--g600);line-height:1.75;font-weight:300}
+
+/* Footer */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);padding:2.25rem 2.5rem;text-align:center;width:100%}
+.flogo-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;margin-bottom:0.75rem}
+.flogo{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--white);display:block;line-height:1}
+.flogo span{color:var(--amid)}
+.flogo-sub{font-size:0.5rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.3)}
+footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
+footer a{color:rgba(201,165,90,0.6);transition:color 0.2s}
+footer a:hover{color:var(--amid)}
+
+/* Responsive */
+@media(max-width:800px){
+  .hero-in{grid-template-columns:1fr;gap:3rem}
+  .form-card{position:static}
+}
+@media(max-width:600px){
+  .hero{padding:2.5rem 1.25rem 2.5rem}
+  .wyg-sec,.faq-sec,.guar-sec,.proof-bar{padding:3rem 1.25rem}
+  .wyg-grid{grid-template-columns:1fr}
+  nav{padding:0 1.25rem}
+  .proof-bar-in{gap:1.75rem;justify-content:center}
+  .pb-div{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav>
+  <a href="index.html" class="logo">
+    <span class="logo-main">Valore<span>.</span></span>
+    <span class="logo-sub">We'll tell you if it's fixable.</span>
+  </a>
+  <a href="index.html" class="nav-back">Main Site</a>
+</nav>
+
+<!-- Hero + Form -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="hero-left">
+      <span class="hero-badge">Free &middot; No call required</span>
+      <h1>Find out what your<br>biggest time drain<br>is <em>actually costing</em> you.</h1>
+      <p class="hero-p">Fill out a 5-minute form. We'll send you a personalized breakdown — in plain English — of what you're losing annually and exactly what we'd build to fix it.</p>
+      <ul class="deliverables">
+        <li>A custom dollar figure: annual cost of your workflow problem</li>
+        <li>Plain-English description of what we'd build to fix it</li>
+        <li>A projected ROI before any commitment</li>
+        <li>An honest go/no-go verdict — we'll tell you if it doesn't pencil out</li>
+      </ul>
+      <div class="hero-guarantee">
+        <span class="hg-label">Our Guarantee</span>
+        <p class="hg-text"><strong>If we can't identify at least $30,000 in recoverable annual value in your workflow, we'll tell you exactly what to fix first</strong> — and it'll still be worth your 5 minutes.</p>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="form-card">
+      <h2>Get Your Free Assessment</h2>
+      <p class="form-sub">Takes 5 minutes. You'll hear back within 48 hours — usually same day.</p>
+
+      <div class="progress">
+        <div class="prog-step active" id="prog1"></div>
+        <div class="prog-step" id="prog2"></div>
+        <span class="prog-label" id="prog-label">Step 1 of 2</span>
+      </div>
+
+      <form id="assessment-form" action="https://formspree.io/f/xaqlgvjv" method="POST">
+        <input type="text" name="_gotcha" style="display:none;visibility:hidden;position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="New Profit Assessment — valoreworks.com">
+        <input type="hidden" name="_load_time" id="form-load-time">
+
+        <!-- Step 1: Business questions -->
+        <div class="form-step active" id="step1">
+          <div class="fg">
+            <label>What type of business do you run?</label>
+            <select name="business_type" id="f-type" required>
+              <option value="">Select type</option>
+              <option>Law Firm</option>
+              <option>Accounting / CPA</option>
+              <option>Financial Advisory</option>
+              <option>Insurance</option>
+              <option>Consulting</option>
+              <option>Sales / Revenue Ops</option>
+              <option>Other</option>
+            </select>
+            <span class="ferr" id="err-type">Please select a business type.</span>
+          </div>
+          <div class="fg">
+            <label>How big is your team?</label>
+            <select name="team_size" id="f-size" required>
+              <option value="">Select size</option>
+              <option>Solo / 1–2 people</option>
+              <option>3–10 people</option>
+              <option>11–25 people</option>
+              <option>25+ people</option>
+            </select>
+            <span class="ferr" id="err-size">Please select a team size.</span>
+          </div>
+          <div class="fg">
+            <label>What process is eating the most time?</label>
+            <select name="biggest_pain" id="f-pain" required>
+              <option value="">Select process</option>
+              <option>Data entry or copying between systems</option>
+              <option>Document creation or review</option>
+              <option>Client intake or onboarding</option>
+              <option>Reporting or analysis</option>
+              <option>Follow-up and communication</option>
+              <option>Contract or compliance review</option>
+              <option>Something else</option>
+            </select>
+            <span class="ferr" id="err-pain">Please select a process.</span>
+          </div>
+          <div class="fg">
+            <label>Hours per week your team spends on this?</label>
+            <select name="weekly_hours" id="f-hours" required>
+              <option value="">Select range</option>
+              <option>2–5 hours</option>
+              <option>5–10 hours</option>
+              <option>10–20 hours</option>
+              <option>20+ hours</option>
+            </select>
+            <span class="ferr" id="err-hours">Please select a range.</span>
+          </div>
+          <div class="fg">
+            <label>How many people are involved in this process?</label>
+            <select name="people_involved" id="f-people" required>
+              <option value="">Select number</option>
+              <option>Just me</option>
+              <option>2–3 people</option>
+              <option>4–10 people</option>
+              <option>More than 10</option>
+            </select>
+            <span class="ferr" id="err-people">Please select a number.</span>
+          </div>
+          <button type="button" class="fnext" onclick="goStep2()">See My Assessment &rarr;</button>
+        </div>
+
+        <!-- Step 2: Contact -->
+        <div class="form-step" id="step2">
+          <div class="fg">
+            <label>Your Name</label>
+            <input type="text" name="name" id="f-name" placeholder="Your name" required>
+            <span class="ferr" id="err-name">Please enter your name.</span>
+          </div>
+          <div class="fg">
+            <label>Work Email</label>
+            <input type="email" name="email" id="f-email" placeholder="you@yourfirm.com" required>
+            <span class="ferr" id="err-email">Please enter a valid email address.</span>
+          </div>
+          <button type="submit" class="fsub-btn">Send Me My Assessment &rarr;</button>
+          <button type="button" class="fback" onclick="goStep1()">&larr; Back</button>
+          <p class="fnote">Your information stays private. We don't share it, sell it, or add you to a list.</p>
+        </div>
+      </form>
+
+      <div class="form-success" id="form-success">
+        <span class="fs-icon">&#10003;</span>
+        <h3>You'll hear from us within 48 hours.</h3>
+        <p>We're reviewing your workflow details and building your personalized ROI breakdown. Usually same day — check your inbox.</p>
+        <p>While you wait — <a href="index.html" class="fsub-link">see the kind of results we've delivered</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Social proof -->
+<div class="proof-bar">
+  <div class="proof-bar-in">
+    <div class="pb-item">
+      <span class="pb-n">$2.5M+</span>
+      <span class="pb-l">Annual value delivered</span>
+    </div>
+    <div class="pb-div"></div>
+    <div class="pb-item">
+      <span class="pb-n">27x</span>
+      <span class="pb-l">Equivalent FTE capacity added</span>
+    </div>
+    <div class="pb-div"></div>
+    <div class="pb-item">
+      <span class="pb-n">48 hrs</span>
+      <span class="pb-l">Compressed to minutes</span>
+    </div>
+    <div class="pb-div"></div>
+    <div class="pb-item">
+      <span class="pb-n">$0</span>
+      <span class="pb-l">Cost to find out</span>
+    </div>
+  </div>
+</div>
+
+<!-- What you get -->
+<div class="wyg-sec">
+  <div class="wyg-in">
+    <span class="lbl">What You Receive</span>
+    <h2>Not a pitch. A deliverable.</h2>
+    <div class="divl"></div>
+    <p class="wyg-sub">Within 48 hours of submitting, you'll receive a written assessment — four specific things, no fluff.</p>
+    <div class="wyg-grid">
+      <div class="wyg-item">
+        <span class="wyg-num">01</span>
+        <h3>Your Dollar Figure</h3>
+        <p>A specific annual cost estimate based on your team size, hourly rates, and time spent. Not a range. An actual number you can take to a decision.</p>
+      </div>
+      <div class="wyg-item">
+        <span class="wyg-num">02</span>
+        <h3>What We'd Build</h3>
+        <p>A plain-English description of the exact system we'd build to fix it — what it does, what it connects to, and how your team would use it day to day.</p>
+      </div>
+      <div class="wyg-item">
+        <span class="wyg-num">03</span>
+        <h3>Projected ROI</h3>
+        <p>A simple model: what the build costs, what it returns, and how long before it pays for itself. The math will be clear before you spend anything.</p>
+      </div>
+      <div class="wyg-item">
+        <span class="wyg-num">04</span>
+        <h3>Honest Verdict</h3>
+        <p>If the numbers support a build, we'll say so and why. If they don't — we'll tell you that directly and explain what to fix first. We've turned down projects. We'll turn down yours if it's not ready.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Guarantee -->
+<div class="guar-sec">
+  <div class="guar-in">
+    <span class="lbl">Our Guarantee</span>
+    <h2>If we can't find <em>$30,000</em><br>in your workflow, we'll<br>tell you exactly why.</h2>
+    <p>Most firms we talk to are losing between $40,000 and $200,000 a year in workflow inefficiency. We've never delivered an assessment that didn't surface something real. But if yours is the exception — you'll get an honest explanation of why and what to address first. No sales pressure. No follow-up unless you ask for it.</p>
+    <a href="#assessment-form" class="guar-cta">Get My Free Assessment &rarr;</a>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-sec">
+  <div class="faq-in">
+    <span class="lbl">Questions</span>
+    <h2>What people usually ask first.</h2>
+    <div class="divl"></div>
+    <p class="faq-sub">A few things worth knowing before you fill out the form.</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <h4>Do I have to get on a call to get the assessment?</h4>
+        <p>No. That's the point. You fill out the form, we do the work, and we send you a written assessment within 48 hours. If the numbers look interesting to you, we can book a call — but only if you want to. You'll get the full assessment either way.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What happens after I receive the assessment?</h4>
+        <p>Nothing, unless you want something to happen. We'll include a link to book a call if you want to go deeper, but there's no automatic follow-up sequence or sales cadence. If you're interested, you reach out. If you're not, you still keep the assessment.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How accurate is the ROI estimate without a full audit?</h4>
+        <p>Directionally accurate. The form gives us enough to produce a grounded estimate — industry, team size, process type, and time spent are the main variables. The number will be conservative. Once we talk and get into the specifics of your workflow, it usually goes up, not down.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if my situation doesn't fit any of the options in the form?</h4>
+        <p>Pick the closest option and note it when you enter your name — or just reach out directly through the <a href="index.html#contact" style="color:var(--accent);border-bottom:1px solid var(--alight)">contact form on the main site</a>. We work across a range of industries and processes. If we've seen something similar, we'll say so in the assessment.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is this really free?</h4>
+        <p>Yes. No credit card, no trial period, no gotcha. The assessment is genuinely useful to you whether or not you ever hire us — and the best way to earn your trust is to give you something worth having before we ask for anything.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="flogo-wrap">
+    <span class="flogo">Valore<span>.</span></span>
+    <span class="flogo-sub">Custom AI Systems</span>
+  </div>
+  <p>Custom AI Systems for Professional Practices &middot; Austin, TX</p>
+  <p><a href="index.html">Main Site</a> &nbsp;&middot;&nbsp; <a href="index.html#privacy">Privacy Policy</a></p>
+  <p style="margin-top:0.5rem">&copy; 2026 Valore. All rights reserved.</p>
+</footer>
+
+</div>
+
+<script>
+document.getElementById('form-load-time').value = Date.now();
+
+function goStep2() {
+  const fields = [
+    {id: 'f-type', err: 'err-type'},
+    {id: 'f-size', err: 'err-size'},
+    {id: 'f-pain', err: 'err-pain'},
+    {id: 'f-hours', err: 'err-hours'},
+    {id: 'f-people', err: 'err-people'}
+  ];
+  let valid = true;
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const err = document.getElementById(f.err);
+    if (!el.value) {
+      err.style.display = 'block';
+      valid = false;
+    } else {
+      err.style.display = 'none';
+    }
+  });
+  if (!valid) return;
+  document.getElementById('step1').classList.remove('active');
+  document.getElementById('step2').classList.add('active');
+  document.getElementById('prog1').classList.add('active');
+  document.getElementById('prog2').classList.add('active');
+  document.getElementById('prog-label').textContent = 'Step 2 of 2';
+  document.querySelector('.form-card').scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+function goStep1() {
+  document.getElementById('step2').classList.remove('active');
+  document.getElementById('step1').classList.add('active');
+  document.getElementById('prog2').classList.remove('active');
+  document.getElementById('prog-label').textContent = 'Step 1 of 2';
+}
+
+document.getElementById('assessment-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const name = document.getElementById('f-name');
+  const email = document.getElementById('f-email');
+  let valid = true;
+  if (!name.value.trim()) {
+    document.getElementById('err-name').style.display = 'block';
+    valid = false;
+  } else {
+    document.getElementById('err-name').style.display = 'none';
+  }
+  if (!email.value.trim() || !email.value.includes('@')) {
+    document.getElementById('err-email').style.display = 'block';
+    valid = false;
+  } else {
+    document.getElementById('err-email').style.display = 'none';
+  }
+  if (!valid) return;
+
+  const btn = this.querySelector('.fsub-btn');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const data = new FormData(this);
+    const res = await fetch(this.action, {
+      method: 'POST',
+      body: data,
+      headers: {Accept: 'application/json'}
+    });
+    if (res.ok) {
+      this.style.display = 'none';
+      document.querySelector('.progress').style.display = 'none';
+      document.querySelector('.form-card h2').style.display = 'none';
+      document.querySelector('.form-sub').style.display = 'none';
+      document.getElementById('form-success').classList.add('show');
+    } else {
+      btn.textContent = 'Send Me My Assessment →';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email us directly.');
+    }
+  } catch {
+    btn.textContent = 'Send Me My Assessment →';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again or email us directly.');
+  }
+});
+</script>
+</body>
+</html>
