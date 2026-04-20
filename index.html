@@ -359,7 +359,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <div class="step">
         <span class="step-n">01</span>
         <h3>You tell us what's broken</h3>
-        <p>A 20-minute call. No jargon, no pitch deck. Just describe the thing that's eating your team's time. You don't need to know what the solution looks like.</p>
+        <p>A 20-minute call. No jargon, no deck. Just describe the thing that's eating your team's time. You don't need to know what the solution looks like.</p>
         <span class="step-t">20 minutes</span>
       </div>
       <div class="step">
@@ -650,8 +650,9 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
             <ul class="rbr" id="breakdownList"></ul>
             <div style="margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08)">
               <p style="font-size:0.76rem;color:rgba(250,248,244,0.55);margin-bottom:0.65rem;line-height:1.6">Want us to follow up with next steps? Leave your email and we'll reach out.</p>
-              <form id="auditEmailForm" action="https://formspree.io/f/mwvwdyqb" method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap">
+              <form id="auditEmailForm" action="https://formspree.io/f/mwvwdyqb" method="POST" style="display:flex;gap:0.5rem;flex-wrap:wrap" onsubmit="return checkForm()">
                 <input type="text" name="_gotcha" style="display:none;visibility:hidden;position:absolute;left:-9999px" tabindex="-1" autocomplete="off">
+                <input type="hidden" name="_load_time" id="audit-load-time">
                 <input type="hidden" name="_subject" value="New ROI Audit Lead"/>
                 <input type="hidden" name="annual_cost" id="auditHiddenCost"/>
                 <input type="hidden" name="practice_type" id="auditHiddenFirm"/>
@@ -681,7 +682,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <div class="about-right">
       <p class="about-name">Zach Asnes</p>
       <span class="about-title">Founder, Valore</span>
-      <p>Zach Asnes is a technical consultant at Google, where he works with enterprise clients on cloud and AI adoption. He started Valore after watching small professional service firms struggle with the same problems the enterprise world solves overnight — manual workflows, disconnected tools, no internal team to fix any of it.</p>
+      <p>Zach Asnes is a Solutions Consultant at Google Cloud, where he works with enterprise clients on cloud and AI adoption. He started Valore after watching small professional service firms struggle with the same problems the enterprise world solves overnight — manual workflows, disconnected tools, no internal team to fix any of it.</p>
       <p>He holds a degree from Florida Atlantic University, where he played Division I baseball, and an MBA from the University of Texas, McCombs School of Business.</p>
     </div>
   </div>
@@ -733,7 +734,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <p>You don't need to know what the solution looks like. You don't need technical language. Just describe the thing that's taking too long, costing too much, or driving your team crazy.</p>
       <p>We'll take it from there.</p>
       <ul class="cpts">
-        <li>20-minute call -- no pitch, no deck, no pressure</li>
+        <li>20-minute call -- no deck, no pressure</li>
         <li>We tell you if it's fixable and what it's worth fixing</li>
         <li>Flat-fee scope before any commitment</li>
         <li>Honest answer even if that answer is not yet</li>
@@ -857,12 +858,6 @@ function runAudit(){
   var r=document.getElementById('auditResult');
   r.classList.add('show');
   r.scrollIntoView({behavior:'smooth',block:'nearest'});
-  document.getElementById('auditEmailForm').addEventListener('submit',function(){
-    setTimeout(function(){
-      document.getElementById('auditEmailForm').style.display='none';
-      document.getElementById('auditFormThanks').style.display='block';
-    },500);
-  });
 }
 
 // ── SPAM PROTECTION ──────────────────────────────────────────────
@@ -870,10 +865,22 @@ function runAudit(){
 document.addEventListener('DOMContentLoaded', function() {
   var loadField = document.getElementById('form-load-time');
   if (loadField) loadField.value = Date.now();
+  var auditLoadField = document.getElementById('audit-load-time');
+  if (auditLoadField) auditLoadField.value = Date.now();
+  // Audit form thank-you — wire up once, not on every runAudit() call
+  var auditForm = document.getElementById('auditEmailForm');
+  if (auditForm) {
+    auditForm.addEventListener('submit', function(){
+      setTimeout(function(){
+        document.getElementById('auditEmailForm').style.display='none';
+        document.getElementById('auditFormThanks').style.display='block';
+      },500);
+    });
+  }
 });
 
 function checkForm() {
-  var loadField = document.getElementById('form-load-time');
+  var loadField = document.getElementById('form-load-time') || document.getElementById('audit-load-time');
   if (!loadField) return true;
 
   var elapsed = Date.now() - parseInt(loadField.value || 0);
