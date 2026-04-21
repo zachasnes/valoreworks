@@ -73,6 +73,14 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2.5rem
 .hero-mini-quote{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--g100);max-width:520px}
 .hmq-text{font-family:var(--serif);font-size:0.95rem;font-style:italic;color:var(--g600);line-height:1.6;margin-bottom:0.35rem}
 .hmq-attr{font-size:0.68rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent)}
+.founder-strip{background:var(--off);border-bottom:1px solid var(--g200);padding:1.75rem 2.5rem}
+.founder-strip-in{max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:1.75rem}
+.founder-photo{width:60px;height:60px;border-radius:50%;background:var(--black);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--white);overflow:hidden}
+.founder-photo img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.founder-name{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--black);display:block;margin-bottom:0.15rem}
+.founder-role{font-size:0.68rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.4rem}
+.founder-bio{font-size:0.82rem;color:var(--g600);font-weight:300;line-height:1.6;max-width:640px}
+@media(max-width:600px){.founder-strip{padding:1.5rem 1.25rem}.founder-strip-in{gap:1.25rem}.founder-photo{width:48px;height:48px;font-size:0.9rem}}
 .recog{background:var(--black);padding:5rem 2.5rem;width:100%}
 .recog-in{max-width:var(--max);margin:0 auto}
 .recog-in .lbl{color:var(--amid)}
@@ -326,25 +334,31 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <div class="hero-tags">
       <span>Law Firms</span><span>CPAs</span><span>Advisory Firms</span><span>Professional Practices</span>
     </div>
-    <h1>Your team is doing work<br>that should run itself.<br>We build the fix.</h1>
-    <p class="hero-p">Most professional service firms are losing $40,000–$200,000 a year to manual workflows their team shouldn't be touching. We find it, put a dollar figure on it, and build a custom system to eliminate it — or tell you honestly if it's not worth building.</p>
+    <h1>What if the hours your team<br>spends on manual work<br><em>just stopped?</em></h1>
+    <p class="hero-p">We've recovered $2.5M+ in value for professional service firms by building custom systems that eliminate manual work permanently — and we'll tell you honestly if yours is worth building.</p>
     <div class="hero-proof">
       <div class="hp-item"><span class="n">$2.5M+</span><span class="l">Annual value delivered</span></div>
       <div class="hp-item"><span class="n">27x</span><span class="l">Equivalent FTE capacity added</span></div>
       <div class="hp-item"><span class="n">48hrs</span><span class="l">Compressed to minutes</span></div>
     </div>
     <div class="hero-btns">
-      <a href="assessment.html" class="btn-p">Get Your Free Profit Assessment</a>
+      <a href="assessment.html" class="btn-p">Show Me What's Automatable &rarr;</a>
       <a href="https://calendly.com/valoreworks/intro-call" target="_blank" class="btn-s">Schedule a 20-Min Call</a>
-    </div>
-    <div class="hero-creds">
-      <span class="hero-cred"><strong>Google Cloud Solutions Consultant</strong></span>
-      <span class="hero-cred"><strong>UT McCombs MBA</strong></span>
-      <span class="hero-cred"><strong>Enterprise AI · Built for small firms</strong></span>
     </div>
     <div class="hero-mini-quote">
       <p class="hmq-text">"You found every gap where AI could take over. I'm 62% more efficient and taking on more clients because of it."</p>
       <span class="hmq-attr">Attorney, Private Practice</span>
+    </div>
+  </div>
+</div>
+
+<div class="founder-strip">
+  <div class="founder-strip-in">
+    <div class="founder-photo">ZA</div>
+    <div>
+      <span class="founder-name">Zach Asnes</span>
+      <span class="founder-role">Google Cloud Solutions Consultant &nbsp;&middot;&nbsp; UT McCombs MBA &nbsp;&middot;&nbsp; Founder, Valore</span>
+      <p class="founder-bio">I built AI automation systems for Google's enterprise clients. Valore exists to bring that same capability to professional service firms — without the enterprise price tag or the IT team requirement.</p>
     </div>
   </div>
 </div>
@@ -369,7 +383,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       </div>
     </div>
     <div style="margin-top:2.5rem;text-align:center">
-      <a href="assessment.html" class="btn-p" style="display:inline-block">Find out what it's costing you &rarr;</a>
+      <a href="assessment.html" class="btn-p" style="display:inline-block">Show Me What's Automatable &rarr;</a>
       <p style="font-size:0.75rem;color:rgba(250,248,244,0.4);margin-top:0.65rem;letter-spacing:0.04em">Free. No call required. 48-hour turnaround.</p>
     </div>
   </div>
@@ -451,7 +465,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
         <p style="font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--black);margin-bottom:0.25rem">See what your workflow is costing you.</p>
         <p style="font-size:0.82rem;color:var(--g400);font-weight:300">Free written assessment. No call required. 48-hour turnaround.</p>
       </div>
-      <a href="assessment.html" class="btn-p" style="white-space:nowrap">Get Your Free Assessment &rarr;</a>
+      <a href="assessment.html" class="btn-p" style="white-space:nowrap">Show Me What's Automatable &rarr;</a>
     </div>
   </div>
 </div>
@@ -554,7 +568,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
       <p>5-minute form. We'll send you a written breakdown of what your workflow is costing you annually, what we'd build to fix it, and the projected ROI — before you spend a dollar. If the numbers don't support a build, we'll tell you that too.</p>
     </div>
     <div class="midcta-right">
-      <a href="assessment.html" class="midcta-btn">Get Your Free Profit Assessment &rarr;</a>
+      <a href="assessment.html" class="midcta-btn">Show Me What's Automatable &rarr;</a>
       <span class="midcta-note">No call required &nbsp;&middot;&nbsp; 48-hour turnaround</span>
     </div>
   </div>
