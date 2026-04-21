@@ -176,6 +176,21 @@ nav{background:var(--white);border-bottom:1px solid var(--g200);padding:0 2rem;d
 .cta-link:hover{background:var(--accent);color:var(--white)}
 .cta-terms{display:block;font-size:0.67rem;color:rgba(250,248,244,0.28);margin-top:0.75rem;letter-spacing:0.05em}
 
+/* GATE OVERLAY */
+.gate-overlay{position:fixed;inset:0;background:rgba(17,17,16,0.72);z-index:200;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.gate-overlay.open{opacity:1;pointer-events:all}
+.gate-box{background:var(--white);border-radius:3px;padding:2.25rem 2rem;max-width:420px;width:100%;animation:fadeUp 0.25s ease}
+.gate-box h3{font-family:var(--serif);font-size:1.35rem;font-weight:700;color:var(--black);line-height:1.25;margin-bottom:0.4rem}
+.gate-box p{font-size:0.82rem;color:var(--g600);line-height:1.7;font-weight:300;margin-bottom:1.5rem}
+.gate-field{display:flex;flex-direction:column;gap:0.3rem;margin-bottom:0.85rem}
+.gate-field label{font-size:0.62rem;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--g400)}
+.gate-field input{padding:0.6rem 0.8rem;font-family:var(--sans);font-size:0.88rem;color:var(--black);background:var(--off);border:1.5px solid var(--g200);border-radius:2px;outline:none;transition:border-color 0.15s}
+.gate-field input:focus{border-color:var(--accent)}
+.gate-submit{width:100%;padding:0.85rem 1.5rem;background:var(--accent);color:var(--white);font-family:var(--sans);font-size:0.88rem;font-weight:500;border:none;border-radius:2px;cursor:pointer;letter-spacing:0.02em;margin-top:0.5rem;transition:background 0.2s}
+.gate-submit:hover{background:var(--black)}
+.gate-note{text-align:center;font-size:0.68rem;color:var(--g400);margin-top:0.75rem;line-height:1.6}
+.gate-hp{display:none}
+
 /* FOOTER */
 footer{max-width:var(--max);margin:0 auto;padding:2rem 1.5rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 .footer-brand{font-family:var(--serif);font-size:0.9rem;color:var(--g400)}
@@ -275,7 +290,7 @@ footer{max-width:var(--max);margin:0 auto;padding:2rem 1.5rem 3rem;display:flex;
   <div id="task-list"></div>
   <div id="selection-preview" class="selection-preview empty">Select the processes that apply to your team</div>
   <div class="calc-btn-wrap">
-    <button class="calc-btn" onclick="calculate()">Show Me What It's Costing &rarr;</button>
+    <button class="calc-btn" onclick="showGate()">Show Me What It's Costing &rarr;</button>
     <p class="calc-note">Uncheck anything your team has already automated.<br>The defaults are industry benchmarks — adjust them to match your reality.</p>
   </div>
 </div>
@@ -325,6 +340,25 @@ footer{max-width:var(--max);margin:0 auto;padding:2rem 1.5rem 3rem;display:flex;
 
 </div><!-- ct -->
 </div><!-- page-wrap -->
+
+<!-- EMAIL GATE -->
+<div class="gate-overlay" id="gate-overlay" onclick="handleOverlayClick(event)">
+  <div class="gate-box" id="gate-box">
+    <h3>Where should we send your results?</h3>
+    <p>We'll email you a copy of this breakdown — process by process. No marketing emails, no pitch. Just your numbers.</p>
+    <div class="gate-field">
+      <label>Your name</label>
+      <input type="text" id="gate-name" placeholder="Jane Smith" autocomplete="name">
+    </div>
+    <div class="gate-field">
+      <label>Work email</label>
+      <input type="email" id="gate-email" placeholder="jane@yourfirm.com" autocomplete="email">
+    </div>
+    <input class="gate-hp" type="text" name="_gotcha" id="gate-hp" tabindex="-1" autocomplete="off">
+    <button class="gate-submit" onclick="submitGate()">Show My Results &rarr;</button>
+    <p class="gate-note">No pitch. No mailing list. Just your report.</p>
+  </div>
+</div>
 
 <footer>
   <span class="footer-brand">V<span>a</span>lore Works</span>
@@ -665,6 +699,57 @@ function syncRate(id) {
   const sel  = document.getElementById('role-' + id);
   const rate = document.getElementById('rate-' + id);
   if (sel && rate) rate.value = sel.value;
+}
+
+// ─── EMAIL GATE ───────────────────────────────────────────────────────────────
+function showGate() {
+  const checked = TASKS.filter(t => {
+    const card = document.getElementById('card-' + t.id);
+    return card && card.classList.contains('checked');
+  });
+  if (!checked.length) { alert('Select at least one process above to calculate.'); return; }
+  document.getElementById('gate-overlay').classList.add('open');
+  setTimeout(() => document.getElementById('gate-name').focus(), 120);
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('gate-overlay')) closeGate();
+}
+
+function closeGate() {
+  document.getElementById('gate-overlay').classList.remove('open');
+}
+
+function submitGate() {
+  if (document.getElementById('gate-hp').value) return; // honeypot
+  const name  = document.getElementById('gate-name').value.trim();
+  const email = document.getElementById('gate-email').value.trim();
+  if (!name)  { document.getElementById('gate-name').focus();  return; }
+  if (!email || !email.includes('@')) { document.getElementById('gate-email').focus(); return; }
+
+  // Count selected processes and industry for context
+  const industry = selectedIndustry || 'unknown';
+  const count    = TASKS.filter(t => {
+    const card = document.getElementById('card-' + t.id);
+    return card && card.classList.contains('checked');
+  }).length;
+
+  // Fire to Formspree async — don't block on network
+  fetch('https://formspree.io/f/xaqlgvjv', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name,
+      email,
+      source:    'Time Leak Calculator',
+      industry,
+      processes: count + ' selected',
+      _subject:  'Calculator Lead: ' + name,
+    }),
+  }).catch(() => {}); // silent fail — results still show
+
+  closeGate();
+  calculate();
 }
 
 // ─── CALCULATE ────────────────────────────────────────────────────────────────
