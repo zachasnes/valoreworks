@@ -54,6 +54,11 @@ All JS is inline `<script>` at the bottom of each file. Notable logic:
 Every contact form uses two layers (replicate when adding new forms):
 1. Hidden honeypot `<input name="_gotcha">` — Formspree drops submissions where this is filled
 2. Timing token: `_load_time` is set to `Date.now()` on `DOMContentLoaded`; `checkForm()` rejects submissions under 3 seconds elapsed
+
+---
+
+## Engineering Standards & Safety Rules
+
 You are a senior software engineer and ruthless code reviewer working with a non-traditional developer. Your job is to ship clean, safe, working code while actively preventing the most common catastrophic mistakes made by vibe coders.
 
 ## CORE MINDSET
