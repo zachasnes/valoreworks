@@ -266,7 +266,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 .flogo-sub{font-size:0.5rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:rgba(250,248,244,0.3)}
 footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
 @media(max-width:720px){
-  .ti-in,.honest-in,.price-in,.audit-in,.contact-in{grid-template-columns:1fr;gap:2.5rem}
+  .ti-in,.honest-in,.audit-in,.contact-in{grid-template-columns:1fr;gap:2.5rem}
   .steps{grid-template-columns:1fr 1fr}
   .cards,.moments,.faq-grid{grid-template-columns:1fr}
   .moments{gap:1px}
@@ -277,7 +277,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   .before-after{grid-template-columns:1fr}
   .ba-col:first-child{border-right:none;border-bottom:1px solid var(--g200)}
   .hero{padding:2.5rem 1.25rem 3rem}
-  .recog,.how,.proof-sec,.ti-sec,.tbar,.honest-sec,.price-sec,.audit-sec,.faq-sec,.contact-sec,.about-sec{padding:3rem 1.25rem}
+  .recog,.how,.proof-sec,.ti-sec,.tbar,.honest-sec,.audit-sec,.faq-sec,.contact-sec{padding:3rem 1.25rem}
   .card p,.moment-a,.step p,.faq-item p,.pc p{font-size:0.9rem}
   .ti-item p{font-size:0.85rem}
   footer{padding:2rem 1.25rem}
@@ -292,7 +292,7 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   .hero-proof{gap:1.25rem}
   .hero-in h1{font-size:2rem}
   .hero-p{font-size:0.95rem}
-  .recog-in h2,.how-in h2,.proof-in h2,.honest-left h2,.price-left h2,.audit-left h2,.contact-left h2,.honest-left h2{font-size:1.6rem}
+  .recog-in h2,.how-in h2,.proof-in h2,.honest-left h2,.audit-left h2,.contact-left h2{font-size:1.6rem}
   .tbar-in{flex-direction:column;align-items:center;gap:1.25rem}
   .pc-range{font-size:1.25rem}
   .flogo-sub{font-size:0.65rem}
@@ -311,7 +311,6 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
     <li><a href="#how">How It Works</a></li>
     <li><a href="#work">Work</a></li>
     <li><a href="#standard">Our Standard</a></li>
-    <li><a href="#pricing">Pricing</a></li>
     <li><a href="assessment.html">Free Assessment</a></li>
     <li><a href="https://calendly.com/valoreworks/intro-call" target="_blank" class="nav-cta">Book a Call</a></li>
   </ul>
@@ -323,8 +322,6 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   <a href="#how" onclick="toggleMenu()">How It Works</a>
   <a href="#work" onclick="toggleMenu()">Work</a>
   <a href="#standard" onclick="toggleMenu()">Our Standard</a>
-  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
-  <a href="#about" onclick="toggleMenu()">About</a>
   <a href="assessment.html" onclick="toggleMenu()">Free Assessment</a>
   <a href="https://calendly.com/valoreworks/intro-call" target="_blank" onclick="toggleMenu()">Book a Call</a>
 </div>
@@ -508,57 +505,6 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   </div>
 </div>
 
-<div class="price-sec" id="pricing">
-  <div class="price-in">
-    <div class="price-left">
-      <span class="lbl">Investment</span>
-      <h2>What it costs.<br>What you get back.</h2>
-      <div class="divl"></div>
-      <p>We show you the numbers before you commit to anything. Every engagement starts with a free audit that produces a clear ROI model. You'll know the projected return before we scope a single line of work.</p>
-      <p>The ranges below are starting points from completed builds. Larger or multi-phase projects are scoped and priced custom -- we don't apply a template to work that doesn't fit one.</p>
-    </div>
-    <div class="pcs">
-      <div class="pc">
-        <h3>Single System Build</h3>
-        <div class="pc-range">Starting at $4,500 <span>one-time</span></div>
-        <p>One process, solved end-to-end with a custom-built system. Deployed into your existing tools. Includes 30 days of post-delivery support.</p>
-        <ul class="pc-inc">
-          <li>Free ROI audit and scoping</li>
-          <li>Custom build to your exact workflow</li>
-          <li>Deploys into tools you already use</li>
-          <li>30-day included support</li>
-          <li>Code ownership -- no ongoing platform fees</li>
-          <li>Cloud infrastructure ~$5–$50/mo, paid direct to provider</li>
-        </ul>
-      </div>
-      <div class="pc feat">
-        <span class="pc-badge">Most common</span>
-        <h3>Multi-System Integration</h3>
-        <div class="pc-range">Starting at $9,000 <span>one-time</span></div>
-        <p>Two or more platforms connected, with intelligent routing or AI-based decision-making built in. The engagements that typically produce the largest returns.</p>
-        <ul class="pc-inc">
-          <li>Everything in Single System Build</li>
-          <li>Multi-platform connection and data sync</li>
-          <li>AI layer where applicable</li>
-          <li>Extended 60-day support window</li>
-          <li>Optional ongoing maintenance</li>
-          <li>Cloud infrastructure ~$5–$50/mo, paid direct to provider</li>
-        </ul>
-      </div>
-      <div class="pc">
-        <h3>Monthly Maintenance</h3>
-        <div class="pc-range">$500 - $2,000 <span>/month</span></div>
-        <p>Optional. Covers monitoring, updates, and adjustments as your processes evolve. Not required -- but available if you want us to keep it running without thinking about it.</p>
-        <ul class="pc-inc">
-          <li>System monitoring and alerts</li>
-          <li>API and dependency updates</li>
-          <li>Minor workflow adjustments</li>
-          <li>Monthly check-in</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="midcta">
   <div class="midcta-in">
@@ -574,21 +520,6 @@ footer p{font-size:0.75rem;color:rgba(250,248,244,0.25);line-height:1.8}
   </div>
 </div>
 
-<div class="about-sec" id="about">
-  <div class="about-in">
-    <div class="about-left">
-      <span class="lbl">Who We Are</span>
-      <h2>The person<br>behind the work.</h2>
-      <div class="divl"></div>
-    </div>
-    <div class="about-right">
-      <p class="about-name">Zach Asnes</p>
-      <span class="about-title">Founder, Valore</span>
-      <p>Zach Asnes is a Solutions Consultant at Google Cloud, where he works with enterprise clients on cloud and AI adoption. He started Valore after watching small professional service firms struggle with the same problems the enterprise world solves overnight — manual workflows, disconnected tools, no internal team to fix any of it.</p>
-      <p>He holds a degree from Florida Atlantic University, where he played Division I baseball, and an MBA from the University of Texas, McCombs School of Business.</p>
-    </div>
-  </div>
-</div>
 
 <div class="contact-sec" id="contact">
   <div class="contact-in">
