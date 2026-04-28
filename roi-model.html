@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Impact Concrete — Phase 1 Value Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#111110;--white:#faf8f4;--off:#f2efe8;
+  --accent:#9a7435;--amid:#c9a55a;--alight:#e8d9be;
+  --g100:#ece9e1;--g200:#d4d0c6;--g400:#9c9890;--g600:#5a5754;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+html,body{width:100%;min-height:100vh;background:var(--off)}
+body{font-family:var(--sans);color:var(--black);font-size:15px;line-height:1.65}
+.page{max-width:860px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+
+/* HEADER */
+.hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.brand{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--black)}
+.brand span{color:var(--accent)}
+.brand-sub{font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--g400);display:block}
+.hdr-right .title{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--black);line-height:1.15}
+.hdr-right .title em{font-style:italic;color:var(--accent)}
+.hdr-right .sub{font-size:0.76rem;color:var(--g600);margin-top:0.2rem}
+.divider{height:2px;background:var(--black);margin-bottom:1.75rem}
+
+/* INTRO */
+.intro{background:var(--white);border:1px solid var(--g200);padding:1.25rem 1.5rem;border-radius:3px;margin-bottom:2rem}
+.intro p{font-size:0.84rem;color:var(--g600);line-height:1.8;font-weight:300}
+.intro p+p{margin-top:0.6rem}
+.intro strong{color:var(--black);font-weight:500}
+
+/* SECTION */
+.sec-lbl{font-size:0.62rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:0.6rem;display:block}
+.sec-title{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--black);margin-bottom:1rem}
+
+/* PROBLEM CARDS */
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem}
+.prob-card{background:var(--white);border:1px solid var(--g200);border-radius:3px;overflow:hidden}
+.prob-card.highlight{border-color:var(--accent);border-width:2px}
+.prob-header{padding:1rem 1.1rem 0.6rem;border-bottom:1px solid var(--g100)}
+.prob-num{font-size:0.6rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:0.25rem}
+.prob-title{font-family:var(--serif);font-size:0.92rem;font-weight:700;color:var(--black);line-height:1.3}
+.prob-desc{font-size:0.76rem;color:var(--g600);line-height:1.65;font-weight:300;margin-top:0.35rem}
+.prob-body{padding:1rem 1.1rem}
+.prob-input-label{font-size:0.67rem;font-weight:500;text-transform:uppercase;letter-spacing:0.1em;color:var(--g600);margin-bottom:0.3rem;display:block}
+.prob-input-hint{font-size:0.68rem;color:var(--g400);font-weight:300;margin-bottom:0.55rem;line-height:1.5;font-style:italic}
+.input-row{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.5rem}
+.prefix{font-size:0.9rem;color:var(--g600);font-weight:500;flex-shrink:0}
+.suffix-txt{font-size:0.82rem;color:var(--g400);flex-shrink:0}
+input[type=number]{width:100%;padding:0.5rem 0.65rem;border:1.5px solid var(--g200);background:var(--white);font-family:var(--sans);font-size:0.95rem;font-weight:500;color:var(--black);border-radius:2px;outline:none;-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+input[type=number]:focus{border-color:var(--accent)}
+input[type=number]::placeholder{color:var(--g400);font-weight:300}
+input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;margin-top:0.35rem}
+.range-val{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--black);display:block;line-height:1}
+.range-labels{display:flex;justify-content:space-between;font-size:0.62rem;color:var(--g400);margin-top:0.25rem}
+.known-badge{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.62rem;background:var(--alight);color:var(--accent);padding:0.18rem 0.55rem;border-radius:2px;font-weight:500;margin-top:0.4rem}
+.unknown-note{font-size:0.71rem;color:var(--g400);font-style:italic;margin-top:0.4rem;line-height:1.5}
+
+/* OUTPUT */
+.output-wrap{background:var(--black);border-radius:3px;padding:1.75rem;margin-bottom:2rem}
+.ow-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:1.5rem}
+.ow-title em{color:var(--amid);font-style:italic}
+
+.out-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.07);margin-bottom:1.5rem}
+.out-item{background:var(--black);padding:1.1rem;border:1px solid rgba(255,255,255,0.05)}
+.out-item.full{grid-column:1/-1}
+.oi-lbl{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(250,248,244,0.4);margin-bottom:0.3rem;display:block}
+.oi-val{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--white);display:block;line-height:1}
+.oi-val.gold{color:var(--amid)}
+.oi-val.muted{color:rgba(250,248,244,0.35);font-size:1rem}
+.oi-sub{font-size:0.68rem;color:rgba(250,248,244,0.35);margin-top:0.3rem;display:block;line-height:1.5}
+
+.total-bar{background:var(--accent);padding:1.25rem 1.5rem;border-radius:2px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.25rem}
+.tb-left .tb-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.7);display:block;margin-bottom:0.25rem}
+.tb-left .tb-val{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--white);line-height:1}
+.tb-right{text-align:right}
+.tb-right .tb-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.7);display:block;margin-bottom:0.25rem}
+.tb-right .tb-val{font-family:var(--serif);font-size:1.25rem;font-weight:700;color:var(--white);line-height:1}
+
+/* RISK */
+.risk-box{border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.07);padding:1rem 1.25rem;border-radius:2px}
+.risk-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:#ff8585;font-weight:500;margin-bottom:0.4rem;display:block}
+.risk-body{font-size:0.8rem;color:rgba(250,248,244,0.6);line-height:1.7}
+.risk-body strong{color:#ff8585}
+
+/* DISCLAIMER */
+.disclaimer{font-size:0.7rem;color:var(--g400);line-height:1.7;border-top:1px solid var(--g200);padding-top:1.25rem;margin-top:1.5rem}
+
+/* FOOTER */
+.footer{text-align:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--g200)}
+.footer .fl{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--black)}
+.footer .fl span{color:var(--accent)}
+.footer p{font-size:0.72rem;color:var(--g400);margin-top:0.3rem}
+
+@media(max-width:600px){
+  .problem-grid,.out-grid{grid-template-columns:1fr}
+  .out-item.full{grid-column:1}
+  .total-bar{flex-direction:column;text-align:center}
+  .tb-right{text-align:center}
+  .hdr{flex-direction:column}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hdr">
+    <div>
+      <span class="brand">Valore<span>.</span></span>
+      <span class="brand-sub">Custom AI Systems</span>
+    </div>
+    <div class="hdr-right">
+      <div class="title">Phase 1 Value Model<br><em>What getting this right is worth.</em></div>
+      <div class="sub">Impact Concrete &nbsp;&middot;&nbsp; Confidential &nbsp;&middot;&nbsp; April 2026</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <p>This model is built around the four problems Dante and Zach identified on April 27. <strong>One number is pre-filled from your own data</strong> — the $83,836 inventory correction figure documented in the Job Cost Macro. Everything else you fill in based on what you know.</p>
+    <p>If you don't know a number, leave it at zero. The model still works — it just shows a conservative picture. The point is to understand what solving each problem is worth, not to get the math perfect on the first pass.</p>
+  </div>
+
+  <!-- PROBLEMS -->
+  <span class="sec-lbl">The Four Problems — Enter Your Numbers</span>
+
+  <div class="problem-grid">
+
+    <!-- PROBLEM 1 -->
+    <div class="prob-card highlight">
+      <div class="prob-header">
+        <span class="prob-num">Problem 1 — Highest Priority</span>
+        <div class="prob-title">Returns aren't being logged. Job costs are inflated.</div>
+        <div class="prob-desc">Crews over-pull materials, return the excess without logging it. The job cost report shows more than was actually used. This happens often.</div>
+      </div>
+      <div class="prob-body">
+        <span class="prob-input-label">Documented annual inventory corrections</span>
+        <span class="prob-input-hint">This number is already in your Job Cost Macro. It represents the gap between what the system shows and what actually exists.</span>
+        <div class="input-row"><span class="prefix">$</span><input type="number" id="corrections" value="83836" placeholder="0" oninput="calculate()"></div>
+        <span class="known-badge">✓ From your OnTrack data</span>
+
+        <span class="prob-input-label" style="margin-top:1rem">% of corrections a logging system eliminates</span>
+        <span class="range-val" id="corrPctVal">60%</span>
+        <input type="range" id="corrPct" min="10" max="90" value="60" oninput="updateSlider('corrPct','corrPctVal','%');calculate()">
+        <div class="range-labels"><span>10% — minimal impact</span><span>90% — near perfect</span></div>
+      </div>
+    </div>
+
+    <!-- PROBLEM 2 -->
+    <div class="prob-card">
+      <div class="prob-header">
+        <span class="prob-num">Problem 2</span>
+        <div class="prob-title">Field requests are unstructured. Dante decodes everything manually.</div>
+        <div class="prob-desc">Requests come in via text, call, and email. No structure. Dante manually interprets, checks inventory, and creates POs from scratch every time.</div>
+      </div>
+      <div class="prob-body">
+        <span class="prob-input-label">Hours Dante spends per week on manual request processing</span>
+        <span class="prob-input-hint">Include: decoding requests, checking inventory, building POs, following up on status. If unsure, estimate conservatively.</span>
+        <span class="range-val" id="manualHoursVal">—</span>
+        <input type="range" id="manualHours" min="0" max="25" value="0" oninput="updateSlider('manualHours','manualHoursVal',' hrs/week');calculate()">
+        <div class="range-labels"><span>0 hrs</span><span>25 hrs/week</span></div>
+
+        <span class="prob-input-label" style="margin-top:1rem">% of this time the system eliminates</span>
+        <span class="range-val" id="automPctVal">75%</span>
+        <input type="range" id="automPct" min="20" max="90" value="75" oninput="updateSlider('automPct','automPctVal','%');calculate()">
+        <div class="range-labels"><span>20%</span><span>90%</span></div>
+        <div class="unknown-note">Not sure? Leave hours at 0. Even without this number the model shows significant value from Problem 1 alone.</div>
+      </div>
+    </div>
+
+    <!-- PROBLEM 3 -->
+    <div class="prob-card">
+      <div class="prob-header">
+        <span class="prob-num">Problem 3</span>
+        <div class="prob-title">Small consumable purchases are never costed to a job.</div>
+        <div class="prob-desc">Gloves, epoxy, nails — picked up at Home Depot, paid for, never logged to a project. That spend disappears into overhead instead of being tracked by job.</div>
+      </div>
+      <div class="prob-body">
+        <span class="prob-input-label">Estimated weekly spend on untracked consumables (all crews)</span>
+        <span class="prob-input-hint">Think about how many small store runs happen across 8 crews in a week. Even a rough estimate is useful.</span>
+        <div class="input-row"><span class="prefix">$</span><input type="number" id="consumables" value="" placeholder="Leave blank if unknown" oninput="calculate()"></div>
+
+        <span class="prob-input-label" style="margin-top:1rem">% captured by the receipt system</span>
+        <span class="range-val" id="consPctVal">70%</span>
+        <input type="range" id="consPct" min="10" max="90" value="70" oninput="updateSlider('consPct','consPctVal','%');calculate()">
+        <div class="range-labels"><span>10%</span><span>90%</span></div>
+        <div class="unknown-note">Not sure on weekly spend? Leave blank. This output will show $0 and you can revisit once Dante tracks it for a week.</div>
+      </div>
+    </div>
+
+    <!-- PROBLEM 4 -->
+    <div class="prob-card">
+      <div class="prob-header">
+        <span class="prob-num">Problem 4</span>
+        <div class="prob-title">The weekly report is always a week behind — and only as accurate as what got entered.</div>
+        <div class="prob-desc">Kyle and Christy receive a job cost report built from a manual OnTrack export and macro refresh. It's never current and never complete.</div>
+      </div>
+      <div class="prob-body">
+        <span class="prob-input-label">Hours Dante spends per week building and reconciling the weekly report</span>
+        <span class="prob-input-hint">Include the OnTrack export, macro refresh, corrections review, and sending. Estimate how long this takes on a typical Monday.</span>
+        <span class="range-val" id="reportHoursVal">—</span>
+        <input type="range" id="reportHours" min="0" max="12" value="0" oninput="updateSlider('reportHours','reportHoursVal',' hrs/week');calculate()">
+        <div class="range-labels"><span>0 hrs</span><span>12 hrs/week</span></div>
+        <div class="unknown-note">This output shows hours recovered. The bigger benefit here is accuracy — leadership gets a report that reflects what actually happened, not what got entered.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OUTPUTS -->
+  <div class="output-wrap">
+    <div class="ow-title">What Solving These Problems Is Worth — <em>Annually</em></div>
+
+    <div class="out-grid">
+      <div class="out-item">
+        <span class="oi-lbl">Inventory correction savings</span>
+        <span class="oi-val gold" id="out-corrSavings">—</span>
+        <span class="oi-sub">Based on your documented $83,836 correction figure</span>
+      </div>
+      <div class="out-item">
+        <span class="oi-lbl">Consumable spend now costed to jobs</span>
+        <span class="oi-val gold" id="out-consSavings">—</span>
+        <span class="oi-sub">Previously disappearing into overhead</span>
+      </div>
+      <div class="out-item">
+        <span class="oi-lbl">Hours returned to Dante annually</span>
+        <span class="oi-val gold" id="out-hoursBack">—</span>
+        <span class="oi-sub">From manual request processing + report building</span>
+      </div>
+      <div class="out-item">
+        <span class="oi-lbl">Weeks of Dante's time recovered per year</span>
+        <span class="oi-val gold" id="out-weeksBack">—</span>
+        <span class="oi-sub">Redirected to higher-value procurement strategy</span>
+      </div>
+    </div>
+
+    <div class="total-bar">
+      <div class="tb-left">
+        <span class="tb-lbl">Total annual value recovered — Phase 1</span>
+        <span class="tb-val" id="out-total">Enter your numbers above</span>
+      </div>
+      <div class="tb-right">
+        <span class="tb-lbl">Monthly equivalent</span>
+        <span class="tb-val" id="out-monthly">—</span>
+      </div>
+    </div>
+
+    <div class="risk-box">
+      <span class="risk-lbl">⚠ Single Point of Failure — The Risk That Grows With Every New Project</span>
+      <p class="risk-body">Every system above runs through one person. Based on the hours entered, an unplanned 5-day absence leaves <strong id="out-absenceHours">—</strong> hours of unprocessed operational data. Returns go unlogged. Requests pile up. The weekly report doesn't get built. As Impact takes on more projects, this risk doesn't stay the same — it compounds.</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong>About this model:</strong> The $83,836 inventory correction figure is sourced directly from Impact Concrete's Job Cost Macro file. All other inputs are estimates. Hours recovered are calculated at 50 working weeks per year. Consumable savings reflect spend that becomes visible and attributable to jobs — not necessarily eliminated. This model is a directional planning tool. Actual results depend on crew adoption, data quality, and process consistency.
+  </div>
+
+  <div class="footer">
+    <div class="fl">Valore<span>.</span></div>
+    <p>Custom AI Systems &middot; Austin, TX &middot; zach@valoreworks.com &middot; valoreworks.com</p>
+  </div>
+
+</div>
+<script>
+function fmt(n){
+  if(!n||isNaN(n)||n===0)return '—';
+  return '$'+Math.round(n).toLocaleString();
+}
+function fmtHrs(n){
+  if(!n||isNaN(n)||n===0)return '—';
+  return Math.round(n).toLocaleString()+' hrs';
+}
+function fmtWks(n){
+  if(!n||isNaN(n)||n===0)return '—';
+  return (n/40).toFixed(1)+' weeks';
+}
+
+function updateSlider(id,valId,suffix){
+  var v=document.getElementById(id).value;
+  var display=v=='0'&&suffix!='%'?'—':v+suffix;
+  document.getElementById(valId).textContent=display;
+}
+
+function getVal(id){
+  var v=parseFloat(document.getElementById(id).value);
+  return isNaN(v)?0:v;
+}
+
+function calculate(){
+  var corrections=getVal('corrections');
+  var corrPct=getVal('corrPct')/100;
+  var manualHours=getVal('manualHours');
+  var automPct=getVal('automPct')/100;
+  var consumables=getVal('consumables')||0;
+  var consPct=getVal('consPct')/100;
+  var reportHours=getVal('reportHours');
+
+  var corrSavings=corrections*corrPct;
+  var consumableAnnual=consumables*50;
+  var consSavings=consumableAnnual*consPct;
+  var hoursBack=Math.round((manualHours*automPct + reportHours)*50);
+  var total=corrSavings+consSavings;
+  var absenceHours=Math.round((manualHours+reportHours)*5);
+
+  document.getElementById('out-corrSavings').textContent=fmt(corrSavings);
+  document.getElementById('out-consSavings').textContent=consumables>0?fmt(consSavings):'Enter weekly spend above';
+  document.getElementById('out-hoursBack').textContent=hoursBack>0?fmtHrs(hoursBack):'—';
+  document.getElementById('out-weeksBack').textContent=hoursBack>0?fmtWks(hoursBack):'—';
+  document.getElementById('out-total').textContent=total>0?fmt(total):'Enter your numbers above';
+  document.getElementById('out-monthly').textContent=total>0?fmt(total/12)+'/mo':'—';
+  document.getElementById('out-absenceHours').textContent=absenceHours>0?absenceHours+' hours':'[enter hours above]';
+}
+
+calculate();
+</script>
+</body>
+</html>
